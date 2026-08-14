@@ -1,0 +1,188 @@
+@import 'tailwindcss';
+
+/*
+ * Palette: warm neutrals with a gold accent, nodding to the German flag
+ * without literally painting the app black-red-gold. Both themes are defined
+ * so the app follows the operating system.
+ */
+@theme {
+  --color-ink-50: #f8f8f7;
+  --color-ink-100: #eeedeb;
+  --color-ink-200: #dcdad6;
+  --color-ink-300: #bab6b0;
+  --color-ink-400: #918c84;
+  --color-ink-500: #6f6a63;
+  --color-ink-600: #56524d;
+  --color-ink-700: #423f3b;
+  --color-ink-800: #2a2825;
+  --color-ink-900: #1a1917;
+  --color-ink-950: #111110;
+
+  --color-gold-300: #f5cf6a;
+  --color-gold-400: #eebc3c;
+  --color-gold-500: #d9a21b;
+  --color-gold-600: #b07f11;
+  --color-gold-700: #8a6210;
+
+  --font-sans: 'Inter var', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+}
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+
+    --surface: var(--color-ink-50);
+    --surface-raised: #ffffff;
+    --surface-sunken: var(--color-ink-100);
+    --border-subtle: var(--color-ink-200);
+    --text-strong: var(--color-ink-900);
+    --text-muted: var(--color-ink-500);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface: var(--color-ink-950);
+      --surface-raised: var(--color-ink-900);
+      --surface-sunken: #0b0b0a;
+      --border-subtle: var(--color-ink-800);
+      --text-strong: var(--color-ink-50);
+      --text-muted: var(--color-ink-400);
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--text-strong);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04';
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* Anything focusable gets a visible ring — this app is heavily keyboard driven. */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .surface-card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  /* The answer field: large, centred, monospace-ish for careful spelling. */
+  .answer-input {
+    background: var(--surface-sunken);
+    border: 2px solid var(--border-subtle);
+    color: var(--text-strong);
+  }
+
+  .answer-input:focus {
+    border-color: var(--color-gold-500);
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .animate-pop {
+    animation: pop 220ms cubic-bezier(0.2, 0.9, 0.3, 1.4);
+  }
+
+  .animate-rise {
+    animation: rise 320ms ease-out both;
+  }
+
+  .animate-shake {
+    animation: shake 380ms ease-in-out;
+  }
+
+  .animate-float-up {
+    animation: float-up 900ms ease-out forwards;
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-7px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes float-up {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-42px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
