@@ -1,54 +1,142 @@
 @import 'tailwindcss';
 
 /*
- * Palette: warm neutrals with a gold accent, nodding to the German flag
- * without literally painting the app black-red-gold. Both themes are defined
- * so the app follows the operating system.
+ * Design system: design.md ("Junior Achievement SoCal"), applied literally.
+ * Deep teal is the voice, yellow-lime is the single call-to-action accent,
+ * containers are flat with a 1px border, actions are pills.
+ *
+ * The existing `ink-*` / `gold-*` scales are re-pointed at that palette rather
+ * than renamed, so the whole app inherits the brand without touching pages.
  */
+
+/* Theme is an explicit attribute, not a media query — index.html resolves the
+   system preference pre-paint and the header toggle overrides it. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 @theme {
-  --color-ink-50: #f8f8f7;
-  --color-ink-100: #eeedeb;
-  --color-ink-200: #dcdad6;
-  --color-ink-300: #bab6b0;
-  --color-ink-400: #918c84;
-  --color-ink-500: #6f6a63;
-  --color-ink-600: #56524d;
-  --color-ink-700: #423f3b;
-  --color-ink-800: #2a2825;
-  --color-ink-900: #1a1917;
-  --color-ink-950: #111110;
+  /* --- design.md colors, verbatim ------------------------------------- */
+  --color-primary: #285f74;
+  --color-secondary: #00a0af;
+  --color-tertiary: #e6e33c;
+  --color-neutral: #ffffff;
+  --color-surface: #f6fbfc;
+  --color-on-surface: #285f74;
+  --color-error: #d64545;
+  --color-primary-60: #5f8f9f;
+  --color-primary-10: #eaf2f4;
+  --color-accent-lime: #dceb4a;
+  --color-accent-cyan: #a7e8ea;
 
-  --color-gold-300: #f5cf6a;
-  --color-gold-400: #eebc3c;
-  --color-gold-500: #d9a21b;
-  --color-gold-600: #b07f11;
-  --color-gold-700: #8a6210;
+  /* --- ink = the primary teal ramp (50 = surface … 900 = primary) ------ */
+  --color-ink-50: #f6fbfc;
+  --color-ink-100: #eaf2f4;
+  --color-ink-200: #d3e4e9;
+  --color-ink-300: #a9c6cf;
+  --color-ink-400: #7fa7b4;
+  --color-ink-500: #5f8f9f;
+  --color-ink-600: #4a7a8b;
+  --color-ink-700: #3a6c7e;
+  --color-ink-800: #2f6577;
+  --color-ink-900: #285f74;
+  --color-ink-950: #1c4453;
 
-  --font-sans: 'Inter var', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  /* --- gold = the tertiary yellow-lime accent -------------------------- */
+  --color-gold-300: #f0f29b;
+  --color-gold-400: #dceb4a;
+  --color-gold-500: #e6e33c;
+  --color-gold-600: #cbc82a;
+  --color-gold-700: #7f7d13;
+
+  /* Validation red is design.md's restrained error, not Tailwind's. */
+  --color-red-400: #e88b8b;
+  --color-red-500: #d64545;
+  --color-red-600: #c33a3a;
+  --color-red-700: #9d2f2f;
+
+  /* --- typography ------------------------------------------------------ */
+  --font-heading: 'Heading Font', 'Inter var', 'Segoe UI', system-ui, sans-serif;
+  --font-sans: 'Body Font', 'Inter var', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  /* Existing markup says `font-serif` for headings; keep it pointing at the
+     heading family rather than editing ten call sites. */
+  --font-serif: var(--font-heading);
+
+  --text-headline-display: 57px;
+  --text-headline-display--line-height: 68px;
+  --text-headline-display--font-weight: 800;
+  --text-headline-lg: 54px;
+  --text-headline-lg--line-height: 65px;
+  --text-headline-lg--font-weight: 800;
+  --text-headline-md: 36px;
+  --text-headline-md--line-height: 44px;
+  --text-headline-md--font-weight: 800;
+  --text-headline-sm: 28px;
+  --text-headline-sm--line-height: 34px;
+  --text-headline-sm--font-weight: 800;
+  --text-body-lg: 20px;
+  --text-body-lg--line-height: 24px;
+  --text-body-lg--font-weight: 600;
+  --text-body-md: 15px;
+  --text-body-md--line-height: 22.95px;
+  --text-body-md--font-weight: 500;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 500;
+  --text-label-lg: 17px;
+  --text-label-lg--line-height: 22px;
+  --text-label-lg--font-weight: 700;
+  --text-label-md: 14.4px;
+  --text-label-md--line-height: 18px;
+  --text-label-md--font-weight: 500;
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--font-weight: 700;
+  --text-label-sm--letter-spacing: 0.04em;
+  --text-nav-link: 14px;
+  --text-nav-link--line-height: 16px;
+  --text-nav-link--font-weight: 700;
+  --text-button: 17px;
+  --text-button--line-height: 20px;
+  --text-button--font-weight: 700;
+
+  /* --- shape: design.md's rounded scale -------------------------------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 28px;
+  --radius-2xl: 16px;
+  --radius-3xl: 28px;
+
+  /* --- spacing rhythm (named, alongside Tailwind's numeric scale) ------- */
+  --spacing-xs: 6px;
+  --spacing-sm: 14px;
+  --spacing-md: 28px;
+  --spacing-lg: 40px;
+  --spacing-xl: 88px;
 }
 
 @layer base {
   :root {
-    color-scheme: light dark;
+    color-scheme: light;
 
-    --surface: var(--color-ink-50);
-    --surface-raised: #ffffff;
-    --surface-sunken: var(--color-ink-100);
+    --surface: var(--color-surface);
+    --surface-raised: var(--color-neutral);
+    --surface-sunken: var(--color-primary-10);
     --border-subtle: var(--color-ink-200);
-    --text-strong: var(--color-ink-900);
-    --text-muted: var(--color-ink-500);
+    --text-strong: var(--color-on-surface);
+    --text-muted: var(--color-primary-60);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --surface: var(--color-ink-950);
-      --surface-raised: var(--color-ink-900);
-      --surface-sunken: #0b0b0a;
-      --border-subtle: var(--color-ink-800);
-      --text-strong: var(--color-ink-50);
-      --text-muted: var(--color-ink-400);
-    }
+  /* design.md is a light-only spec; dark deepens the primary teal and flips
+     surface and on-surface, keeping the same hue family. */
+  [data-theme='dark'] {
+    color-scheme: dark;
+
+    --surface: #143844;
+    --surface-raised: #1c4453;
+    --surface-sunken: #0f2c36;
+    --border-subtle: #2f6577;
+    --text-strong: var(--color-surface);
+    --text-muted: #a9c6cf;
   }
 
   html {
@@ -65,11 +153,12 @@
     min-height: 100vh;
   }
 
-  /* Anything focusable gets a visible ring — this app is heavily keyboard driven. */
+  /* Anything focusable gets a visible ring — this app is heavily keyboard
+     driven. Clarity through the secondary aqua, not a glow. */
   :focus-visible {
-    outline: 2px solid var(--color-gold-500);
+    outline: 2px solid var(--color-secondary);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
   }
 
   button {
@@ -85,6 +174,7 @@
 }
 
 @layer components {
+  /* Flat container with a faint outline — no shadow. */
   .surface-card {
     background: var(--surface-raised);
     border: 1px solid var(--border-subtle);
@@ -94,15 +184,16 @@
     color: var(--text-muted);
   }
 
-  /* The answer field: large, centred, monospace-ish for careful spelling. */
+  /* The answer field: large, centred, for careful spelling. Understated, with
+     focus emphasised through border colour. */
   .answer-input {
-    background: var(--surface-sunken);
+    background: var(--surface-raised);
     border: 2px solid var(--border-subtle);
     color: var(--text-strong);
   }
 
   .answer-input:focus {
-    border-color: var(--color-gold-500);
+    border-color: var(--color-secondary);
     outline: none;
   }
 }

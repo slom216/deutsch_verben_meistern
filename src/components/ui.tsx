@@ -9,20 +9,22 @@ export function cx(...parts: Array<string | false | null | undefined>): string {
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
+/* design.md: flat fills, teal text, no shadows; emphasis comes from colour. */
 const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
   primary:
-    'bg-gold-500 text-ink-950 hover:bg-gold-400 active:bg-gold-600 disabled:bg-ink-300 dark:disabled:bg-ink-700 disabled:text-ink-500 shadow-sm',
+    'bg-tertiary text-primary hover:bg-gold-600 active:bg-gold-600 disabled:bg-ink-200 dark:disabled:bg-ink-700 disabled:text-ink-500',
   secondary:
-    'surface-card hover:bg-ink-100 dark:hover:bg-ink-800 disabled:opacity-50',
-  ghost: 'hover:bg-ink-100 dark:hover:bg-ink-800 disabled:opacity-50',
-  danger:
-    'bg-red-600 text-white hover:bg-red-500 active:bg-red-700 disabled:opacity-50 shadow-sm',
+    'surface-card hover:bg-primary-10 dark:hover:bg-ink-800 disabled:opacity-50',
+  ghost: 'hover:bg-primary-10 dark:hover:bg-ink-800 disabled:opacity-50',
+  danger: 'bg-error text-neutral hover:bg-red-700 active:bg-red-700 disabled:opacity-50',
 };
 
+/* Pill actions. `lg` is design.md's button-primary (56px), `md` its
+   button-secondary (48px), `sm` a compact variant of the same shape. */
 const BUTTON_SIZES: Record<ButtonSize, string> = {
-  sm: 'px-3 py-1.5 text-sm rounded-lg',
-  md: 'px-4 py-2 text-sm rounded-xl',
-  lg: 'px-6 py-3 text-base rounded-xl',
+  sm: 'px-4 py-1.5 text-label-md rounded-full',
+  md: 'h-12 px-6 py-3 text-button rounded-full',
+  lg: 'h-14 px-7 py-3.5 text-button rounded-full',
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -42,7 +44,7 @@ export function Button({
     <button
       {...props}
       className={cx(
-        'inline-flex items-center justify-center gap-2 font-medium transition-colors',
+        'inline-flex items-center justify-center gap-2 transition-colors',
         'disabled:cursor-not-allowed',
         BUTTON_VARIANTS[variant],
         BUTTON_SIZES[size],
@@ -53,7 +55,7 @@ export function Button({
 }
 
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div {...props} className={cx('surface-card rounded-2xl', className)} />;
+  return <div {...props} className={cx('surface-card rounded-md', className)} />;
 }
 
 export function SectionHeading({
@@ -87,7 +89,7 @@ export function Badge({
 }) {
   const tones: Record<string, string> = {
     neutral: 'bg-ink-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300',
-    gold: 'bg-gold-500/15 text-gold-700 dark:text-gold-300',
+    gold: 'bg-tertiary text-primary dark:bg-gold-500 dark:text-primary',
     green: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
     red: 'bg-red-500/15 text-red-700 dark:text-red-300',
     blue: 'bg-sky-500/15 text-sky-700 dark:text-sky-300',
@@ -96,7 +98,8 @@ export function Badge({
   return (
     <span
       className={cx(
-        'inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-medium leading-4',
+        /* design.md chip: pill, compact 6px/12px padding, label-sm. */
+        'inline-flex items-center rounded-full px-3 py-1.5 text-label-sm',
         tones[tone],
         className,
       )}
@@ -199,7 +202,7 @@ export function Segmented<T extends string>({
   size?: 'sm' | 'md';
 }) {
   return (
-    <div className="inline-flex rounded-lg bg-ink-100 dark:bg-ink-800 p-0.5">
+    <div className="inline-flex rounded-full bg-primary-10 dark:bg-ink-800 p-0.5">
       {options.map((option) => (
         <button
           key={option.value}
@@ -207,10 +210,10 @@ export function Segmented<T extends string>({
           onClick={() => onChange(option.value)}
           aria-pressed={value === option.value}
           className={cx(
-            'rounded-md font-medium transition-colors',
-            size === 'sm' ? 'px-2.5 py-1 text-xs' : 'px-3 py-1.5 text-sm',
+            'rounded-full font-medium transition-colors',
+            size === 'sm' ? 'px-3 py-1 text-xs' : 'px-4 py-1.5 text-sm',
             value === option.value
-              ? 'bg-white dark:bg-ink-950 shadow-sm'
+              ? 'bg-neutral text-primary dark:bg-ink-950 dark:text-ink-50'
               : 'text-muted hover:text-[var(--text-strong)]',
           )}
         >

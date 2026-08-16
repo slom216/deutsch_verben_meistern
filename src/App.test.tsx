@@ -37,6 +37,14 @@ describe('application shell', () => {
     expect(screen.getByText('Deutsch Verben Meister')).toBeTruthy();
   });
 
+  it('flips the theme, and the CSS actually sees it', async () => {
+    render(<App />);
+    const before = document.documentElement.dataset.theme;
+    fireEvent.click(await screen.findByLabelText(/switch to (light|dark) theme/i));
+    expect(document.documentElement.dataset.theme).not.toBe(before);
+    expect(useSettings.getState().theme).toBe(document.documentElement.dataset.theme);
+  });
+
   it('shows the starting rank and an empty streak', async () => {
     render(<App />);
     await screen.findByText('Willkommen!');

@@ -109,65 +109,81 @@ function DailyGoalRing() {
   );
 }
 
+function ThemeToggle() {
+	const theme = useSettings((state) => state.theme);
+	const setTheme = useSettings((state) => state.setTheme);
+	const next = theme === "dark" ? "light" : "dark";
+
+	return (
+		<button
+			type="button"
+			onClick={() => setTheme(next)}
+			className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-base transition-colors hover:bg-primary-10 dark:hover:bg-ink-800"
+			title={`Switch to ${next} theme`}
+			aria-label={`Switch to ${next} theme`}
+		>
+			<span aria-hidden>{theme === "dark" ? "☀️" : "🌙"}</span>
+		</button>
+	);
+}
+
 export function AppLayout() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-30 border-b border-[var(--border-subtle)] bg-[var(--surface)]/85 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-2.5">
-          <NavLink to="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-xl" aria-hidden>
-              🇩🇪
-            </span>
-            <span className="hidden font-serif text-base font-semibold tracking-tight sm:block">
-              Deutsch Verben Meister
-            </span>
-          </NavLink>
+			<div className="min-h-screen flex flex-col">
+				<header className="sticky top-0 z-30 border-b border-[var(--border-subtle)] bg-[var(--surface)]/85 backdrop-blur">
+					<div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-2.5">
+						<NavLink to="/" className="flex items-center gap-2 shrink-0">
+							<span className="hidden font-serif text-base font-semibold tracking-tight sm:block">
+								Deutsch Verben Meister
+							</span>
+						</NavLink>
 
-          <div className="ml-auto flex items-center gap-3">
-            <div className="hidden sm:block">
-              <RankPill />
-            </div>
-            <StreakPill />
-            <DailyGoalRing />
-          </div>
-        </div>
+						<div className="ml-auto flex items-center gap-3">
+							<div className="hidden sm:block">
+								<RankPill />
+							</div>
+							<StreakPill />
+							<DailyGoalRing />
+							<ThemeToggle />
+						</div>
+					</div>
 
-        <nav className="mx-auto max-w-5xl px-2">
-          <ul className="flex gap-0.5 overflow-x-auto pb-1">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  end={item.end}
-                  className={({ isActive }) =>
-                    cx(
-                      'flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
-                      isActive
-                        ? 'bg-gold-500/15 text-gold-700 dark:text-gold-300'
-                        : 'text-muted hover:bg-ink-100 dark:hover:bg-ink-800',
-                    )
-                  }
-                >
-                  <span aria-hidden>{item.icon}</span>
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
+					<nav className="mx-auto max-w-5xl px-2">
+						<ul className="flex gap-0.5 overflow-x-auto pb-1">
+							{NAV_ITEMS.map((item) => (
+								<li key={item.to}>
+									<NavLink
+										to={item.to}
+										end={item.end}
+										className={({ isActive }) =>
+											cx(
+												"flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-nav-link transition-colors",
+												isActive
+													? "bg-tertiary text-primary"
+													: "text-muted hover:bg-primary-10 dark:hover:bg-ink-800",
+											)
+										}
+									>
+										{item.label}
+									</NavLink>
+								</li>
+							))}
+						</ul>
+					</nav>
+				</header>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6">
-        <Outlet />
-      </main>
+				<main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6">
+					<Outlet />
+				</main>
 
-      <footer className="border-t border-[var(--border-subtle)] py-4">
-        <p className="mx-auto max-w-5xl px-4 text-xs text-muted">
-          676 verbs across A1–A2–B1. Everything is stored in this browser only.
-        </p>
-      </footer>
+				<footer className="border-t border-[var(--border-subtle)] py-4">
+					<p className="mx-auto max-w-5xl px-4 text-xs text-muted">
+						676 verbs across A1–A2–B1. Everything is stored in this browser
+						only.
+					</p>
+				</footer>
 
-      <CelebrationLayer />
-    </div>
-  );
+				<CelebrationLayer />
+			</div>
+		);
 }

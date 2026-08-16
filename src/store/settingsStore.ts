@@ -16,6 +16,8 @@ import type { StrictnessPolicy } from '@/lib/grader';
 
 export type Regularity = 'regular' | 'irregular' | 'mixed';
 
+export type Theme = 'light' | 'dark';
+
 export interface VerbFilters {
   /** Empty means "no restriction". */
   regularity: Regularity[];
@@ -42,6 +44,7 @@ export interface SettingsState {
   showTranslations: boolean;
   autoAdvance: boolean;
   soundEnabled: boolean;
+  theme: Theme;
 
   toggleLevel: (level: CefrLevel) => void;
   toggleCategory: (category: FormCategory) => void;
@@ -55,6 +58,7 @@ export interface SettingsState {
   setShowTranslations: (value: boolean) => void;
   setAutoAdvance: (value: boolean) => void;
   setSoundEnabled: (value: boolean) => void;
+  setTheme: (theme: Theme) => void;
   resetToDefaults: () => void;
 }
 
@@ -96,6 +100,11 @@ const DEFAULTS = {
   showTranslations: true,
   autoAdvance: false,
   soundEnabled: true,
+  // First run follows the OS; after that the header toggle decides.
+  theme: (typeof matchMedia !== 'undefined' &&
+  matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light') as Theme,
 };
 
 export const useSettings = create<SettingsState>()(
@@ -151,6 +160,7 @@ export const useSettings = create<SettingsState>()(
       setShowTranslations: (value) => set(() => ({ showTranslations: value })),
       setAutoAdvance: (value) => set(() => ({ autoAdvance: value })),
       setSoundEnabled: (value) => set(() => ({ soundEnabled: value })),
+      setTheme: (theme) => set(() => ({ theme })),
       resetToDefaults: () => set(() => ({ ...DEFAULTS })),
     }),
     {
@@ -173,6 +183,19 @@ export const useSettings = create<SettingsState>()(
     },
   ),
 );
+
+/*
+ * Reflect the theme onto <html data-theme>, which is what the CSS reads.
+ * index.html sets the first value pre-paint so there is no flash; this keeps
+ * it in sync afterwards.
+ */
+if (typeof document !== 'undefined') {
+  const apply = (state: SettingsState) => {
+    document.documentElement.dataset.theme = state.theme;
+  };
+  apply(useSettings.getState());
+  useSettings.subscribe(apply);
+}
 
 /** Enabled categories as a plain list, in canonical teaching order. */
 export function enabledCategories(state: SettingsState): FormCategory[] {
