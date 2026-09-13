@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, useEffect, type ReactNode } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppLayout } from './components/AppLayout';
 import { DashboardPage } from './pages/DashboardPage';
@@ -21,22 +21,33 @@ const ProgressPage = lazy(() =>
 const AchievementsPage = lazy(() =>
   import('./pages/AchievementsPage').then((m) => ({ default: m.AchievementsPage })),
 );
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
+);
 const SettingsPage = lazy(() =>
   import('./pages/SettingsPage').then((m) => ({ default: m.SettingsPage })),
 );
+
+/** Sets the document title for a route, so tabs and history can tell pages apart. */
+function Titled({ title, children }: { title: string; children: ReactNode }) {
+  useEffect(() => {
+    document.title = `${title} · Deutsch Verben Meister`;
+  }, [title]);
+  return children;
+}
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
-        <Route index element={<DashboardPage />} />
-        <Route path="practice" element={<PracticePage />} />
-        <Route path="library" element={<LibraryPage />} />
-        <Route path="library/:verbId" element={<LibraryPage />} />
-        <Route path="progress" element={<ProgressPage />} />
-        <Route path="achievements" element={<AchievementsPage />} />
-        <Route path="settings" element={<SettingsPage />} />
-        <Route path="*" element={<DashboardPage />} />
+        <Route index element={<Titled title="Home"><DashboardPage /></Titled>} />
+        <Route path="practice" element={<Titled title="Practice"><PracticePage /></Titled>} />
+        <Route path="library" element={<Titled title="Verbs"><LibraryPage /></Titled>} />
+        <Route path="library/:verbId" element={<Titled title="Verbs"><LibraryPage /></Titled>} />
+        <Route path="progress" element={<Titled title="Progress"><ProgressPage /></Titled>} />
+        <Route path="achievements" element={<Titled title="Badges"><AchievementsPage /></Titled>} />
+        <Route path="settings" element={<Titled title="Settings"><SettingsPage /></Titled>} />
+        <Route path="*" element={<Titled title="Page not found"><NotFoundPage /></Titled>} />
       </Route>
     </Routes>
   );

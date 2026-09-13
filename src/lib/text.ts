@@ -3,9 +3,12 @@
  * generators. Kept dependency-free and pure so they are cheap to unit test.
  */
 
-/** Collapse runs of whitespace and trim. */
+/**
+ * Collapse runs of whitespace and trim. Also composes to NFC, so an umlaut
+ * typed as base letter + combining mark compares equal to the precomposed one.
+ */
 export function collapseWhitespace(value: string): string {
-  return value.replace(/\s+/g, ' ').trim();
+  return value.normalize('NFC').replace(/\s+/g, ' ').trim();
 }
 
 /** Drop sentence punctuation that never distinguishes a verb form. */

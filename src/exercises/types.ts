@@ -130,6 +130,8 @@ export interface SentenceCompletionExercise extends ExerciseBase {
 export interface MatchingPair {
   left: string;
   right: string;
+  /** The SRS card this pair reviews, so matching can be graded per pair. */
+  cardId: CardId;
 }
 
 export interface MatchingExercise extends ExerciseBase {
@@ -164,6 +166,8 @@ export interface SentenceReconstructionExercise extends ExerciseBase {
   /** Tokens in scrambled presentation order. */
   tokens: string[];
   correctOrder: string[];
+  /** Final punctuation of the source sentence: '.', '?' or '!'. */
+  terminal: string;
   translation?: string;
 }
 

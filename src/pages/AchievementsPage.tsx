@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import {
   ACHIEVEMENTS,
   RANKS,
@@ -15,8 +16,29 @@ import { Badge, Card, cx, ProgressBar, SectionHeading, Stat } from '@/components
 
 /** Badge gallery and the rank ladder. */
 export function AchievementsPage() {
-  const progress = useProgress();
-  const gamification = useGamification();
+  const progress = useProgress(
+    useShallow((state) => ({
+      cards: state.cards,
+      totalAnswered: state.totalAnswered,
+      totalCorrect: state.totalCorrect,
+      sessionsCompleted: state.sessionsCompleted,
+    })),
+  );
+  const gamification = useGamification(
+    useShallow((state) => ({
+      xp: state.xp,
+      longestStreak: state.longestStreak,
+      perfectSessions: state.perfectSessions,
+      bestCombo: state.bestCombo,
+      goalDays: state.goalDays,
+      categoriesTouched: state.categoriesTouched,
+      levelsTouched: state.levelsTouched,
+      productionCorrect: state.productionCorrect,
+      comebacks: state.comebacks,
+      unlocked: state.unlocked,
+    })),
+  );
+  const streak = useGamification(effectiveStreak);
 
   // Reconcile on open, so badges earned through a data change are not missed.
   useEffect(() => {
@@ -30,7 +52,7 @@ export function AchievementsPage() {
 
     return {
       xp: gamification.xp,
-      dailyStreak: effectiveStreak(gamification),
+      dailyStreak: streak,
       longestStreak: gamification.longestStreak,
       totalAnswered: progress.totalAnswered,
       totalCorrect: progress.totalCorrect,
@@ -45,7 +67,7 @@ export function AchievementsPage() {
       productionCorrect: gamification.productionCorrect,
       comebacks: gamification.comebacks,
     };
-  }, [progress, gamification]);
+  }, [progress, gamification, streak]);
 
   const unlockedCount = Object.keys(gamification.unlocked).length;
   const rank = rankForXp(gamification.xp);

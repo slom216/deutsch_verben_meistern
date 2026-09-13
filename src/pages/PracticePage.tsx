@@ -1,9 +1,20 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useShallow } from 'zustand/react/shallow';
 import { useVerbs } from '@/hooks/useVerbs';
 import { useSession } from '@/hooks/useSession';
 import { ExerciseView, FeedbackPanel } from '@/components/ExerciseView';
-import { Badge, Button, Card, cx, EmptyState, ProgressBar, Spinner, Stat } from '@/components/ui';
+import {
+  Badge,
+  Button,
+  buttonClasses,
+  Card,
+  cx,
+  EmptyState,
+  ProgressBar,
+  Spinner,
+  Stat,
+} from '@/components/ui';
 import { enabledCategories, useSettings } from '@/store/settingsStore';
 import { FORM_CATEGORY_META } from '@/types/formCategory';
 import { EXERCISE_TYPE_META } from '@/exercises/types';
@@ -18,7 +29,10 @@ import { useProgress } from '@/store/progressStore';
  */
 export function PracticePage() {
   const { filtered, byId, loading, error } = useVerbs();
-  const settings = useSettings();
+  const categories = useSettings(useShallow(enabledCategories));
+  const sessionSettings = useSettings((state) => state.session);
+  const exerciseTypes = useSettings((state) => state.exerciseTypes);
+  const autoAdvance = useSettings((state) => state.autoAdvance);
   const cards = useProgress((state) => state.cards);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -44,7 +58,6 @@ export function PracticePage() {
     reset,
   } = session;
 
-  const categories = useMemo(() => enabledCategories(settings), [settings]);
   const dueNow = useMemo(
     () => (loading ? 0 : countDue(filtered, cards, categories)),
     [loading, filtered, cards, categories],
@@ -67,7 +80,10 @@ export function PracticePage() {
       case 'choice':
         return response.value !== null;
       case 'order':
-        return response.value.length > 0;
+        return (
+          exercise.type === 'sentenceReconstruction' &&
+          response.value.length === exercise.tokens.length
+        );
       case 'pairs':
         return (
           exercise.type === 'matching' &&
@@ -78,17 +94,33 @@ export function PracticePage() {
     }
   }, [exercise, response]);
 
-  // Enter advances from the feedback panel; the exercise views handle Enter
-  // during the answering phase themselves.
+  const exerciseRef = useRef<HTMLDivElement | null>(null);
+  const checkRef = useRef<HTMLButtonElement | null>(null);
+
+  // Enter submits whenever Check is enabled, and Enter (or Space) advances from
+  // the feedback panel. This is the single page-level key handler.
   const handleKey = useCallback(
     (event: KeyboardEvent) => {
-      if (phase !== 'feedback') return;
-      if (event.key === 'Enter' || event.key === ' ') {
+      const isEnter = event.key === 'Enter';
+      if (event.defaultPrevented || !(isEnter || (phase === 'feedback' && event.key === ' '))) {
+        return;
+      }
+      const target = event.target as HTMLElement | null;
+      // Text fields handle their own keys (GermanInput submits on Enter), and
+      // controls outside the exercise — Continue, End session, the nav — keep
+      // their native activation.
+      if (target?.closest?.('input, textarea, select')) return;
+      if (target?.closest?.('button, a') && !exerciseRef.current?.contains(target)) return;
+
+      if (phase === 'feedback') {
         event.preventDefault();
         advance();
+      } else if (phase === 'active' && isEnter && canSubmit) {
+        event.preventDefault();
+        submit();
       }
     },
-    [phase, advance],
+    [phase, advance, submit, canSubmit],
   );
 
   useEffect(() => {
@@ -98,10 +130,17 @@ export function PracticePage() {
 
   // Optionally skip the feedback panel on a clean answer.
   useEffect(() => {
-    if (!settings.autoAdvance || phase !== 'feedback' || !result?.correct) return;
+    if (!autoAdvance || phase !== 'feedback' || !result?.correct) return;
     const timer = window.setTimeout(advance, 900);
     return () => window.clearTimeout(timer);
-  }, [settings.autoAdvance, phase, result, advance]);
+  }, [autoAdvance, phase, result, advance]);
+
+  // A new question takes focus, so keyboard users do not restart from <body>.
+  // Typed questions autofocus their input on mount, which this leaves alone.
+  useEffect(() => {
+    const area = exerciseRef.current;
+    if (area && !area.contains(document.activeElement)) area.focus();
+  }, [exercise]);
 
   if (loading) return <Spinner label="Loading verbs…" />;
 
@@ -130,8 +169,8 @@ export function PracticePage() {
           title="No verbs match your filters"
           description="Your level selection and verb filters have narrowed the pool to nothing. Loosen them in settings to start practising."
           action={
-            <Link to="/settings">
-              <Button variant="primary">Open settings</Button>
+            <Link to="/settings" className={buttonClasses('primary')}>
+              Open settings
             </Link>
           }
         />
@@ -153,8 +192,8 @@ export function PracticePage() {
 
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             <Stat label="Due now" value={dueNow} tone={dueNow > 0 ? 'gold' : undefined} />
-            <Stat label="Session length" value={settings.session.length} hint="questions" />
-            <Stat label="New forms" value={settings.session.newCardLimit} hint="max per session" />
+            <Stat label="Session length" value={sessionSettings.length} hint="questions" />
+            <Stat label="New forms" value={sessionSettings.newCardLimit} hint="max per session" />
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -176,7 +215,7 @@ export function PracticePage() {
           <h2 className="text-sm font-semibold">What this session can ask you</h2>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {Object.values(EXERCISE_TYPE_META)
-              .filter((meta) => settings.exerciseTypes[meta.id])
+              .filter((meta) => exerciseTypes[meta.id])
               .map((meta) => (
                 <Badge key={meta.id} tone={meta.mode === 'production' ? 'violet' : 'blue'}>
                   {meta.label}
@@ -195,7 +234,7 @@ export function PracticePage() {
 
           <Link
             to="/settings"
-            className="mt-5 inline-block text-sm font-medium text-gold-600 hover:underline dark:text-gold-400"
+            className="mt-2 inline-flex min-h-11 items-center text-sm font-medium text-gold-600 hover:underline dark:text-gold-400"
           >
             Change what you practise →
           </Link>
@@ -249,8 +288,8 @@ export function PracticePage() {
             Another session
           </Button>
           <Button onClick={reset}>Back</Button>
-          <Link to="/progress">
-            <Button variant="ghost">See progress</Button>
+          <Link to="/progress" className={buttonClasses('ghost')}>
+            See progress
           </Link>
         </div>
       </Card>
@@ -263,6 +302,8 @@ export function PracticePage() {
 
   return (
     <div className="space-y-4">
+      <h1 className="sr-only">Practice session</h1>
+
       {/* Session progress and combo */}
       <div className="flex items-center gap-3">
         <ProgressBar value={total === 0 ? 0 : index / total} className="flex-1" label="Session progress" />
@@ -289,18 +330,34 @@ export function PracticePage() {
           'p-6',
           phase === 'feedback' && result && !result.correct && 'animate-shake',
         )}
+        onFocus={(event) => {
+          // On phones the on-screen keyboard opens after focus and can cover
+          // Check; bring it back into view once the viewport has shrunk.
+          if (event.target instanceof HTMLInputElement) {
+            window.setTimeout(() => checkRef.current?.scrollIntoView?.({ block: 'nearest' }), 300);
+          }
+        }}
       >
-        <ExerciseView
-          exercise={exercise}
-          response={response}
-          onChange={setResponse}
-          onSubmit={() => canSubmit && submit()}
-          result={phase === 'feedback' ? result : null}
-          hintUsed={hintUsed}
-        />
+        <div
+          ref={exerciseRef}
+          tabIndex={-1}
+          role="group"
+          aria-label={`Question ${index + 1} of ${total}`}
+          className="outline-none"
+        >
+          <ExerciseView
+            key={exercise.id}
+            exercise={exercise}
+            response={response}
+            onChange={setResponse}
+            onSubmit={() => canSubmit && submit()}
+            result={phase === 'feedback' ? result : null}
+            hintUsed={hintUsed}
+          />
+        </div>
 
         {phase === 'active' && (
-          <div className="mt-6 flex items-center justify-between gap-3">
+          <div className="mt-4 flex items-center justify-between gap-3">
             {exercise.hint && !hintUsed ? (
               <Button variant="ghost" size="sm" onClick={revealHint}>
                 💡 Hint
@@ -309,23 +366,26 @@ export function PracticePage() {
               <span />
             )}
 
-            <Button variant="primary" onClick={submit} disabled={!canSubmit}>
+            <Button ref={checkRef} variant="primary" onClick={submit} disabled={!canSubmit}>
               Check <span className="text-xs opacity-70">↵</span>
             </Button>
           </div>
         )}
       </Card>
 
-      {phase === 'feedback' && result && (
-        <FeedbackPanel
-          result={result}
-          exercise={exercise}
-          xp={lastXp}
-          multiplier={multiplier}
-          onNext={advance}
-          autoFocusNext={!settings.autoAdvance}
-        />
-      )}
+      {/* Always mounted, so screen readers announce feedback when it is inserted. */}
+      <div role="status" aria-live="polite">
+        {phase === 'feedback' && result && (
+          <FeedbackPanel
+            result={result}
+            exercise={exercise}
+            xp={lastXp}
+            multiplier={multiplier}
+            onNext={advance}
+            autoFocusNext={!autoAdvance}
+          />
+        )}
+      </div>
 
       <div className="flex items-center justify-between text-xs text-muted">
         <span>

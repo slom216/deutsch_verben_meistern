@@ -457,9 +457,10 @@ function LevelChip({ level }: { level: CefrLevel }) {
       type="button"
       onClick={() => toggleLevel(level)}
       disabled={isLast}
+      aria-pressed={active}
       title={isLast ? 'At least one level must stay enabled' : undefined}
       className={cx(
-        'rounded-xl border-2 px-4 py-2 text-sm font-semibold transition-colors',
+        'min-h-11 min-w-11 rounded-xl border-2 px-4 py-2 text-sm font-semibold transition-colors',
         active
           ? 'border-gold-500 bg-gold-500/15 text-gold-700 dark:text-gold-300'
           : 'border-[var(--border-subtle)] text-muted hover:border-ink-300',
@@ -493,6 +494,7 @@ function ChipToggle({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={cx(
         'rounded-lg border px-2.5 py-1 text-xs font-medium transition-colors',
         active

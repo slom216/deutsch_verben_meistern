@@ -73,7 +73,7 @@ export interface AchievementContext {
   categoriesTouched: number;
   /** Distinct CEFR levels the learner has answered questions in. */
   levelsTouched: number;
-  /** Correct answers on typed/production exercises. */
+  /** Correct answers on typed exercises (not multiple choice, matching or tile-based sentence building). */
   productionCorrect: number;
   /** Cards recovered from `lapsed` back to `review` or better. */
   comebacks: number;

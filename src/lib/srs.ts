@@ -99,12 +99,13 @@ export function createCard(id: CardId, now: number = Date.now()): CardRecord {
 /** Map a grading outcome plus response speed onto an SM-2 quality score. */
 export function qualityFrom(
   verdict: 'correct' | 'accepted-with-note' | 'near-miss' | 'incorrect' | 'empty',
-  options: { hintUsed?: boolean; fast?: boolean } = {},
+  options: { hintUsed?: boolean; fast?: boolean; recognition?: boolean } = {},
 ): ReviewQuality {
   switch (verdict) {
     case 'correct':
       if (options.hintUsed) return 3;
-      return options.fast ? 5 : 4;
+      // Picking from shown options can be a lucky guess, so it never counts as confident recall.
+      return options.fast && !options.recognition ? 5 : 4;
     case 'accepted-with-note':
       return 3;
     case 'near-miss':
@@ -145,11 +146,13 @@ export function reviewCard(
     // but the ease floor keeps it from collapsing to daily drilling forever.
     next.repetitions = 0;
     next.step = 0;
-    next.lapses = card.lapses + (card.state === 'review' || card.state === 'mastered' ? 1 : 0);
+    // Only a card that had graduated can be forgotten; one still being learnt stays in learning.
+    const graduated = card.state === 'review' || card.state === 'mastered';
+    next.lapses = card.lapses + (graduated ? 1 : 0);
     next.ease = clampEase(card.ease - (quality === 0 ? 0.3 : 0.2));
     next.interval = LEARNING_STEPS[0];
     next.due = now + LEARNING_STEPS[0];
-    next.state = card.state === 'new' ? 'learning' : 'lapsed';
+    next.state = graduated || (card.state === 'lapsed' && card.lapses > 0) ? 'lapsed' : 'learning';
     return next;
   }
 
@@ -162,7 +165,8 @@ export function reviewCard(
   if (inLearning) {
     const nextStep = card.step + 1;
     if (quality === 5 && card.state === 'new') {
-      // A confident first answer skips the drill steps entirely.
+      // A confident first answer skips the drill steps. Quality 5 only comes
+      // from production exercises, so a recognition guess cannot do this.
       next.step = LEARNING_STEPS.length;
       next.interval = EASY_INTERVAL;
       next.due = now + EASY_INTERVAL;

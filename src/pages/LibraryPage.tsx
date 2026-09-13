@@ -9,6 +9,7 @@ import { makeCardId, formatInterval, type CardRecord } from '@/lib/srs';
 import { slotsFor } from '@/exercises/formAccess';
 import { enabledCategories, useSettings } from '@/store/settingsStore';
 import { useProgress } from '@/store/progressStore';
+import { useShallow } from 'zustand/react/shallow';
 import { Badge, Card, cx, EmptyState, ProgressBar, Spinner } from '@/components/ui';
 
 /**
@@ -38,6 +39,12 @@ export function LibraryPage() {
           {results.length} of {filtered.length} verbs in your current pool
         </p>
       </div>
+
+      {verbId && (
+        <p role="alert" className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-300">
+          Verb not found: there is no “{verbId}” in your current pool. Pick one from the list below.
+        </p>
+      )}
 
       <input
         type="search"
@@ -78,10 +85,9 @@ export function LibraryPage() {
 /** Fraction of this verb's practisable forms that are mastered. */
 function useVerbMastery(verb: Verb) {
   const cards = useProgress((state) => state.cards);
-  const settings = useSettings();
+  const categories = useSettings(useShallow(enabledCategories));
 
   return useMemo(() => {
-    const categories = enabledCategories(settings);
     let total = 0;
     let mastered = 0;
     let seen = 0;
@@ -97,7 +103,7 @@ function useVerbMastery(verb: Verb) {
     }
 
     return { total, mastered, seen, ratio: total === 0 ? 0 : mastered / total };
-  }, [verb, cards, settings]);
+  }, [verb, cards, categories]);
 }
 
 function VerbRow({ verb, onOpen }: { verb: Verb; onOpen: () => void }) {
@@ -111,7 +117,7 @@ function VerbRow({ verb, onOpen }: { verb: Verb; onOpen: () => void }) {
     >
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline gap-2">
-          <span className="truncate font-semibold">{verb.dictionaryForm}</span>
+          <span lang="de" className="truncate font-semibold">{verb.dictionaryForm}</span>
           <Badge tone="neutral">{verb.level}</Badge>
           {verb.regularity !== 'regular' && <Badge tone="violet">{verb.regularity}</Badge>}
           {verb.separable && <Badge tone="blue">trennbar</Badge>}
@@ -152,7 +158,7 @@ function VerbDetail({ verb, onBack }: { verb: Verb; onBack: () => void }) {
       <Card className="p-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="font-serif text-3xl font-semibold tracking-tight">
+            <h1 lang="de" className="font-serif text-3xl font-semibold tracking-tight">
               {verb.dictionaryForm}
             </h1>
             <p className="mt-1 text-muted">{verb.english.join(', ')}</p>
@@ -170,7 +176,7 @@ function VerbDetail({ verb, onBack }: { verb: Verb; onBack: () => void }) {
         </div>
 
         <p className="mt-4 rounded-xl bg-ink-100 px-4 py-3 dark:bg-ink-800">
-          <span className="block font-medium">{verb.example.german}</span>
+          <span lang="de" className="block font-medium">{verb.example.german}</span>
           <span className="mt-0.5 block text-sm text-muted italic">{verb.example.english}</span>
         </p>
 
@@ -179,6 +185,14 @@ function VerbDetail({ verb, onBack }: { verb: Verb; onBack: () => void }) {
           <span>Band: {verb.frequencyBand}</span>
           <span>Classes: {verb.verbClasses.join(', ')}</span>
         </div>
+
+        {verb.usageRestrictions?.notes && verb.usageRestrictions.notes.length > 0 && (
+          <ul className="mt-4 space-y-1 text-sm">
+            {verb.usageRestrictions.notes.map((note) => (
+              <li key={note}>ℹ️ {note}</li>
+            ))}
+          </ul>
+        )}
 
         {mastery.total > 0 && (
           <div className="mt-4">
@@ -210,7 +224,7 @@ function VerbDetail({ verb, onBack }: { verb: Verb; onBack: () => void }) {
             ))}
             {verb.fixedPrepositions.map((preposition) => (
               <li key={`${preposition.preposition}-${preposition.case}`}>
-                <strong>
+                <strong lang="de">
                   {verb.infinitive} + {preposition.preposition}
                 </strong>{' '}
                 + {preposition.case}
@@ -406,8 +420,8 @@ function FormRow({
         }
         aria-hidden
       />
-      <span className="w-20 shrink-0 text-sm text-muted">{label}</span>
-      <span className="min-w-0 flex-1 font-medium">
+      <span lang="de" className="w-20 shrink-0 text-sm text-muted">{label}</span>
+      <span lang="de" className="min-w-0 flex-1 font-medium">
         {value}
         {secondary && <span className="ml-2 text-sm font-normal text-muted">/ {secondary}</span>}
       </span>

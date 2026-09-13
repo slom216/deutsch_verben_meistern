@@ -36,7 +36,9 @@ export const GermanInput = forwardRef<HTMLInputElement, GermanInputProps>(functi
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
+      // Handled here: keep the page-level Enter handler from also advancing.
       event.preventDefault();
+      event.stopPropagation();
       onSubmit();
     }
   };
@@ -52,8 +54,10 @@ export const GermanInput = forwardRef<HTMLInputElement, GermanInputProps>(functi
     const end = input.selectionEnd ?? value.length;
     const next = value.slice(0, start) + character + value.slice(end);
     onChange(next);
+    // Refocus straight away so keys typed right after the click land in the
+    // input; the caret can only be placed once React has rendered the value.
+    input.focus();
     requestAnimationFrame(() => {
-      input.focus();
       input.setSelectionRange(start + character.length, start + character.length);
     });
   };
@@ -72,6 +76,7 @@ export const GermanInput = forwardRef<HTMLInputElement, GermanInputProps>(functi
         value={value}
         onChange={(event) => onChange(event.target.value)}
         onKeyDown={handleKeyDown}
+        lang="de"
         placeholder={placeholder}
         disabled={disabled}
         autoFocus={autoFocus}
@@ -93,9 +98,10 @@ export const GermanInput = forwardRef<HTMLInputElement, GermanInputProps>(functi
             <button
               key={character}
               type="button"
-              tabIndex={-1}
+              // Keep focus (and the caret) in the input on mouse clicks.
+              onMouseDown={(event) => event.preventDefault()}
               onClick={() => insert(character)}
-              className="h-8 w-8 rounded-lg bg-ink-100 text-sm font-semibold transition-colors hover:bg-ink-200 dark:bg-ink-800 dark:hover:bg-ink-700"
+              className="h-11 min-w-11 rounded-lg bg-ink-100 text-base font-semibold transition-colors hover:bg-ink-200 dark:bg-ink-800 dark:hover:bg-ink-700"
               aria-label={`Insert ${character}`}
             >
               {character}

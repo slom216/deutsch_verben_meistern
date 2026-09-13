@@ -82,7 +82,9 @@ function QuestionHeader({
   return (
     <div className="text-center">
       <div className="text-xs font-medium uppercase tracking-wide text-muted">{prompt}</div>
-      <div className="mt-1 font-serif text-2xl font-semibold tracking-tight">{infinitive}</div>
+      <div lang="de" className="mt-1 font-serif text-2xl font-semibold tracking-tight">
+        {infinitive}
+      </div>
       {context && <div className="mt-0.5 text-sm text-muted">{context}</div>}
     </div>
   );
@@ -126,7 +128,22 @@ function MultipleChoiceView({
       />
       <p className="text-center text-sm">{exercise.question}</p>
 
-      <div className="grid gap-2 sm:grid-cols-2">
+      <div
+        role="radiogroup"
+        aria-label={exercise.question}
+        className="grid gap-2 sm:grid-cols-2"
+        // Radio-group keyboard pattern: arrows move the selection and focus.
+        onKeyDown={(event) => {
+          const step = ({ ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 } as Record<string, number>)[event.key];
+          if (!step || graded) return;
+          event.preventDefault();
+          const count = exercise.options.length;
+          const current = selected === null ? -1 : exercise.options.indexOf(selected);
+          const next = current === -1 ? (step > 0 ? 0 : count - 1) : (current + step + count) % count;
+          onChange({ kind: 'choice', value: exercise.options[next] });
+          event.currentTarget.querySelectorAll<HTMLElement>('[role="radio"]')[next]?.focus();
+        }}
+      >
         {exercise.options.map((option, position) => {
           const isSelected = selected === option;
           const isAnswer = option === exercise.answer;
@@ -145,6 +162,10 @@ function MultipleChoiceView({
             <button
               key={option}
               type="button"
+              role="radio"
+              aria-checked={isSelected}
+              // Roving tab stop: Tab reaches the group once, arrows move within it.
+              tabIndex={isSelected || (!selected && position === 0) ? 0 : -1}
               disabled={graded}
               onClick={() => onChange({ kind: 'choice', value: option })}
               onDoubleClick={onSubmit}
@@ -157,7 +178,9 @@ function MultipleChoiceView({
               <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-ink-100 text-xs font-semibold dark:bg-ink-800">
                 {position + 1}
               </span>
-              <span className="font-medium">{option}</span>
+              <span lang="de" className="font-medium">
+                {option}
+              </span>
               {graded && isAnswer && <span className="ml-auto text-emerald-600">✓</span>}
             </button>
           );
@@ -200,6 +223,8 @@ function TypedView({
       />
 
       <p
+        // Typed-conjugation questions are English instructions; the others are German sentences.
+        lang={exercise.type === 'typedConjugation' ? undefined : 'de'}
         className={cx(
           'text-center text-lg',
           questionTone === 'error' && 'font-medium text-red-600 line-through decoration-red-400/60 dark:text-red-400',
@@ -250,7 +275,7 @@ function SentenceCompletionView({
         infinitive={exercise.infinitive}
       />
 
-      <p className="text-center text-xl leading-relaxed">
+      <p lang="de" className="text-center text-xl leading-relaxed">
         <span>{exercise.before}</span>
         <span
           className={cx(
@@ -349,11 +374,16 @@ function MatchingView({
                       : 'border-[var(--border-subtle)]',
               )}
             >
-              <span className="w-20 shrink-0 font-medium text-muted">{pair.left}</span>
-              <span className="text-muted">→</span>
+              <span lang="de" className="w-20 shrink-0 font-medium text-muted">
+                {pair.left}
+              </span>
+              <span className="text-muted" aria-hidden>
+                →
+              </span>
               {value ? (
                 <button
                   type="button"
+                  lang="de"
                   onClick={() => unassign(pair.left)}
                   disabled={graded}
                   className="font-semibold disabled:cursor-default"
@@ -364,7 +394,7 @@ function MatchingView({
                 <span className="text-sm text-muted italic">choose a form…</span>
               )}
               {graded && !isCorrect && (
-                <span className="ml-auto text-sm text-emerald-600 dark:text-emerald-400">
+                <span lang="de" className="ml-auto text-sm text-emerald-600 dark:text-emerald-400">
                   {pair.right}
                 </span>
               )}
@@ -375,22 +405,28 @@ function MatchingView({
 
       {!graded && (
         <div className="flex flex-wrap justify-center gap-2">
-          {exercise.shuffledRight.map((form) => (
-            <button
-              key={form}
-              type="button"
-              onClick={() => assign(form)}
-              disabled={usedForms.has(form)}
-              className={cx(
-                'rounded-lg border-2 border-[var(--border-subtle)] px-3 py-1.5 text-sm font-medium transition-colors surface-card',
-                usedForms.has(form)
-                  ? 'opacity-30'
-                  : 'hover:border-gold-500 hover:bg-gold-500/10',
-              )}
-            >
-              {form}
-            </button>
-          ))}
+          {exercise.shuffledRight.map((form) =>
+            usedForms.has(form) ? (
+              // An empty slot keeps the layout steady without a second, identical button.
+              <span
+                key={form}
+                aria-hidden
+                className="rounded-lg border-2 border-dashed border-[var(--border-subtle)] px-3 py-1.5 text-sm font-medium text-transparent select-none"
+              >
+                {form}
+              </span>
+            ) : (
+              <button
+                key={form}
+                type="button"
+                lang="de"
+                onClick={() => assign(form)}
+                className="rounded-lg border-2 border-[var(--border-subtle)] px-3 py-1.5 text-sm font-medium transition-colors surface-card hover:border-gold-500 hover:bg-gold-500/10"
+              >
+                {form}
+              </button>
+            ),
+          )}
         </div>
       )}
     </div>
@@ -455,6 +491,7 @@ function ReconstructionView({
           <button
             key={`${token}-${position}`}
             type="button"
+            lang="de"
             onClick={() => removeAt(position)}
             disabled={graded}
             className="rounded-lg bg-gold-500/15 px-2.5 py-1 font-medium transition-colors hover:bg-gold-500/25 disabled:cursor-default"
@@ -470,6 +507,7 @@ function ReconstructionView({
             <button
               key={`${token}-${position}`}
               type="button"
+              lang="de"
               onClick={() => append(token)}
               disabled={(remaining.get(token) ?? 0) <= 0}
               className={cx(
@@ -488,8 +526,9 @@ function ReconstructionView({
       {graded && !result.correct && (
         <p className="text-center text-sm">
           <span className="text-muted">Correct order: </span>
-          <span className="font-medium text-emerald-600 dark:text-emerald-400">
-            {exercise.correctOrder.join(' ')}.
+          <span lang="de" className="font-medium text-emerald-600 dark:text-emerald-400">
+            {exercise.correctOrder.join(' ')}
+            {exercise.terminal}
           </span>
         </p>
       )}
@@ -533,8 +572,6 @@ export function FeedbackPanel({
           ? 'border-emerald-500/50 bg-emerald-500/10'
           : 'border-red-500/50 bg-red-500/10',
       )}
-      role="status"
-      aria-live="polite"
     >
       <div className="flex items-start gap-3">
         <span className="text-2xl" aria-hidden>
@@ -556,7 +593,9 @@ export function FeedbackPanel({
           {!result.correct && (
             <p className="mt-1 text-sm">
               <span className="text-muted">Answer: </span>
-              <span className="font-semibold">{result.target}</span>
+              <span lang="de" className="font-semibold">
+                {result.target}
+              </span>
             </p>
           )}
 

@@ -160,9 +160,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -284,9 +282,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -416,9 +412,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -547,9 +541,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -671,9 +663,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -796,9 +786,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -928,9 +916,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -1051,10 +1037,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -1187,7 +1170,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -1311,9 +1293,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "reflexivePattern"
       ],
       "strictness": {
         "capitalization": true,
@@ -1437,8 +1417,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -1563,8 +1541,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -1656,7 +1632,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "beriete",
             "du": "berietest",
@@ -1695,8 +1671,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -1830,8 +1804,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -1923,7 +1895,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "beschriebe",
             "du": "beschriebest",
@@ -1962,8 +1934,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -2097,7 +2067,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -2195,7 +2164,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "bestände",
             "du": "beständest",
@@ -2234,8 +2203,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -2359,8 +2326,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -2462,7 +2427,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "bewürbe mich",
             "du": "bewürbest dich",
@@ -2501,7 +2466,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -2593,7 +2557,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "briete",
             "du": "brietest",
@@ -2631,10 +2595,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -2766,8 +2727,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -2891,9 +2850,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -3078,7 +3035,7 @@
         "isReflexive": false,
         "case": null
       },
-      "auxiliary": "haben",
+      "auxiliary": "sein",
       "requiredCases": [],
       "fixedPrepositions": [],
       "forms": {
@@ -3099,12 +3056,12 @@
           "sieSie": "zogen ein"
         },
         "presentPerfect": {
-          "ich": "habe eingezogen",
-          "du": "hast eingezogen",
-          "erSieEs": "hat eingezogen",
-          "wir": "haben eingezogen",
-          "ihr": "habt eingezogen",
-          "sieSie": "haben eingezogen"
+          "ich": "bin eingezogen",
+          "du": "bist eingezogen",
+          "erSieEs": "ist eingezogen",
+          "wir": "sind eingezogen",
+          "ihr": "seid eingezogen",
+          "sieSie": "sind eingezogen"
         },
         "futureI": {
           "ich": "werde einziehen",
@@ -3161,9 +3118,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -3291,7 +3246,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -3414,10 +3368,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -3506,7 +3457,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "fiele",
             "du": "fielest",
@@ -3544,10 +3495,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -3669,9 +3617,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "reflexivePattern"
       ],
       "strictness": {
         "capitalization": true,
@@ -3794,9 +3740,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -3925,9 +3869,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -4047,10 +3989,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4171,10 +4110,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4297,10 +4233,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4393,7 +4326,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "liehe",
             "du": "liehest",
@@ -4432,8 +4365,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -4554,10 +4485,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4646,7 +4574,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "löge",
             "du": "lögest",
@@ -4684,10 +4612,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4808,10 +4733,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4932,10 +4854,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5056,10 +4975,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5152,7 +5068,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "nennte",
             "du": "nenntest",
@@ -5191,8 +5107,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -5313,10 +5227,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5436,10 +5347,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5562,8 +5470,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -5686,10 +5592,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5810,10 +5713,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5911,7 +5811,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "riete",
             "du": "rietest",
@@ -5950,8 +5850,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -6073,10 +5971,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6113,9 +6008,9 @@
       "frequencyBand": "A2 Core 2",
       "verbClasses": [
         "multiword",
-        "regular"
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -6204,10 +6099,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6339,8 +6231,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -6430,7 +6320,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "ritte",
             "du": "rittest",
@@ -6468,10 +6358,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6591,10 +6478,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6686,7 +6570,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "riefe",
             "du": "riefest",
@@ -6725,8 +6609,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -6847,10 +6729,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6971,10 +6850,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7095,10 +6971,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7187,7 +7060,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "sänge",
             "du": "sängest",
@@ -7225,10 +7098,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7355,8 +7225,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -7485,10 +7353,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7608,10 +7473,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7700,7 +7562,7 @@
           "reason": "The imperative is excluded for semantic and pedagogical reasons."
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "stürbe",
             "du": "stürbest",
@@ -7738,10 +7600,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7842,7 +7701,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "stritte mich",
             "du": "strittest dich",
@@ -7881,7 +7740,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -8004,10 +7862,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -8131,8 +7986,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -8260,8 +8113,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -8391,9 +8242,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -8494,7 +8343,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "unterhielte mich",
             "du": "unterhieltest dich",
@@ -8533,7 +8382,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -8625,7 +8473,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "unternähme",
             "du": "unternähmest",
@@ -8663,10 +8511,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -8789,8 +8634,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -8912,10 +8755,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9006,7 +8846,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "vergliche",
             "du": "verglichest",
@@ -9045,8 +8885,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -9169,9 +9007,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "reflexivePattern"
       ],
       "strictness": {
         "capitalization": true,
@@ -9299,7 +9135,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -9421,10 +9256,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9545,10 +9377,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9638,7 +9467,7 @@
           "reason": null
         },
         "konjunktivII": {
-          "preferred": "synthetic",
+          "preferred": "würdeForm",
           "synthetic": {
             "ich": "verschöbe",
             "du": "verschöbest",
@@ -9676,10 +9505,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9800,10 +9626,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9924,10 +9747,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10047,10 +9867,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10170,10 +9987,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10298,8 +10112,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -10420,10 +10232,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10548,7 +10357,6 @@
         "pastParticiple",
         "auxiliary",
         "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -10672,9 +10480,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -10795,10 +10601,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10927,7 +10730,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],

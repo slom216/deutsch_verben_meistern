@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useShallow } from 'zustand/react/shallow';
 import { useVerbs } from '@/hooks/useVerbs';
 import { enabledCategories, useSettings } from '@/store/settingsStore';
 import { countDue, countPractisable } from '@/exercises/sessionBuilder';
@@ -8,20 +9,41 @@ import { effectiveStreak, useGamification } from '@/store/gamificationStore';
 import { ACHIEVEMENTS_BY_ID, nextRank, rankForXp, rankProgress } from '@/lib/achievements';
 import { FORM_CATEGORY_META } from '@/types/formCategory';
 import { dayKey, recentDays } from '@/lib/dates';
-import { Badge, Button, Card, cx, ProgressBar, Spinner, Stat } from '@/components/ui';
+import { Badge, buttonClasses, Card, cx, ProgressBar, Spinner, Stat } from '@/components/ui';
 
 /** Home screen: what to do now, and how the last two weeks have gone. */
 export function DashboardPage() {
   const { filtered, loading } = useVerbs();
-  const settings = useSettings();
-  const progress = useProgress();
-  const gamification = useGamification();
+  const categories = useSettings(useShallow(enabledCategories));
+  const dailyGoalXp = useSettings((state) => state.dailyGoalXp);
+  const progress = useProgress(
+    useShallow((state) => ({
+      cards: state.cards,
+      categoryStats: state.categoryStats,
+      daily: state.daily,
+      totalAnswered: state.totalAnswered,
+    })),
+  );
+  const xp = useGamification((state) => state.xp);
+  const unlocked = useGamification((state) => state.unlocked);
+  const streak = useGamification(effectiveStreak);
 
-  const categories = useMemo(() => enabledCategories(settings), [settings]);
+  // Cards fall due as time passes, not only when the store changes, so re-read
+  // the clock every 30 s and whenever the tab regains focus.
+  const [now, setNow] = useState(Date.now);
+  useEffect(() => {
+    const tick = () => setNow(Date.now());
+    const timer = window.setInterval(tick, 30_000);
+    window.addEventListener('focus', tick);
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener('focus', tick);
+    };
+  }, []);
 
   const due = useMemo(
-    () => (loading ? 0 : countDue(filtered, progress.cards, categories)),
-    [loading, filtered, progress.cards, categories],
+    () => (loading ? 0 : countDue(filtered, progress.cards, categories, now)),
+    [loading, filtered, progress.cards, categories, now],
   );
   const practisable = useMemo(
     () => (loading ? 0 : countPractisable(filtered, categories)),
@@ -31,13 +53,12 @@ export function DashboardPage() {
   const mastery = useMemo(() => masteryBreakdown(progress.cards), [progress.cards]);
   const weak = useMemo(() => weakestCategories(progress.categoryStats), [progress.categoryStats]);
 
-  const streak = effectiveStreak(gamification);
-  const rank = rankForXp(gamification.xp);
-  const upcoming = nextRank(gamification.xp);
+  const rank = rankForXp(xp);
+  const upcoming = nextRank(xp);
 
   const today = progress.daily[dayKey()];
   const todayXp = today?.xp ?? 0;
-  const goalMet = todayXp >= settings.dailyGoalXp;
+  const goalMet = todayXp >= dailyGoalXp;
 
   const last14 = useMemo(() => {
     const days = recentDays(14);
@@ -79,14 +100,13 @@ export function DashboardPage() {
 							<div className="flex gap-2">
 								<Link
 									to={due > 0 ? "/practice?start=due" : "/practice?start=mixed"}
+									className={buttonClasses("primary", "lg")}
 								>
-									<Button variant="primary" size="lg">
 										{isNewUser
 											? "Start learning"
 											: due > 0
 												? `Review ${due}`
 												: "Practise"}
-									</Button>
 								</Link>
 							</div>
 						</div>
@@ -105,7 +125,7 @@ export function DashboardPage() {
 							<Stat
 								label="Today"
 								value={`${todayXp} XP`}
-								hint={goalMet ? "goal met ✓" : `goal ${settings.dailyGoalXp}`}
+								hint={goalMet ? "goal met ✓" : `goal ${dailyGoalXp}`}
 								tone={goalMet ? "green" : undefined}
 							/>
 							<Stat label="Mastered" value={mastery.mastered} hint="forms" />
@@ -119,7 +139,7 @@ export function DashboardPage() {
 						<div className="flex items-baseline justify-between">
 							<h2 className="text-sm font-semibold">Rank</h2>
 							<span className="text-xs tabular-nums text-muted">
-								{gamification.xp} XP
+								{xp} XP
 							</span>
 						</div>
 						<div className="mt-2 flex items-baseline gap-2">
@@ -131,13 +151,13 @@ export function DashboardPage() {
 							</span>
 						</div>
 						<ProgressBar
-							value={rankProgress(gamification.xp)}
+							value={rankProgress(xp)}
 							className="mt-3"
 							label="Rank progress"
 						/>
 						<p className="mt-2 text-xs text-muted">
 							{upcoming
-								? `${upcoming.minXp - gamification.xp} XP to ${upcoming.name}`
+								? `${upcoming.minXp - xp} XP to ${upcoming.name}`
 								: "Highest rank reached — Verbmeister."}
 						</p>
 					</Card>
@@ -259,7 +279,7 @@ export function DashboardPage() {
 				)}
 
 				{/* Recently unlocked */}
-				{Object.keys(gamification.unlocked).length > 0 && (
+				{Object.keys(unlocked).length > 0 && (
 					<Card className="p-5">
 						<div className="flex items-baseline justify-between">
 							<h2 className="text-sm font-semibold">Latest badges</h2>
@@ -271,7 +291,7 @@ export function DashboardPage() {
 							</Link>
 						</div>
 						<div className="mt-3 flex flex-wrap gap-1.5">
-							{Object.entries(gamification.unlocked)
+							{Object.entries(unlocked)
 								.sort((a, b) => b[1] - a[1])
 								.slice(0, 6)
 								.flatMap(([id]) => {

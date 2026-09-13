@@ -109,6 +109,7 @@ export function gradeAgainst(
   response: string,
   target: string,
   policy: StrictnessPolicy,
+  otherForms: readonly string[] = [],
 ): GradeResult {
   const trimmedResponse = collapseWhitespace(response);
   const trimmedTarget = collapseWhitespace(target);
@@ -136,13 +137,18 @@ export function gradeAgainst(
     return { correct: true, verdict: 'correct', target: trimmedTarget, diagnostics, distance: 0 };
   }
 
-  const distance = levenshtein(canonical(trimmedResponse), canonical(trimmedTarget));
+  const canonicalResponse = canonical(trimmedResponse);
+  const distance = levenshtein(canonicalResponse, canonical(trimmedTarget));
 
   /* -------- Feature-by-feature comparison -------- */
 
   // Capitalisation: identical once case is ignored.
   const caseInsensitiveMatch = responseNoPunct.toLowerCase() === targetNoPunct.toLowerCase();
   if (caseInsensitiveMatch) {
+    // Only the first letter differs: sentence-initial capitals (`Geh!`) are fine.
+    if (responseNoPunct.slice(1) === targetNoPunct.slice(1)) {
+      return { correct: true, verdict: 'correct', target: trimmedTarget, diagnostics, distance: 0 };
+    }
     diagnostics.push(diagnostic('capitalization', policy.capitalization));
     return finalize(trimmedTarget, diagnostics, distance);
   }
@@ -241,25 +247,42 @@ export function gradeAgainst(
 
   /* -------- Single-token near misses -------- */
 
-  // A separable verb answered with the prefix still attached, or vice versa.
+  // A separable verb answered with the prefix still attached (`aufstehe` for
+  // `stehe auf`, or glued in place), or vice versa.
   if (responseTokens.length !== targetTokens.length) {
     const joinedResponse = responseTokens.join('');
     const joinedTarget = targetTokens.join('');
-    if (joinedResponse === joinedTarget) {
+    const prefixInFront =
+      targetTokens[targetTokens.length - 1] + targetTokens.slice(0, -1).join('');
+    if (joinedResponse === joinedTarget || joinedResponse === prefixInFront) {
       diagnostics.push(
         diagnostic(
           'separablePrefix',
           true,
-          'Right words — but the separable prefix belongs on its own.',
+          'Right words — but the separable prefix goes on its own at the end.',
         ),
       );
       return finalize(trimmedTarget, diagnostics, distance);
     }
   }
 
+  // A real form of the verb in the wrong slot is a grammar error, never a typo.
+  if (otherForms.some((form) => canonical(form) === canonicalResponse)) {
+    diagnostics.push(
+      diagnostic(
+        'wrongForm',
+        true,
+        `"${responseNoPunct}" is a form of this verb, but not the one asked for.`,
+      ),
+    );
+    return { ...finalize(trimmedTarget, diagnostics, distance), verdict: 'incorrect' };
+  }
+
+  // Close misspellings get a spelling hint; forgive-typos only accepts
+  // "one character off", as the setting promises.
   const tolerance = trimmedTarget.length <= 5 ? 1 : 2;
   if (distance <= tolerance) {
-    diagnostics.push(diagnostic('spelling', !policy.allowTypos));
+    diagnostics.push(diagnostic('spelling', !(policy.allowTypos && distance <= 1)));
     return finalize(trimmedTarget, diagnostics, distance);
   }
 
@@ -282,17 +305,21 @@ function finalize(target: string, diagnostics: Diagnostic[], distance: number): 
  * Grade a response against every acceptable answer and report the kindest
  * outcome. Ties are broken by edit distance so the feedback points at the
  * variant the learner was evidently reaching for.
+ *
+ * `otherForms` are the verb's other forms (duplicates and accepted answers
+ * allowed); a response matching one is a wrong form, not a typo.
  */
 export function gradeAnswer(
   response: string,
   accepted: readonly string[],
   policy: StrictnessPolicy = DEFAULT_POLICY,
+  otherForms: readonly string[] = [],
 ): GradeResult {
   if (accepted.length === 0) {
     throw new Error('gradeAnswer requires at least one accepted answer.');
   }
 
-  const results = accepted.map((target) => gradeAgainst(response, target, policy));
+  const results = accepted.map((target) => gradeAgainst(response, target, policy, otherForms));
 
   const rank = (result: GradeResult) => {
     const verdictRank: Record<Verdict, number> = {

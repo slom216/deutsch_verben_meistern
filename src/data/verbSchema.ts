@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PERSONS } from '@/types/verb';
+import { PERSONS, specialForms } from '@/types/verb';
 import type { CefrLevel, Verb, VerbDataset } from '@/types/verb';
 
 /**
@@ -112,7 +112,11 @@ export const verbSchema = z
     specialA2Forms: z.record(specialFormSchema).optional(),
     specialB1Forms: z.record(specialFormSchema).optional(),
     usageRestrictions: z
-      .object({ mostlyImpersonal: z.boolean().optional(), notes: z.array(z.string()).optional() })
+      .object({
+        mostlyImpersonal: z.boolean().optional(),
+        thirdPersonOnly: z.boolean().optional(),
+        notes: z.array(z.string()).optional(),
+      })
       .optional(),
     sourceMetadata: z.record(z.unknown()).optional(),
     example: z.object({ german: nonEmpty, english: nonEmpty }),
@@ -198,6 +202,12 @@ export function auditVerb(verb: Verb): ValidationIssue[] {
     add('forms.imperative.reason', 'Unavailable imperative should explain why.', 'warning');
   }
 
+  auditFormPatterns(verb, add);
+
+  if (verb.usageRestrictions?.thirdPersonOnly && verb.forms.imperative.available) {
+    add('forms.imperative.available', 'Third-person-only verb cannot have an imperative.');
+  }
+
   if (verb.forms.konjunktivII.preferred === 'synthetic' && !verb.forms.konjunktivII.synthetic) {
     add('forms.konjunktivII', 'Prefers synthetic Konjunktiv II but none is provided.');
   }
@@ -229,6 +239,70 @@ export function auditVerb(verb: Verb): ValidationIssue[] {
   }
 
   return issues;
+}
+
+const lastWord = (s: string) => s.trim().split(/\s+/).pop() ?? '';
+const firstWord = (s: string) => s.trim().split(/\s+/)[0] ?? '';
+
+/**
+ * Cheap morphology checks for mistakes that slipped into generated data:
+ * "-ltst" du forms, "-nnet" ihr forms, "seind" participles, stray punctuation.
+ * Tuned to raise nothing on the shipped datasets, so every hit is an error.
+ */
+function auditFormPatterns(
+  verb: Verb,
+  add: (path: string, message: string, severity?: ValidationIssue['severity']) => void,
+) {
+  const stem = lastWord(verb.infinitive).replace(/e?n$/, '');
+  const { present, imperative, participles } = verb.forms;
+
+  // halten → hältst is fine; anschnallen → "schnalltst" is not.
+  const du = firstWord(present.du);
+  if (/tst$/.test(du) && !/[td]$/.test(stem)) {
+    add('forms.present.du', `du form "${present.du}" has a stray "t" before "-st".`);
+  }
+  // öffnen → öffnest/öffnet needs the e; "eröffnst" lacks it.
+  if (/[bdfgkpt][nm]st$/.test(du)) {
+    add('forms.present.du', `du form "${present.du}" is missing the epenthetic "e".`);
+  }
+
+  // rechnen → rechnet, atmen → atmet keep the e; brennen → "brennet" must not.
+  const needlessE = /(?:[aeiouäöüyrlnm]|(?<!c)h)[nm]et$/;
+  const missingE = /[bdfgkpt][nm]t$/;
+  for (const [path, form] of [
+    ['forms.present.ihr', present.ihr],
+    ['forms.imperative.ihr', imperative.ihr],
+  ] as const) {
+    if (!form) continue;
+    if (needlessE.test(firstWord(form))) add(path, `ihr form "${form}" has a needless "e".`);
+    if (missingE.test(firstWord(form))) add(path, `ihr form "${form}" is missing the epenthetic "e".`);
+  }
+
+  // Partizip I is infinitive + d: seiend, tuend, lächelnd — never "seind".
+  if (!/(?:end|[lr]nd)$/.test(lastWord(participles.present))) {
+    add('forms.participles.present', `Present participle "${participles.present}" is malformed.`);
+  }
+
+  const strings: [string, string][] = [];
+  const collect = (value: unknown, path: string) => {
+    if (typeof value === 'string') strings.push([path, value]);
+    else if (value && typeof value === 'object') {
+      for (const [key, child] of Object.entries(value)) {
+        if (key !== 'reason') collect(child, `${path}.${key}`);
+      }
+    }
+  };
+  collect(verb.forms, 'forms');
+  collect(verb.optionalReflexiveForms, 'optionalReflexiveForms');
+  for (const [key, form] of Object.entries(specialForms(verb))) {
+    collect(typeof form === 'string' ? form : form.forms, `special.${key}`);
+  }
+  for (const [path, value] of strings) {
+    if (/[.,;:!?]$|\s{2}|^\s|\s$/.test(value)) {
+      add(path, `Form "${value}" has stray punctuation or whitespace.`);
+    }
+    if (/ieen\b/.test(value)) add(path, `Form "${value}" has "ieen" (e.g. schrien, not schrieen).`);
+  }
 }
 
 /** Validate a whole dataset: shape, declared count, id uniqueness, semantics. */

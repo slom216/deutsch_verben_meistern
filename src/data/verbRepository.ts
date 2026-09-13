@@ -1,5 +1,8 @@
 import type { CefrLevel, Verb, VerbDataset } from '@/types/verb';
 import { FORM_CATEGORIES, type FormCategory } from '@/types/formCategory';
+import { hasContentFor } from '@/exercises/formAccess';
+
+export { hasContentFor };
 
 /**
  * Lazily loads CEFR datasets and answers structural questions about the
@@ -74,37 +77,6 @@ export function availableCategories(verb: Verb): FormCategory[] {
   }
 
   return result;
-}
-
-export function hasContentFor(verb: Verb, category: FormCategory): boolean {
-  switch (category) {
-    case 'present':
-    case 'simplePast':
-    case 'presentPerfect':
-    case 'futureI':
-      return Boolean(verb.forms[category]);
-    case 'imperative':
-      return verb.forms.imperative.available;
-    case 'konjunktivII':
-      return Boolean(verb.forms.konjunktivII.würdeForm || verb.forms.konjunktivII.synthetic);
-    case 'pastParticiple':
-      return Boolean(verb.forms.participles.past);
-    case 'presentParticiple':
-      return Boolean(verb.forms.participles.present);
-    case 'infinitiveWithZu':
-      return Boolean(verb.forms.infinitiveWithZu);
-    case 'auxiliary':
-      return Boolean(verb.auxiliary);
-    case 'separability':
-      // Only meaningful when there is a prefix to reason about.
-      return verb.separable || Boolean(verb.prefix);
-    case 'reflexivePattern':
-      return verb.reflexive.isReflexive || Boolean(verb.optionalReflexiveForms);
-    case 'caseAndPreposition':
-      return verb.requiredCases.length > 0 || verb.fixedPrepositions.length > 0;
-    default:
-      return false;
-  }
 }
 
 export interface CorpusFacets {

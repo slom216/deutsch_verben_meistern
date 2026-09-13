@@ -82,11 +82,14 @@ describe('resolveTarget', () => {
     expect(target!.accepted).toContain(verb!.forms.konjunktivII.würdeForm.ich);
   });
 
-  it('accepts either auxiliary for variable-auxiliary verbs', () => {
+  it('accepts either auxiliary in the Perfekt of variable-auxiliary verbs', () => {
     const verb = CORPUS.find((v) => v.auxiliary.includes('/'));
     if (!verb) return;
-    const target = resolveTarget(verb, 'auxiliary', '_');
-    expect(target!.accepted.length).toBeGreaterThan(1);
+    // Both auxiliaries are right, so there is no auxiliary question to ask.
+    expect(slotsFor(verb, 'auxiliary')).toEqual([]);
+    const target = resolveTarget(verb, 'presentPerfect', 'ich');
+    expect(target!.accepted.some((a) => a.startsWith('habe '))).toBe(true);
+    expect(target!.accepted.some((a) => a.startsWith('bin '))).toBe(true);
   });
 });
 
@@ -315,10 +318,13 @@ describe('buildSession', () => {
 
   it('introduces new material with recognition formats', () => {
     const plan = buildSession(baseRequest);
-    // Every card is new here, so nothing should demand blind production.
-    const productionFirst = plan.exercises.filter(
-      (exercise) => exercise.type !== 'multipleChoice' && exercise.type !== 'matching',
-    );
+    // Every card is new here, so no card's first appearance demands blind production.
+    const seen = new Set<string>();
+    const productionFirst = plan.exercises.filter((exercise) => {
+      const first = exercise.cardIds.some((id) => !seen.has(id));
+      exercise.cardIds.forEach((id) => seen.add(id));
+      return first && exercise.type !== 'multipleChoice' && exercise.type !== 'matching';
+    });
     expect(productionFirst).toEqual([]);
   });
 

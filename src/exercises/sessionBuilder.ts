@@ -9,8 +9,8 @@ import {
   type CardRecord,
 } from '@/lib/srs';
 import { slotsFor, resolveTarget, type FormTarget } from './formAccess';
-import { generateExercise } from './generators';
-import type { Exercise, ExerciseType } from './types';
+import { GENERATORS, generateExercise, type GeneratorContext } from './generators';
+import { isProduction, type Exercise, type ExerciseType } from './types';
 
 /**
  * Session assembly.
@@ -162,21 +162,64 @@ export function buildSession(request: SessionRequest): SessionPlan {
 
   const exercises: Exercise[] = [];
   const pool = verbs;
+  const contextFor = (candidate: Candidate): GeneratorContext => ({
+    target: candidate.target,
+    rng,
+    pool,
+    enabledCategories,
+    showTranslations,
+  });
+
+  // Each card is reviewed at most once in the first pass; a matching exercise
+  // covers four cards, which then count as used too.
+  const usedCards = new Set<string>();
+  // (type, card) pairs already shown, so the second pass never repeats one.
+  const shown = new Set<string>();
+  const add = (exercise: Exercise) => {
+    exercises.push(exercise);
+    for (const id of exercise.cardIds) {
+      usedCards.add(id);
+      shown.add(`${exercise.type}|${id}`);
+    }
+  };
 
   for (const candidate of ordered) {
-    const exercise = generateExercise(
-      {
-        target: candidate.target,
-        rng,
-        pool,
-        enabledCategories,
-        showTranslations,
-      },
-      // A brand-new form is introduced by recognition before it is demanded
-      // in production — you cannot recall what you have never seen.
-      candidate.isNew ? preferRecognition(enabledTypes) : enabledTypes,
-    );
-    if (exercise) exercises.push(exercise);
+    if (usedCards.has(candidate.cardId)) continue;
+    // A brand-new form is introduced by recognition before it is demanded
+    // in production — you cannot recall what you have never seen.
+    const types = candidate.isNew ? preferRecognition(enabledTypes) : enabledTypes;
+    let exercise = generateExercise(contextFor(candidate), types);
+    if (exercise?.cardIds.some((id) => usedCards.has(id))) {
+      exercise = generateExercise(
+        contextFor(candidate),
+        types.filter((t) => t !== 'matching'),
+      );
+    }
+    if (exercise && !exercise.cardIds.some((id) => usedCards.has(id))) add(exercise);
+  }
+
+  // In-session learning step: a short session of new material is topped up
+  // with production practice on the cards just introduced, after every first
+  // presentation.
+  const production = enabledTypes.filter(isProduction);
+  const introduced = chosenFresh.filter((candidate) => usedCards.has(candidate.cardId));
+  let progressed = production.length > 0;
+  while (progressed && exercises.length < length) {
+    progressed = false;
+    for (const candidate of introduced) {
+      if (exercises.length >= length) break;
+      const fallback = enabledTypes.filter((t) => !isProduction(t));
+      const types = [...rng.shuffle(production), ...rng.shuffle(fallback)].filter(
+        (t) => !shown.has(`${t}|${candidate.cardId}`),
+      );
+      for (const type of types) {
+        const exercise = GENERATORS[type](contextFor(candidate));
+        if (!exercise) continue;
+        add(exercise);
+        progressed = true;
+        break;
+      }
+    }
   }
 
   return {

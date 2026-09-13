@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect } from 'react';
+import { create } from 'zustand';
 import type { Verb } from '@/types/verb';
-import type { Exercise, ExerciseResponse } from '@/exercises/types';
-import { EXERCISE_TYPE_META } from '@/exercises/types';
+import type { Exercise, ExerciseResponse, ExerciseType } from '@/exercises/types';
 import { buildSession, type SessionPlan } from '@/exercises/sessionBuilder';
 import {
   gradeAnswer,
@@ -9,11 +9,14 @@ import {
   gradeSelection,
   type GradeResult,
   type StrictnessPolicy,
+  type Verdict,
 } from '@/lib/grader';
+import type { CardId } from '@/lib/srs';
 import { comboMultiplier, useGamification } from '@/store/gamificationStore';
 import { masteredVerbIds, useProgress } from '@/store/progressStore';
 import { enabledCategories, enabledExerciseTypes, useSettings } from '@/store/settingsStore';
 import { dayKey } from '@/lib/dates';
+import { isRecord } from '@/store/storage';
 
 /**
  * Runs a practice session: builds the queue, grades each response, feeds the
@@ -33,238 +36,302 @@ export interface SessionSummary {
 
 const EMPTY_RESPONSE: ExerciseResponse = { kind: 'text', value: '' };
 
+/** Exercises where the learner types the answer, for the "Selbst getippt" badge. */
+const TYPED_TYPES: readonly ExerciseType[] = [
+  'typedConjugation',
+  'sentenceCompletion',
+  'errorCorrection',
+  'tenseTransformation',
+];
+
+interface SessionData {
+  plan: SessionPlan | null;
+  index: number;
+  phase: SessionPhase;
+  response: ExerciseResponse;
+  result: GradeResult | null;
+  hintUsed: boolean;
+  combo: number;
+  lastXp: number;
+  summary: SessionSummary;
+  questionStartedAt: number;
+  sessionStartedAt: number;
+  /** Completion bookkeeping already ran for this session. */
+  finished: boolean;
+}
+
+const IDLE: SessionData = {
+  plan: null,
+  index: 0,
+  phase: 'idle',
+  response: EMPTY_RESPONSE,
+  result: null,
+  hintUsed: false,
+  combo: 0,
+  lastXp: 0,
+  summary: { answered: 0, correct: 0, xp: 0, bestCombo: 0, perfect: true, durationMs: 0 },
+  questionStartedAt: 0,
+  sessionStartedAt: 0,
+  finished: false,
+};
+
+/*
+ * The running session lives outside the component, so leaving the practice
+ * page and coming back resumes it. It is also mirrored to sessionStorage (per
+ * tab), so a full reload resumes it too. Timers are saved as elapsed time, so
+ * time spent away is not counted against the answer.
+ */
+const SAVED_KEY = 'dvm.session.v1';
+
+type SavedSession = Omit<SessionData, 'questionStartedAt' | 'sessionStartedAt'> & {
+  questionElapsedMs: number;
+  sessionElapsedMs: number;
+};
+
+const isCount = (value: unknown) => typeof value === 'number' && Number.isFinite(value) && value >= 0;
+
+/** Only a running session is saved; anything else in the key is dropped. */
+function isSavedSession(value: unknown): value is SavedSession {
+  if (!isRecord(value) || (value.phase !== 'active' && value.phase !== 'feedback')) return false;
+  const { plan, response, summary } = value;
+  const exercises = isRecord(plan) ? plan.exercises : null;
+  return (
+    Array.isArray(exercises) &&
+    exercises.every((e) => isRecord(e) && typeof e.verbId === 'string' && Array.isArray(e.cardIds)) &&
+    Number.isInteger(value.index) &&
+    (value.index as number) >= 0 &&
+    (value.index as number) < exercises.length &&
+    isRecord(response) &&
+    ['text', 'choice', 'order', 'pairs'].includes(response.kind as string) &&
+    // Feedback means the answer was already graded and recorded.
+    (value.phase === 'feedback' ? isRecord(value.result) : value.result === null) &&
+    isRecord(summary) &&
+    ['answered', 'correct', 'xp', 'bestCombo', 'durationMs'].every((key) => isCount(summary[key])) &&
+    typeof summary.perfect === 'boolean' &&
+    ['combo', 'lastXp', 'questionElapsedMs', 'sessionElapsedMs'].every((key) => isCount(value[key])) &&
+    typeof value.hintUsed === 'boolean' &&
+    typeof value.finished === 'boolean'
+  );
+}
+
+function loadSession(): SessionData {
+  try {
+    const saved: unknown = JSON.parse(sessionStorage.getItem(SAVED_KEY) ?? 'null');
+    if (isSavedSession(saved)) {
+      const { questionElapsedMs, sessionElapsedMs, ...data } = saved;
+      const now = Date.now();
+      return { ...data, questionStartedAt: now - questionElapsedMs, sessionStartedAt: now - sessionElapsedMs };
+    }
+  } catch {
+    // Malformed JSON or unavailable storage: start idle.
+  }
+  saveSession(IDLE);
+  return IDLE;
+}
+
+function saveSession(state: SessionData) {
+  try {
+    if (state.phase !== 'active' && state.phase !== 'feedback') {
+      sessionStorage.removeItem(SAVED_KEY);
+      return;
+    }
+    const { questionStartedAt, sessionStartedAt, ...data } = state;
+    const now = Date.now();
+    const saved: SavedSession = {
+      ...data,
+      questionElapsedMs: now - questionStartedAt,
+      sessionElapsedMs: now - sessionStartedAt,
+    };
+    sessionStorage.setItem(SAVED_KEY, JSON.stringify(saved));
+  } catch {
+    // Unavailable or full storage: the session stays in memory only.
+  }
+}
+
+const useSessionStore = create<SessionData>(() => loadSession());
+useSessionStore.subscribe(saveSession);
+// Refresh the elapsed timers right before the page goes away.
+if (typeof window !== 'undefined') {
+  window.addEventListener('pagehide', () => saveSession(useSessionStore.getState()));
+}
+
+/**
+ * Count a session once: sessions completed, perfect sessions, badges. Runs on
+ * normal completion and on "End session"; the flag keeps repeat calls inert.
+ * A session ended early is perfect only if every planned exercise was answered
+ * correctly, which it cannot be.
+ */
+function finishSession() {
+  const { plan, summary, finished } = useSessionStore.getState();
+  if (!plan || finished || summary.answered === 0) return;
+  useSessionStore.setState({ finished: true });
+
+  useProgress.getState().completeSession();
+  useGamification
+    .getState()
+    .registerSessionResult(summary.perfect && summary.answered === plan.exercises.length);
+  syncAchievements();
+}
+
 export function useSession(verbsById: Map<string, Verb>, pool: readonly Verb[]) {
-  const settings = useSettings();
-  const recordAnswer = useProgress((state) => state.recordAnswer);
-  const completeSession = useProgress((state) => state.completeSession);
+  const {
+    plan,
+    index,
+    phase,
+    response,
+    result,
+    hintUsed,
+    combo,
+    lastXp,
+    summary,
+  } = useSessionStore();
 
-  const gamification = useGamification();
+  // A finished session has nothing to resume; show the start card next time.
+  useEffect(
+    () => () => {
+      if (useSessionStore.getState().phase === 'complete') useSessionStore.setState(IDLE);
+    },
+    [],
+  );
 
-  const [plan, setPlan] = useState<SessionPlan | null>(null);
-  const [index, setIndex] = useState(0);
-  const [phase, setPhase] = useState<SessionPhase>('idle');
-  const [response, setResponse] = useState<ExerciseResponse>(EMPTY_RESPONSE);
-  const [result, setResult] = useState<GradeResult | null>(null);
-  const [hintUsed, setHintUsed] = useState(false);
-  const [combo, setCombo] = useState(0);
-  const [lastXp, setLastXp] = useState(0);
-
-  const [summary, setSummary] = useState<SessionSummary>({
-    answered: 0,
-    correct: 0,
-    xp: 0,
-    bestCombo: 0,
-    perfect: true,
-    durationMs: 0,
-  });
-
-  const questionStartedAt = useRef<number>(Date.now());
-  const sessionStartedAt = useRef<number>(Date.now());
-
-  const categories = useMemo(() => enabledCategories(settings), [settings]);
-  const types = useMemo(() => enabledExerciseTypes(settings), [settings]);
+  // A restored session can reference verbs that are no longer loaded; drop it.
+  useEffect(() => {
+    if (verbsById.size > 0 && plan?.exercises.some((e) => !verbsById.has(e.verbId))) {
+      useSessionStore.setState(IDLE);
+    }
+  }, [plan, verbsById]);
 
   const exercise: Exercise | null = plan?.exercises[index] ?? null;
 
   const start = useCallback(
     (options?: { length?: number; onlyDue?: boolean }) => {
+      finishSession();
+      const settings = useSettings.getState();
       const built = buildSession({
         verbs: pool,
         cards: useProgress.getState().cards,
-        enabledCategories: categories,
-        enabledTypes: types,
+        enabledCategories: enabledCategories(settings),
+        enabledTypes: enabledExerciseTypes(settings),
         length: options?.length ?? settings.session.length,
         newCardLimit: options?.onlyDue ? 0 : settings.session.newCardLimit,
         showTranslations: settings.showTranslations,
       });
 
-      setPlan(built);
-      setIndex(0);
-      setResponse(EMPTY_RESPONSE);
-      setResult(null);
-      setHintUsed(false);
-      setCombo(0);
-      setLastXp(0);
-      setSummary({ answered: 0, correct: 0, xp: 0, bestCombo: 0, perfect: true, durationMs: 0 });
-      sessionStartedAt.current = Date.now();
-      questionStartedAt.current = Date.now();
-      setPhase(built.exercises.length > 0 ? 'active' : 'complete');
+      const now = Date.now();
+      useSessionStore.setState({
+        ...IDLE,
+        plan: built,
+        sessionStartedAt: now,
+        questionStartedAt: now,
+        phase: built.exercises.length > 0 ? 'active' : 'complete',
+      });
     },
-    [pool, categories, types, settings.session.length, settings.session.newCardLimit, settings.showTranslations],
-  );
-
-  /** Verb strictness is a ceiling; learner settings can only relax it. */
-  const policyFor = useCallback(
-    (verb: Verb | undefined): StrictnessPolicy => {
-      const user = settings.strictness;
-      if (!verb) return user;
-      return {
-        capitalization: user.capitalization && verb.strictness.capitalization,
-        umlauts: user.umlauts && verb.strictness.umlauts,
-        eszett: user.eszett && verb.strictness.eszett,
-        wordOrder: user.wordOrder && verb.strictness.wordOrder,
-        allowTypos: user.allowTypos,
-      };
-    },
-    [settings.strictness],
-  );
-
-  const grade = useCallback(
-    (current: Exercise, given: ExerciseResponse, verb: Verb | undefined): GradeResult => {
-      const policy = policyFor(verb);
-
-      switch (current.type) {
-        case 'multipleChoice':
-          return gradeSelection(given.kind === 'choice' ? given.value : null, current.answer);
-
-        case 'typedConjugation':
-        case 'sentenceCompletion':
-        case 'errorCorrection':
-        case 'tenseTransformation':
-          return gradeAnswer(given.kind === 'text' ? given.value : '', current.accepted, policy);
-
-        case 'sentenceReconstruction':
-          return gradeOrder(given.kind === 'order' ? given.value : [], current.correctOrder);
-
-        case 'matching': {
-          const chosen = given.kind === 'pairs' ? given.value : {};
-          const wrong = current.pairs.filter((pair) => chosen[pair.left] !== pair.right);
-          const allAnswered = current.pairs.every((pair) => Boolean(chosen[pair.left]));
-          if (!allAnswered) {
-            return {
-              correct: false,
-              verdict: 'empty',
-              target: current.pairs.map((p) => `${p.left} → ${p.right}`).join(', '),
-              diagnostics: [],
-              distance: wrong.length,
-            };
-          }
-          return {
-            correct: wrong.length === 0,
-            verdict: wrong.length === 0 ? 'correct' : 'incorrect',
-            target: current.pairs.map((p) => `${p.left} → ${p.right}`).join(', '),
-            diagnostics:
-              wrong.length === 0
-                ? []
-                : [
-                    {
-                      code: 'wrongForm',
-                      message: `${wrong.length} pair${wrong.length === 1 ? '' : 's'} not matched correctly.`,
-                      fatal: true,
-                    },
-                  ],
-            distance: wrong.length,
-          };
-        }
-
-        default:
-          throw new Error('Unhandled exercise type.');
-      }
-    },
-    [policyFor],
+    [pool],
   );
 
   const submit = useCallback(() => {
-    if (!exercise || phase !== 'active') return;
+    const state = useSessionStore.getState();
+    const current = state.plan?.exercises[state.index];
+    if (!current || state.phase !== 'active') return;
 
-    const verb = verbsById.get(exercise.verbId);
-    const graded = grade(exercise, response, verb);
-    const responseMs = Date.now() - questionStartedAt.current;
+    const verb = verbsById.get(current.verbId);
+    const graded = grade(current, state.response, verb);
+    const responseMs = Date.now() - state.questionStartedAt;
 
-    const nextCombo = graded.correct ? combo + 1 : 0;
+    const nextCombo = graded.correct ? state.combo + 1 : 0;
     const multiplier = comboMultiplier(nextCombo);
-    const xp = graded.correct ? Math.round(exercise.baseXp * multiplier) : 0;
+    const xp = graded.correct ? Math.round(current.baseXp * multiplier) : 0;
 
-    // Detect a card climbing back out of the lapsed state, for the badge.
-    const before = useProgress.getState().cards[exercise.cardIds[0]];
-    const wasLapsed = before?.state === 'lapsed';
+    // Detect a genuinely forgotten card climbing back out, for the badge.
+    const before = useProgress.getState().cards[current.cardIds[0]];
+    const wasLapsed = before?.state === 'lapsed' && before.lapses > 0;
 
-    recordAnswer({
-      cardIds: exercise.cardIds,
-      verbId: exercise.verbId,
-      category: exercise.category,
-      slot: exercise.cardIds[0]?.split('|')[2] ?? '_',
-      exerciseType: exercise.type,
+    const progress = useProgress.getState();
+    progress.recordAnswer({
+      cardIds: current.cardIds,
+      verbId: current.verbId,
+      category: current.category,
+      slot: current.cardIds[0]?.split('|')[2] ?? '_',
+      exerciseType: current.type,
       result: graded,
-      response: describeResponse(response),
+      response: describeResponse(state.response),
       responseMs,
-      hintUsed,
+      hintUsed: state.hintUsed,
       xpAwarded: xp,
+      cardResults: current.type === 'matching' ? matchingResults(current, state.response) : undefined,
     });
 
+    const gamification = useGamification.getState();
     if (graded.correct) {
       gamification.awardXp(xp);
       gamification.registerCombo(nextCombo);
-      if (EXERCISE_TYPE_META[exercise.type].mode === 'production') {
-        gamification.registerProductionCorrect();
-      }
+      if (TYPED_TYPES.includes(current.type)) gamification.registerProductionCorrect();
       if (wasLapsed) {
-        const after = useProgress.getState().cards[exercise.cardIds[0]];
+        const after = useProgress.getState().cards[current.cardIds[0]];
         if (after && after.state !== 'lapsed') gamification.registerComeback();
       }
     }
 
-    if (verb) gamification.registerTouched(verb.level, exercise.category);
+    if (verb) gamification.registerTouched(verb.level, graded.correct ? current.category : undefined);
     gamification.registerPractice();
 
-    setCombo(nextCombo);
-    setLastXp(xp);
-    setResult(graded);
-    setPhase('feedback');
-    setSummary((current) => ({
-      answered: current.answered + 1,
-      correct: current.correct + (graded.correct ? 1 : 0),
-      xp: current.xp + xp,
-      bestCombo: Math.max(current.bestCombo, nextCombo),
-      perfect: current.perfect && graded.correct,
-      durationMs: Date.now() - sessionStartedAt.current,
-    }));
-  }, [exercise, phase, response, combo, hintUsed, grade, verbsById, recordAnswer, gamification]);
+    // Daily goal is evaluated against the day's cumulative XP after every
+    // answer, so several short or abandoned sessions still add up.
+    const today = dayKey();
+    const todayXp = useProgress.getState().daily[today]?.xp ?? 0;
+    if (todayXp >= useSettings.getState().dailyGoalXp) gamification.registerGoalMet(today);
+
+    useSessionStore.setState({
+      combo: nextCombo,
+      lastXp: xp,
+      result: graded,
+      phase: 'feedback',
+      summary: {
+        answered: state.summary.answered + 1,
+        correct: state.summary.correct + (graded.correct ? 1 : 0),
+        xp: state.summary.xp + xp,
+        bestCombo: Math.max(state.summary.bestCombo, nextCombo),
+        perfect: state.summary.perfect && graded.correct,
+        durationMs: Date.now() - state.sessionStartedAt,
+      },
+    });
+  }, [verbsById]);
 
   const advance = useCallback(() => {
-    if (!plan) return;
-    const nextIndex = index + 1;
+    const state = useSessionStore.getState();
+    if (!state.plan) return;
+    const nextIndex = state.index + 1;
 
-    if (nextIndex >= plan.exercises.length) {
-      completeSession();
-
-      const finalSummary: SessionSummary = {
-        ...summary,
-        durationMs: Date.now() - sessionStartedAt.current,
-      };
-      gamification.registerSessionResult(finalSummary.perfect && finalSummary.answered > 0);
-
-      // Daily goal is evaluated against the day's cumulative XP, not this
-      // session's, so several short sessions add up.
-      const today = dayKey();
-      const todayXp = useProgress.getState().daily[today]?.xp ?? 0;
-      if (todayXp >= useSettings.getState().dailyGoalXp) {
-        gamification.registerGoalMet(today);
-      }
-
-      syncAchievements();
-      setSummary(finalSummary);
-      setPhase('complete');
+    if (nextIndex >= state.plan.exercises.length) {
+      finishSession();
+      useSessionStore.setState({
+        summary: { ...state.summary, durationMs: Date.now() - state.sessionStartedAt },
+        phase: 'complete',
+      });
       return;
     }
 
-    setIndex(nextIndex);
-    setResponse(EMPTY_RESPONSE);
-    setResult(null);
-    setHintUsed(false);
-    questionStartedAt.current = Date.now();
-    setPhase('active');
-  }, [plan, index, summary, completeSession, gamification]);
-
-  const reset = useCallback(() => {
-    setPlan(null);
-    setPhase('idle');
-    setIndex(0);
-    setResult(null);
-    setResponse(EMPTY_RESPONSE);
+    useSessionStore.setState({
+      index: nextIndex,
+      response: EMPTY_RESPONSE,
+      result: null,
+      hintUsed: false,
+      questionStartedAt: Date.now(),
+      phase: 'active',
+    });
   }, []);
 
-  const revealHint = useCallback(() => setHintUsed(true), []);
+  const reset = useCallback(() => {
+    finishSession();
+    useSessionStore.setState(IDLE);
+  }, []);
+
+  const setResponse = useCallback(
+    (next: ExerciseResponse) => useSessionStore.setState({ response: next }),
+    [],
+  );
+
+  const revealHint = useCallback(() => useSessionStore.setState({ hintUsed: true }), []);
 
   return {
     plan,
@@ -286,6 +353,101 @@ export function useSession(verbsById: Map<string, Verb>, pool: readonly Verb[]) 
     advance,
     reset,
   };
+}
+
+/** Verb strictness is a ceiling; learner settings can only relax it. */
+function policyFor(verb: Verb | undefined): StrictnessPolicy {
+  const user = useSettings.getState().strictness;
+  if (!verb) return user;
+  return {
+    capitalization: user.capitalization && verb.strictness.capitalization,
+    umlauts: user.umlauts && verb.strictness.umlauts,
+    eszett: user.eszett && verb.strictness.eszett,
+    wordOrder: user.wordOrder && verb.strictness.wordOrder,
+    allowTypos: user.allowTypos,
+  };
+}
+
+/** Every string form of the verb, so the grader can tell a wrong form from a typo. */
+function verbForms(verb: Verb | undefined): string[] {
+  const forms: string[] = [];
+  const walk = (value: unknown, key?: string) => {
+    // `reason` and `preferred` are annotations, not forms.
+    if (key === 'reason' || key === 'preferred') return;
+    if (typeof value === 'string') forms.push(value);
+    else if (value && typeof value === 'object') {
+      Object.entries(value).forEach(([childKey, child]) => walk(child, childKey));
+    }
+  };
+  walk(verb?.forms);
+  walk(verb?.optionalReflexiveForms);
+  return forms;
+}
+
+function grade(current: Exercise, given: ExerciseResponse, verb: Verb | undefined): GradeResult {
+  switch (current.type) {
+    case 'multipleChoice':
+      return gradeSelection(given.kind === 'choice' ? given.value : null, current.answer);
+
+    case 'typedConjugation':
+    case 'sentenceCompletion':
+    case 'errorCorrection':
+    case 'tenseTransformation':
+      return gradeAnswer(
+        given.kind === 'text' ? given.value : '',
+        current.accepted,
+        policyFor(verb),
+        verbForms(verb),
+      );
+
+    case 'sentenceReconstruction':
+      return gradeOrder(given.kind === 'order' ? given.value : [], current.correctOrder);
+
+    case 'matching': {
+      const chosen = given.kind === 'pairs' ? given.value : {};
+      const wrong = current.pairs.filter((pair) => chosen[pair.left] !== pair.right);
+      const allAnswered = current.pairs.every((pair) => Boolean(chosen[pair.left]));
+      if (!allAnswered) {
+        return {
+          correct: false,
+          verdict: 'empty',
+          target: current.pairs.map((p) => `${p.left} → ${p.right}`).join(', '),
+          diagnostics: [],
+          distance: wrong.length,
+        };
+      }
+      return {
+        correct: wrong.length === 0,
+        verdict: wrong.length === 0 ? 'correct' : 'incorrect',
+        target: current.pairs.map((p) => `${p.left} → ${p.right}`).join(', '),
+        diagnostics:
+          wrong.length === 0
+            ? []
+            : [
+                {
+                  code: 'wrongForm',
+                  message: `${wrong.length} pair${wrong.length === 1 ? '' : 's'} not matched correctly.`,
+                  fatal: true,
+                },
+              ],
+        distance: wrong.length,
+      };
+    }
+
+    default:
+      throw new Error('Unhandled exercise type.');
+  }
+}
+
+/** Each matching pair reviews its own card: right pairs pass, wrong ones fail. */
+function matchingResults(
+  current: Extract<Exercise, { type: 'matching' }>,
+  given: ExerciseResponse,
+): Record<CardId, Verdict> {
+  const chosen = given.kind === 'pairs' ? given.value : {};
+  return Object.fromEntries(
+    current.pairs.map((pair) => [pair.cardId, chosen[pair.left] === pair.right ? 'correct' : 'incorrect']),
+  );
 }
 
 /** Flatten a response into the string stored in the mistake log. */

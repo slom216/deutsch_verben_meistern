@@ -38,16 +38,27 @@ describe('gradeAnswer — acceptance', () => {
 
 describe('gradeAnswer — capitalisation', () => {
   it('flags capitalisation as fatal when enforced', () => {
-    const result = gradeAnswer('Gehst', ['gehst']);
+    const result = gradeAnswer('WAR', ['war']);
     expect(result.correct).toBe(false);
+    expect(result.verdict).toBe('near-miss');
     expect(primaryDiagnostic(result)?.code).toBe('capitalization');
   });
 
   it('accepts with a note when capitalisation is relaxed', () => {
-    const result = gradeAnswer('Gehst', ['gehst'], lenient({ capitalization: false }));
+    const result = gradeAnswer('WAR', ['war'], lenient({ capitalization: false }));
     expect(result.correct).toBe(true);
     expect(result.verdict).toBe('accepted-with-note');
     expect(result.diagnostics[0].code).toBe('capitalization');
+  });
+
+  it('accepts a sentence-initial capital', () => {
+    expect(gradeAnswer('Geh!', ['geh']).verdict).toBe('correct');
+    expect(gradeAnswer('Seien Sie!', ['seien Sie']).verdict).toBe('correct');
+    expect(gradeAnswer('ich bin', ['Ich bin.']).verdict).toBe('correct');
+  });
+
+  it('still flags a case slip after the first letter', () => {
+    expect(primaryDiagnostic(gradeAnswer('seien sie', ['seien Sie']))?.code).toBe('capitalization');
   });
 });
 
@@ -61,6 +72,11 @@ describe('gradeAnswer — umlauts and eszett', () => {
   it('detects dropped umlauts', () => {
     const result = gradeAnswer('fahrst', ['fährst']);
     expect(primaryDiagnostic(result)?.code).toBe('umlaut');
+  });
+
+  it('accepts umlauts typed as decomposed characters (NFD)', () => {
+    const result = gradeAnswer('müsst'.normalize('NFD'), ['müsst']);
+    expect(result.verdict).toBe('correct');
   });
 
   it('accepts digraphs when umlaut strictness is relaxed', () => {
@@ -139,10 +155,37 @@ describe('gradeAnswer — typos', () => {
     expect(result.correct).toBe(true);
   });
 
+  it('does not forgive another real form of the verb', () => {
+    const forms = ['kann', 'kannst', 'kann', 'können', 'könnt', 'können'];
+    const result = gradeAnswer('kann', ['kannst'], lenient({ allowTypos: true }), forms);
+    expect(result.correct).toBe(false);
+    expect(result.verdict).toBe('incorrect');
+    expect(primaryDiagnostic(result)?.code).toBe('wrongForm');
+    expect(primaryDiagnostic(result)?.message).toContain('"kann" is a form of this verb');
+  });
+
+  it('still forgives a one-letter typo that is not a real form', () => {
+    const forms = ['kann', 'kannst', 'können', 'könnt'];
+    expect(gradeAnswer('kanst', ['kannst'], lenient({ allowTypos: true }), forms).correct).toBe(
+      true,
+    );
+  });
+
+  it('forgives only one character, whatever the length', () => {
+    expect(gradeAnswer('arbieten', ['arbeiten'], lenient({ allowTypos: true })).correct).toBe(false);
+  });
+
   it('does not forgive a genuinely different form', () => {
     const result = gradeAnswer('lief', ['gegangen'], lenient({ allowTypos: true }));
     expect(result.correct).toBe(false);
     expect(primaryDiagnostic(result)?.code).toBe('wrongForm');
+  });
+});
+
+describe('gradeAnswer — separable prefix', () => {
+  it('spots the prefix glued to the front', () => {
+    const result = gradeAnswer('aufstehe', ['stehe auf']);
+    expect(primaryDiagnostic(result)?.code).toBe('separablePrefix');
   });
 });
 

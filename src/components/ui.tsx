@@ -34,24 +34,28 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ref?: Ref<HTMLButtonElement>;
 }
 
+/** Button look for elements that are not buttons, e.g. a router `Link`. */
+export function buttonClasses(
+  variant: ButtonVariant = 'secondary',
+  size: ButtonSize = 'md',
+  className?: string,
+): string {
+  return cx(
+    'inline-flex items-center justify-center gap-2 transition-colors',
+    'disabled:cursor-not-allowed',
+    BUTTON_VARIANTS[variant],
+    BUTTON_SIZES[size],
+    className,
+  );
+}
+
 export function Button({
   variant = 'secondary',
   size = 'md',
   className,
   ...props
 }: ButtonProps) {
-  return (
-    <button
-      {...props}
-      className={cx(
-        'inline-flex items-center justify-center gap-2 transition-colors',
-        'disabled:cursor-not-allowed',
-        BUTTON_VARIANTS[variant],
-        BUTTON_SIZES[size],
-        className,
-      )}
-    />
-  );
+  return <button {...props} className={buttonClasses(variant, size, className)} />;
 }
 
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
@@ -88,7 +92,7 @@ export function Badge({
   className?: string;
 }) {
   const tones: Record<string, string> = {
-    neutral: 'bg-ink-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300',
+    neutral: 'bg-ink-100 text-ink-700 dark:bg-ink-800 dark:text-ink-200',
     gold: 'bg-tertiary text-primary dark:bg-gold-500 dark:text-primary',
     green: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300',
     red: 'bg-red-500/15 text-red-700 dark:text-red-300',
@@ -160,7 +164,8 @@ export function Toggle({
   return (
     <label
       className={cx(
-        'flex items-start gap-3 py-2 cursor-pointer select-none',
+        /* The whole row is the tap target (≥44px); the switch stays small. */
+        'flex min-h-11 items-start gap-3 py-2.5 cursor-pointer select-none',
         disabled && 'opacity-50 cursor-not-allowed',
       )}
     >
@@ -177,7 +182,7 @@ export function Toggle({
       >
         <span
           className={cx(
-            'absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform',
+            'absolute left-0 top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform',
             checked ? 'translate-x-4.5' : 'translate-x-0.5',
           )}
         />

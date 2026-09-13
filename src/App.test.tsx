@@ -101,9 +101,7 @@ describe('a practice session', () => {
 
       // Pick the first multiple-choice option; whether it is right or wrong
       // does not matter, only that the session advances and records it.
-      const optionButtons = screen
-        .getAllByRole('button')
-        .filter((button) => /^[1-4]$/.test(button.textContent?.trim().charAt(0) ?? ''));
+      const optionButtons = screen.getAllByRole('radio');
 
       expect(optionButtons.length).toBeGreaterThan(0);
       await act(async () => {
@@ -133,6 +131,108 @@ describe('a practice session', () => {
     expect(Object.keys(progress.cards).length).toBeGreaterThanOrEqual(3);
     // And practising must have started a streak.
     expect(useGamification.getState().dailyStreak).toBe(1);
+  }, 30000);
+});
+
+describe('keyboard flow', () => {
+  /** Leave exactly one exercise format enabled. */
+  function onlyFormat(only: (typeof EXERCISE_TYPES)[number]) {
+    useSettings.getState().setSession({ length: 2, newCardLimit: 2 });
+    for (const type of EXERCISE_TYPES) {
+      if ((type === only) !== useSettings.getState().exerciseTypes[type]) {
+        useSettings.getState().toggleExerciseType(type);
+      }
+    }
+  }
+
+  /**
+   * The running session outlives the page (it resumes after navigation), so
+   * end it explicitly or it leaks into the next test.
+   */
+  async function endSession() {
+    const end = screen.queryByRole('button', { name: 'End session' });
+    if (end) {
+      await act(async () => {
+        fireEvent.click(end);
+      });
+    }
+  }
+
+  async function startSession() {
+    render(<App />);
+    await screen.findByText('Willkommen!');
+    fireEvent.click(screen.getByRole('link', { name: /Practice/ }));
+    const startButton = await screen.findByRole('button', { name: 'Start session' }, LAZY);
+    await act(async () => {
+      fireEvent.click(startButton);
+    });
+  }
+
+  it('Enter on a typed answer shows feedback instead of skipping it', async () => {
+    onlyFormat('typedConjugation');
+    await startSession();
+
+    try {
+      const input = await screen.findByRole('textbox');
+      fireEvent.change(input, { target: { value: 'blah' } });
+      await act(async () => {
+        fireEvent.keyDown(input, { key: 'Enter' });
+      });
+
+      expect(await screen.findByRole('button', { name: /Continue/ })).toBeTruthy();
+      expect(screen.getByText('1 / 2')).toBeTruthy();
+    } finally {
+      await endSession();
+    }
+  }, 30000);
+
+  it('Enter submits a selected multiple-choice option', async () => {
+    onlyFormat('multipleChoice');
+    await startSession();
+
+    try {
+      const [option] = await screen.findAllByRole('radio');
+      await act(async () => {
+        fireEvent.click(option);
+      });
+      expect(option.getAttribute('aria-checked')).toBe('true');
+
+      await act(async () => {
+        fireEvent.keyDown(option, { key: 'Enter' });
+      });
+
+      expect(await screen.findByRole('button', { name: /Continue/ })).toBeTruthy();
+      expect(useProgress.getState().totalAnswered).toBe(1);
+    } finally {
+      await endSession();
+    }
+  }, 30000);
+
+  it('arrow keys move the multiple-choice selection and focus', async () => {
+    onlyFormat('multipleChoice');
+    await startSession();
+
+    try {
+      const options = await screen.findAllByRole('radio');
+      const group = screen.getByRole('radiogroup');
+      // One tab stop for the whole group.
+      expect(options.filter((o) => o.tabIndex === 0)).toHaveLength(1);
+
+      await act(async () => {
+        fireEvent.keyDown(group, { key: 'ArrowDown' });
+      });
+      expect(options[0].getAttribute('aria-checked')).toBe('true');
+
+      await act(async () => {
+        fireEvent.keyDown(group, { key: 'ArrowUp' });
+      });
+      const last = options[options.length - 1];
+      expect(last.getAttribute('aria-checked')).toBe('true');
+      expect(document.activeElement).toBe(last);
+      expect(useProgress.getState().totalAnswered).toBe(0);
+    } finally {
+      await endSession();
+    }
   }, 30000);
 });
 

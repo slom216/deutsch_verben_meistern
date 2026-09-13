@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useGamification } from '@/store/gamificationStore';
 import { ACHIEVEMENTS_BY_ID, RANKS, TIER_STYLES } from '@/lib/achievements';
 import { cx } from './ui';
@@ -17,9 +18,13 @@ interface Toast {
   title: string;
   subtitle: string;
   accent: string;
+  /** Makes the toast a link, e.g. to the badge gallery. */
+  to?: string;
 }
 
 const TOAST_MS = 4200;
+/** More unlocks than this at once collapse into one summary toast. */
+const MAX_BADGE_TOASTS = 3;
 
 export function CelebrationLayer() {
   const pendingUnlocks = useGamification((state) => state.pendingUnlocks);
@@ -45,7 +50,21 @@ export function CelebrationLayer() {
         },
       ];
     });
-    if (fresh.length > 0) setToasts((current) => [...current, ...fresh]);
+    if (fresh.length > MAX_BADGE_TOASTS) {
+      setToasts((current) => [
+        ...current,
+        {
+          key: `badges-${Date.now()}`,
+          icon: '🏅',
+          title: `${fresh.length} badges unlocked`,
+          subtitle: 'See them all on the Badges page.',
+          accent: 'text-gold-600 dark:text-gold-400',
+          to: '/achievements',
+        },
+      ]);
+    } else if (fresh.length > 0) {
+      setToasts((current) => [...current, ...fresh]);
+    }
   }, [pendingUnlocks, consumeUnlocks]);
 
   useEffect(() => {
@@ -78,21 +97,32 @@ export function CelebrationLayer() {
       className="pointer-events-none fixed inset-x-0 bottom-4 z-50 flex flex-col items-center gap-2 px-4"
       role="status"
       aria-live="polite"
+      data-print-hidden
     >
-      {toasts.slice(0, 3).map((toast) => (
-        <div
-          key={toast.key}
-          className="animate-pop surface-card flex w-full max-w-sm items-center gap-3 rounded-2xl px-4 py-3 shadow-lg"
-        >
-          <span className="text-2xl" aria-hidden>
-            {toast.icon}
-          </span>
-          <span className="min-w-0">
-            <span className={cx('block text-sm font-semibold', toast.accent)}>{toast.title}</span>
-            <span className="block truncate text-xs text-muted">{toast.subtitle}</span>
-          </span>
-        </div>
-      ))}
+      {toasts.slice(0, 3).map((toast) => {
+        const className =
+          'animate-pop surface-card flex w-full max-w-sm items-center gap-3 rounded-2xl px-4 py-3 shadow-lg';
+        const content = (
+          <>
+            <span className="text-2xl" aria-hidden>
+              {toast.icon}
+            </span>
+            <span className="min-w-0">
+              <span className={cx('block text-sm font-semibold', toast.accent)}>{toast.title}</span>
+              <span className="block truncate text-xs text-muted">{toast.subtitle}</span>
+            </span>
+          </>
+        );
+        return toast.to ? (
+          <Link key={toast.key} to={toast.to} className={cx(className, 'pointer-events-auto')}>
+            {content}
+          </Link>
+        ) : (
+          <div key={toast.key} className={className}>
+            {content}
+          </div>
+        );
+      })}
     </div>
   );
 }

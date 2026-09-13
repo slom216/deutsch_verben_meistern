@@ -1,4 +1,6 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { StorageWarning } from '@/components/StorageWarning';
 import { useGamification, effectiveStreak } from '@/store/gamificationStore';
 import { rankForXp, rankProgress, nextRank } from '@/lib/achievements';
 import { useProgress } from '@/store/progressStore';
@@ -37,9 +39,8 @@ function RankPill() {
 }
 
 function StreakPill() {
-  const state = useGamification();
-  const streak = effectiveStreak(state);
-  const practisedToday = state.lastPracticeDay === dayKey();
+  const streak = useGamification(effectiveStreak);
+  const practisedToday = useGamification((state) => state.lastPracticeDay === dayKey());
 
   return (
     <div
@@ -110,81 +111,112 @@ function DailyGoalRing() {
 }
 
 function ThemeToggle() {
-	const theme = useSettings((state) => state.theme);
-	const setTheme = useSettings((state) => state.setTheme);
-	const next = theme === "dark" ? "light" : "dark";
+  const theme = useSettings((state) => state.theme);
+  const setTheme = useSettings((state) => state.setTheme);
+  const next = theme === 'dark' ? 'light' : 'dark';
 
-	return (
-		<button
-			type="button"
-			onClick={() => setTheme(next)}
-			className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-base transition-colors hover:bg-primary-10 dark:hover:bg-ink-800"
-			title={`Switch to ${next} theme`}
-			aria-label={`Switch to ${next} theme`}
-		>
-			<span aria-hidden>{theme === "dark" ? "☀️" : "🌙"}</span>
-		</button>
-	);
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(next)}
+      className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-base transition-colors hover:bg-primary-10 dark:hover:bg-ink-800"
+      title={`Switch to ${next} theme`}
+      aria-label={`Switch to ${next} theme`}
+    >
+      <span aria-hidden>{theme === 'dark' ? '☀️' : '🌙'}</span>
+    </button>
+  );
 }
 
 export function AppLayout() {
+  const { pathname } = useLocation();
+  const navRef = useRef<HTMLUListElement | null>(null);
+
+  // On phones the pill row scrolls sideways; keep the current page's pill visible.
+  useEffect(() => {
+    navRef.current
+      ?.querySelector('[aria-current="page"]')
+      ?.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+  }, [pathname]);
+
   return (
-			<div className="min-h-screen flex flex-col">
-				<header className="sticky top-0 z-30 border-b border-[var(--border-subtle)] bg-[var(--surface)]/85 backdrop-blur">
-					<div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-2.5">
-						<NavLink to="/" className="flex items-center gap-2 shrink-0">
-							<span className="hidden font-serif text-base font-semibold tracking-tight sm:block">
-								Deutsch Verben Meister
-							</span>
-						</NavLink>
+    <div className="min-h-screen flex flex-col">
+      {/* Hash routing owns the URL fragment, so move focus instead of following #main. */}
+      <a
+        href="#main"
+        onClick={(event) => {
+          event.preventDefault();
+          document.getElementById('main')?.focus();
+        }}
+        data-print-hidden
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-tertiary focus:px-4 focus:py-2 focus:text-primary"
+      >
+        Skip to content
+      </a>
 
-						<div className="ml-auto flex items-center gap-3">
-							<div className="hidden sm:block">
-								<RankPill />
-							</div>
-							<StreakPill />
-							<DailyGoalRing />
-							<ThemeToggle />
-						</div>
-					</div>
+      {/* Sticky from `sm` up only: on phones a sticky header plus the on-screen
+          keyboard would leave no room for the answer field and Check. */}
+      <header className="z-30 border-b border-[var(--border-subtle)] bg-[var(--surface)]/85 backdrop-blur sm:sticky sm:top-0">
+        <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-1 sm:py-2.5">
+          <NavLink to="/" className="flex min-h-11 shrink-0 items-center gap-2">
+            <span aria-hidden className="font-serif text-base font-semibold tracking-tight sm:hidden">
+              🇩🇪 DVM
+            </span>
+            <span className="sr-only font-serif text-base font-semibold tracking-tight sm:not-sr-only">
+              Deutsch Verben Meister
+            </span>
+          </NavLink>
 
-					<nav className="mx-auto max-w-5xl px-2">
-						<ul className="flex gap-0.5 overflow-x-auto pb-1">
-							{NAV_ITEMS.map((item) => (
-								<li key={item.to}>
-									<NavLink
-										to={item.to}
-										end={item.end}
-										className={({ isActive }) =>
-											cx(
-												"flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-nav-link transition-colors",
-												isActive
-													? "bg-tertiary text-primary"
-													: "text-muted hover:bg-primary-10 dark:hover:bg-ink-800",
-											)
-										}
-									>
-										{item.label}
-									</NavLink>
-								</li>
-							))}
-						</ul>
-					</nav>
-				</header>
+          <div className="ml-auto flex items-center gap-3">
+            <div className="hidden sm:block">
+              <RankPill />
+            </div>
+            <StreakPill />
+            <DailyGoalRing />
+            <ThemeToggle />
+          </div>
+        </div>
 
-				<main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6">
-					<Outlet />
-				</main>
+        <nav className="mx-auto max-w-5xl px-2">
+          <ul
+            ref={navRef}
+            className="flex gap-0.5 overflow-x-auto pb-1 max-sm:fade-x-end max-sm:pr-8"
+          >
+            {NAV_ITEMS.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  end={item.end}
+                  className={({ isActive }) =>
+                    cx(
+                      'flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-nav-link transition-colors',
+                      isActive
+                        ? 'bg-tertiary text-primary'
+                        : 'text-muted hover:bg-primary-10 dark:hover:bg-ink-800',
+                    )
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
 
-				<footer className="border-t border-[var(--border-subtle)] py-4">
-					<p className="mx-auto max-w-5xl px-4 text-xs text-muted">
-						676 verbs across A1–A2–B1. Everything is stored in this browser
-						only. Built with the help of AI, so there may be errors; every
-						one we find gets fixed.
-					</p>
-				</footer>
+      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 outline-none">
+        <StorageWarning />
+        <Outlet />
+      </main>
 
-				<CelebrationLayer />
-			</div>
-		);
+      <footer className="border-t border-[var(--border-subtle)] py-4">
+        <p className="mx-auto max-w-5xl px-4 text-xs text-muted">
+          German verbs from A1 to B1. Everything is stored in this browser only. Built with the
+          help of AI, so there may be errors; every one we find gets fixed.
+        </p>
+      </footer>
+
+      <CelebrationLayer />
+    </div>
+  );
 }

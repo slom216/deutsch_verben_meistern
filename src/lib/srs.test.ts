@@ -48,6 +48,10 @@ describe('qualityFrom', () => {
     expect(qualityFrom('correct', { hintUsed: true })).toBe(3);
   });
 
+  it('caps recognition answers at 4, however fast', () => {
+    expect(qualityFrom('correct', { fast: true, recognition: true })).toBe(4);
+  });
+
   it('ranks failures below the passing threshold', () => {
     expect(qualityFrom('near-miss')).toBeLessThan(3);
     expect(qualityFrom('incorrect')).toBeLessThan(3);
@@ -102,6 +106,14 @@ describe('reviewCard', () => {
     expect(failed.repetitions).toBe(0);
     expect(failed.interval).toBeLessThan(DAY);
     expect(failed.ease).toBeLessThan(mature.ease);
+  });
+
+  it('keeps a never-learned card in learning when it fails', () => {
+    const failedNew = reviewCard(createCard('x', NOW), 1, NOW);
+    expect(failedNew.state).toBe('learning');
+    const failedLearning = reviewCard(reviewCard(createCard('y', NOW), 4, NOW), 1, NOW + 1000);
+    expect(failedLearning.state).toBe('learning');
+    expect(failedLearning.lapses).toBe(0);
   });
 
   it('never drops ease below the floor', () => {

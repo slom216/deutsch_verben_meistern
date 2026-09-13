@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useShallow } from 'zustand/react/shallow';
 import { useVerbs } from '@/hooks/useVerbs';
 import {
   masteredVerbIds,
@@ -11,9 +12,18 @@ import {
 import { effectiveStreak, useGamification } from '@/store/gamificationStore';
 import { FORM_CATEGORY_META } from '@/types/formCategory';
 import { PERSON_LABELS, type Person, PERSONS } from '@/types/verb';
-import { formatInterval, parseCardId } from '@/lib/srs';
+import { formatInterval, isDue, parseCardId } from '@/lib/srs';
 import { recentDays, formatDayShort, dayKey } from '@/lib/dates';
-import { Badge, Button, Card, cx, EmptyState, ProgressBar, SectionHeading, Stat } from '@/components/ui';
+import {
+  Badge,
+  buttonClasses,
+  Card,
+  cx,
+  EmptyState,
+  ProgressBar,
+  SectionHeading,
+  Stat,
+} from '@/components/ui';
 
 const DIAGNOSTIC_LABELS: Record<string, string> = {
   capitalization: 'Capitalisation',
@@ -32,8 +42,20 @@ const DIAGNOSTIC_LABELS: Record<string, string> = {
 
 /** Analytics: accuracy, weak categories, repeated mistakes, upcoming reviews. */
 export function ProgressPage() {
-  const progress = useProgress();
-  const gamification = useGamification();
+  const progress = useProgress(
+    useShallow((state) => ({
+      cards: state.cards,
+      categoryStats: state.categoryStats,
+      mistakes: state.mistakes,
+      diagnosticCounts: state.diagnosticCounts,
+      daily: state.daily,
+      totalAnswered: state.totalAnswered,
+      sessionsCompleted: state.sessionsCompleted,
+    })),
+  );
+  const accuracy = useProgress(overallAccuracy);
+  const longestStreak = useGamification((state) => state.longestStreak);
+  const streak = useGamification(effectiveStreak);
   const { byId, loading } = useVerbs();
 
   const mastery = useMemo(() => masteryBreakdown(progress.cards), [progress.cards]);
@@ -59,15 +81,16 @@ export function ProgressPage() {
     [progress.diagnosticCounts],
   );
 
-  /** Reviews falling due over the coming week. */
+  /**
+   * Reviews falling due over the coming week. "Now" uses the same `isDue` test
+   * as the dashboard; everything later is bucketed by whole days ahead.
+   */
   const forecast = useMemo(() => {
     const buckets = new Array(8).fill(0);
     const now = Date.now();
     for (const card of Object.values(progress.cards)) {
-      const days = Math.floor((card.due - now) / 86_400_000);
-      if (days < 0) buckets[0] += 1;
-      else if (days < 7) buckets[days] += 1;
-      else buckets[7] += 1;
+      if (isDue(card, now)) buckets[0] += 1;
+      else buckets[Math.min(7, Math.ceil((card.due - now) / 86_400_000))] += 1;
     }
     return buckets;
   }, [progress.cards]);
@@ -115,16 +138,14 @@ export function ProgressPage() {
           title="No progress yet"
           description="Finish a practice session and this page will fill up with accuracy trends, your weakest forms and a review forecast."
           action={
-            <Link to="/practice">
-              <Button variant="primary">Start practising</Button>
+            <Link to="/practice" className={buttonClasses('primary')}>
+              Start practising
             </Link>
           }
         />
       </Card>
     );
   }
-
-  const accuracy = overallAccuracy(progress);
 
   return (
     <div className="space-y-4">
@@ -141,8 +162,8 @@ export function ProgressPage() {
           <Stat label="Sessions" value={progress.sessionsCompleted} />
           <Stat
             label="Longest streak"
-            value={`${gamification.longestStreak} d`}
-            hint={`now ${effectiveStreak(gamification)} d`}
+            value={`${longestStreak} d`}
+            hint={`now ${streak} d`}
           />
         </div>
       </Card>
@@ -186,7 +207,13 @@ export function ProgressPage() {
                       index === 0 ? 'bg-gold-500' : 'bg-sky-500/60',
                     )}
                     style={{ height: `${Math.max(2, (count / peak) * 100)}%` }}
-                    title={index === 0 ? `${count} due now` : `${count} due in ${index} days`}
+                    title={
+                      index === 0
+                        ? `${count} due now`
+                        : index === 7
+                          ? `${count} due in 7 days or later`
+                          : `${count} due within ${index} day${index === 1 ? '' : 's'}`
+                    }
                   />
                   <span className="text-[10px] text-muted">
                     {index === 0 ? 'now' : index === 7 ? '7+' : `${index}d`}
@@ -319,6 +346,7 @@ export function ProgressPage() {
                     <div className="flex flex-wrap items-baseline gap-x-2">
                       <Link
                         to={`/library/${mistake.verbId}`}
+                        lang="de"
                         className="font-medium hover:underline"
                       >
                         {loading ? mistake.verbId : (verb?.dictionaryForm ?? mistake.verbId)}
@@ -330,11 +358,11 @@ export function ProgressPage() {
                     </div>
                     <p className="truncate text-sm text-muted">
                       you wrote{' '}
-                      <span className="text-red-600 dark:text-red-400">
+                      <span lang="de" className="text-red-600 dark:text-red-400">
                         {mistake.lastResponse || '—'}
                       </span>{' '}
                       · correct{' '}
-                      <span className="text-emerald-600 dark:text-emerald-400">
+                      <span lang="de" className="text-emerald-600 dark:text-emerald-400">
                         {mistake.expected}
                       </span>
                     </p>

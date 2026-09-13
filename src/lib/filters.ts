@@ -1,5 +1,6 @@
 import type { Verb } from '@/types/verb';
 import type { VerbFilters } from '@/store/settingsStore';
+import { isOptionallyReflexive } from '@/exercises/formAccess';
 
 /**
  * Verb pool filtering — the "organise verbs by grammatical pattern" half of
@@ -21,8 +22,14 @@ export function matchesFilters(verb: Verb, filters: VerbFilters): boolean {
     if (!auxiliaries.includes(filters.auxiliary)) return false;
   }
 
-  if (filters.reflexive === 'reflexive' && !verb.reflexive.isReflexive) return false;
-  if (filters.reflexive === 'non-reflexive' && verb.reflexive.isReflexive) return false;
+  // Optionally reflexive verbs (trennen / sich trennen) belong to both groups.
+  const optionallyReflexive = isOptionallyReflexive(verb);
+  if (filters.reflexive === 'reflexive' && !verb.reflexive.isReflexive && !optionallyReflexive) {
+    return false;
+  }
+  if (filters.reflexive === 'non-reflexive' && verb.reflexive.isReflexive && !optionallyReflexive) {
+    return false;
+  }
 
   if (filters.topics.length > 0 && !filters.topics.includes(verb.topic)) return false;
 

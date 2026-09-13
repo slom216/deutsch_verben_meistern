@@ -1,16 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { FormCategory } from '@/types/formCategory';
-import type { DiagnosticCode, GradeResult } from '@/lib/grader';
-import type { ExerciseType } from '@/exercises/types';
+import type { DiagnosticCode, GradeResult, Verdict } from '@/lib/grader';
+import { isProduction, type ExerciseType } from '@/exercises/types';
 import {
   createCard,
   qualityFrom,
   reviewCard,
   type CardId,
   type CardRecord,
+  type CardState,
 } from '@/lib/srs';
 import { dayKey } from '@/lib/dates';
+import { flagStorage, isRecord, recordEntries, safeStorage, sanitize, syncAcrossTabs } from './storage';
 
 /**
  * Learning progress.
@@ -57,6 +59,11 @@ export interface AnswerInput {
   responseMs: number;
   hintUsed: boolean;
   xpAwarded: number;
+  /**
+   * Per-card verdicts when one exercise grades several cards separately
+   * (matching). Cards not listed use `result.verdict`.
+   */
+  cardResults?: Record<CardId, Verdict>;
 }
 
 export interface ProgressState {
@@ -75,7 +82,7 @@ export interface ProgressState {
   resetProgress: () => void;
 }
 
-const EMPTY: Pick<
+type ProgressData = Pick<
   ProgressState,
   | 'cards'
   | 'categoryStats'
@@ -85,7 +92,9 @@ const EMPTY: Pick<
   | 'totalAnswered'
   | 'totalCorrect'
   | 'sessionsCompleted'
-> = {
+>;
+
+const EMPTY: ProgressData = {
   cards: {},
   categoryStats: {},
   diagnosticCounts: {},
@@ -101,8 +110,74 @@ const FAST_ANSWER_MS = 6000;
 /** Cap the mistake log so long-term storage cannot grow without bound. */
 const MAX_MISTAKES = 300;
 
+/*
+ * Compact storage. The card table is the bulk of all saved data, so it is
+ * stored as positional tuples with timestamps in whole seconds rather than as
+ * keyed objects in milliseconds. In memory it stays a CardRecord map.
+ */
+
+const CARD_STATES: CardState[] = ['new', 'learning', 'review', 'lapsed', 'mastered'];
+const SECOND = 1000;
+
+/** [id, state, repetitions, interval s, ease, due s, lastReviewed s or 0, step, seen, correct, lapses, bestStreak, streak] */
+type CardTuple = [CardId, ...number[]];
+
+type SavedProgress = Omit<ProgressData, 'cards'> & { cards: CardTuple[] };
+
+export function encodeCards(cards: Record<CardId, CardRecord>): CardTuple[] {
+  return Object.values(cards).map((card) => [
+    card.id,
+    CARD_STATES.indexOf(card.state),
+    card.repetitions,
+    Math.round(card.interval / SECOND),
+    card.ease,
+    Math.round(card.due / SECOND),
+    card.lastReviewed === null ? 0 : Math.round(card.lastReviewed / SECOND),
+    card.step,
+    card.seen,
+    card.correct,
+    card.lapses,
+    card.bestStreak,
+    card.streak,
+  ]);
+}
+
+function decodeCards(tuples: unknown[]): Record<CardId, CardRecord> {
+  const cards: Record<CardId, CardRecord> = {};
+  for (const tuple of tuples) {
+    const valid =
+      Array.isArray(tuple) &&
+      tuple.length === 13 &&
+      typeof tuple[0] === 'string' &&
+      tuple.slice(1).every((n) => typeof n === 'number' && Number.isFinite(n)) &&
+      CARD_STATES[tuple[1]] !== undefined;
+    if (!valid) {
+      flagStorage('unreadable');
+      continue;
+    }
+    const [id, state, repetitions, interval, ease, due, lastReviewed, step, seen, correct, lapses, bestStreak, streak] =
+      tuple as [CardId, ...number[]];
+    cards[id] = {
+      id,
+      state: CARD_STATES[state],
+      repetitions,
+      interval: interval * SECOND,
+      ease,
+      due: due * SECOND,
+      lastReviewed: lastReviewed ? lastReviewed * SECOND : null,
+      step,
+      seen,
+      correct,
+      lapses,
+      bestStreak,
+      streak,
+    };
+  }
+  return cards;
+}
+
 export const useProgress = create<ProgressState>()(
-  persist(
+  persist<ProgressState, [], [], SavedProgress>(
     (set) => ({
       ...EMPTY,
 
@@ -110,17 +185,20 @@ export const useProgress = create<ProgressState>()(
         set((state) => {
           const now = Date.now();
           const { result } = input;
-          const quality = qualityFrom(result.verdict, {
+          const qualityOptions = {
             hintUsed: input.hintUsed,
             fast: input.responseMs <= FAST_ANSWER_MS,
-          });
+            recognition: !isProduction(input.exerciseType),
+          };
 
           // Advance every card the exercise touched. Matching exercises cover
-          // a whole paradigm, so they legitimately review several at once.
+          // a whole paradigm, so they legitimately review several at once,
+          // each by its own pair's outcome.
           const cards = { ...state.cards };
           for (const cardId of input.cardIds) {
             const existing = cards[cardId] ?? createCard(cardId, now);
-            cards[cardId] = reviewCard(existing, quality, now);
+            const verdict = input.cardResults?.[cardId] ?? result.verdict;
+            cards[cardId] = reviewCard(existing, qualityFrom(verdict, qualityOptions), now);
           }
 
           const categoryStats = { ...state.categoryStats };
@@ -205,9 +283,45 @@ export const useProgress = create<ProgressState>()(
 
       resetProgress: () => set(() => ({ ...EMPTY })),
     }),
-    { name: 'dvm.progress.v1', version: 1 },
+    {
+      // The key keeps its original name; the version number tracks the format.
+      name: 'dvm.progress.v1',
+      version: 2,
+      storage: safeStorage(),
+      partialize: ({ cards, categoryStats, diagnosticCounts, mistakes, daily, totalAnswered, totalCorrect, sessionsCompleted }) => ({
+        cards: encodeCards(cards),
+        categoryStats,
+        diagnosticCounts,
+        mistakes,
+        daily,
+        totalAnswered,
+        totalCorrect,
+        sessionsCompleted,
+      }),
+      migrate: (persisted, version) => {
+        // v1 stored cards as an id-keyed map of full records.
+        if (version < 2 && isRecord(persisted) && isRecord(persisted.cards)) {
+          const v1Cards = recordEntries<CardRecord>(persisted.cards);
+          return { ...persisted, cards: encodeCards(v1Cards) } as SavedProgress;
+        }
+        return persisted as SavedProgress;
+      },
+      merge: (persisted, current) => {
+        const saved = sanitize(persisted, { ...EMPTY, cards: [] as unknown[] });
+        return {
+          ...current,
+          ...saved,
+          cards: decodeCards(saved.cards),
+          categoryStats: recordEntries<CategoryStat>(saved.categoryStats),
+          mistakes: recordEntries<MistakeEntry>(saved.mistakes),
+          daily: recordEntries<DailyStat>(saved.daily),
+        };
+      },
+    },
   ),
 );
+
+syncAcrossTabs(useProgress);
 
 /* ------------------------------------------------------------------ */
 /* Selectors                                                            */

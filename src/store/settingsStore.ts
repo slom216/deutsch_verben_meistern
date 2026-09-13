@@ -2,8 +2,9 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { FORM_CATEGORIES, type FormCategory } from '@/types/formCategory';
 import { EXERCISE_TYPES, type ExerciseType } from '@/exercises/types';
-import type { CefrLevel } from '@/types/verb';
+import { CEFR_LEVELS, type CefrLevel } from '@/types/verb';
 import type { StrictnessPolicy } from '@/lib/grader';
+import { safeStorage, sanitize, syncAcrossTabs } from './storage';
 
 /**
  * Learner settings.
@@ -166,23 +167,28 @@ export const useSettings = create<SettingsState>()(
     {
       name: 'dvm.settings.v1',
       version: 1,
-      // Merge rather than replace, so categories added in a later release
-      // appear with their default value instead of as `undefined`.
+      storage: safeStorage(),
+      // Identity for now; a future version bump converts here instead of wiping.
+      migrate: (persisted) => persisted as SettingsState,
+      // Merge field by field against the defaults, so categories added in a
+      // later release appear with their default value and malformed saved
+      // values fall back instead of breaking the app.
       merge: (persisted, current) => {
-        const saved = (persisted ?? {}) as Partial<SettingsState>;
+        const saved = sanitize(persisted, DEFAULTS);
+        const levelsValid =
+          saved.levels.length > 0 && saved.levels.every((level) => CEFR_LEVELS.includes(level));
         return {
           ...current,
           ...saved,
-          categories: { ...DEFAULT_CATEGORIES, ...(saved.categories ?? {}) },
-          exerciseTypes: { ...DEFAULT_EXERCISE_TYPES, ...(saved.exerciseTypes ?? {}) },
-          filters: { ...DEFAULT_FILTERS, ...(saved.filters ?? {}) },
-          strictness: { ...DEFAULTS.strictness, ...(saved.strictness ?? {}) },
-          session: { ...DEFAULTS.session, ...(saved.session ?? {}) },
+          levels: levelsValid ? saved.levels : ['A1'],
+          theme: saved.theme === 'light' || saved.theme === 'dark' ? saved.theme : DEFAULTS.theme,
         };
       },
     },
   ),
 );
+
+syncAcrossTabs(useSettings);
 
 /*
  * Reflect the theme onto <html data-theme>, which is what the CSS reads.

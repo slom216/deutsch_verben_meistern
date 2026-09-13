@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { HashRouter } from 'react-router-dom';
 import { AppRoutes } from './routes';
 import { Spinner } from './components/ui';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 /**
  * Hash routing keeps the app deployable as static files from any path without
@@ -9,10 +10,12 @@ import { Spinner } from './components/ui';
  */
 export function App() {
   return (
-    <HashRouter>
-      <Suspense fallback={<Spinner />}>
-        <AppRoutes />
-      </Suspense>
-    </HashRouter>
+    <ErrorBoundary>
+      <HashRouter>
+        <Suspense fallback={<Spinner />}>
+          <AppRoutes />
+        </Suspense>
+      </HashRouter>
+    </ErrorBoundary>
   );
 }

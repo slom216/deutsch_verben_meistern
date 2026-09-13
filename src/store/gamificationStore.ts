@@ -6,6 +6,7 @@ import {
   type AchievementContext,
 } from '@/lib/achievements';
 import { dayKey, daysBetween } from '@/lib/dates';
+import { safeStorage, sanitize, syncAcrossTabs } from './storage';
 
 /**
  * Motivation state: experience, ranks, streaks and badges.
@@ -41,7 +42,8 @@ export interface GamificationState {
   registerCombo: (combo: number) => void;
   registerProductionCorrect: () => void;
   registerComeback: () => void;
-  registerTouched: (level: string, category: string) => void;
+  /** `category` is only passed for correct answers; the Allrounder badge counts those. */
+  registerTouched: (level: string, category?: string) => void;
   registerSessionResult: (perfect: boolean) => void;
   registerGoalMet: (day: string) => void;
   syncAchievements: (context: Omit<AchievementContext, keyof DerivedContext> & Partial<DerivedContext>) => void;
@@ -107,8 +109,10 @@ export const useGamification = create<GamificationState>()(
           if (state.lastPracticeDay === today) return state;
 
           // A gap of exactly one day continues the streak; anything longer
-          // restarts it. The first ever session starts a streak of one.
+          // restarts it. The first ever session starts a streak of one. A
+          // negative gap means the clock or time zone moved back: same day.
           const gap = state.lastPracticeDay ? daysBetween(state.lastPracticeDay, today) : null;
+          if (gap !== null && gap < 0) return state;
           const dailyStreak = gap === 1 ? state.dailyStreak + 1 : 1;
 
           return {
@@ -131,9 +135,10 @@ export const useGamification = create<GamificationState>()(
           const levelsTouched = state.levelsTouched.includes(level)
             ? state.levelsTouched
             : [...state.levelsTouched, level];
-          const categoriesTouched = state.categoriesTouched.includes(category)
-            ? state.categoriesTouched
-            : [...state.categoriesTouched, category];
+          const categoriesTouched =
+            category === undefined || state.categoriesTouched.includes(category)
+              ? state.categoriesTouched
+              : [...state.categoriesTouched, category];
           if (
             levelsTouched === state.levelsTouched &&
             categoriesTouched === state.categoriesTouched
@@ -199,9 +204,26 @@ export const useGamification = create<GamificationState>()(
 
       resetGamification: () => set(() => ({ ...EMPTY })),
     }),
-    { name: 'dvm.gamification.v1', version: 1 },
+    {
+      name: 'dvm.gamification.v1',
+      version: 1,
+      storage: safeStorage(),
+      // Identity for now; a future version bump converts here instead of wiping.
+      migrate: (persisted) => persisted as GamificationState,
+      merge: (persisted, current) => {
+        const saved = sanitize(persisted, EMPTY);
+        return {
+          ...current,
+          ...saved,
+          lastPracticeDay: typeof saved.lastPracticeDay === 'string' ? saved.lastPracticeDay : null,
+          pendingLevelUp: typeof saved.pendingLevelUp === 'number' ? saved.pendingLevelUp : null,
+        };
+      },
+    },
   ),
 );
+
+syncAcrossTabs(useGamification);
 
 /**
  * Streaks are only accurate once staleness is accounted for: a streak that was
@@ -210,7 +232,8 @@ export const useGamification = create<GamificationState>()(
 export function effectiveStreak(state: GamificationState, at: number = Date.now()): number {
   if (!state.lastPracticeDay) return 0;
   const gap = daysBetween(state.lastPracticeDay, dayKey(at));
-  if (gap === 0 || gap === 1) return state.dailyStreak;
+  // A negative gap is a clock or time zone moving back, not a missed day.
+  if (gap <= 1) return state.dailyStreak;
   return 0;
 }
 

@@ -7,8 +7,10 @@ import {
   frameParts,
   isSingleClause,
   locateInExample,
+  personsReadAs,
   resolveTarget,
   simpleFrame,
+  slotsFor,
   SUBJECT_PRONOUN,
   type FormTarget,
 } from './formAccess';
@@ -57,6 +59,14 @@ function cardIdFor(target: FormTarget): string {
 
 function englishOf(verb: Verb): string {
   return verb.english.join(', ');
+}
+
+/** A short nudge that never gives the form away. */
+function hintFor({ verb, category }: FormTarget): string {
+  const notes = [englishOf(verb)];
+  if (verb.regularity !== 'regular') notes.push(`${verb.regularity} verb`);
+  if (verb.separable && category !== 'separability') notes.push(`separable prefix "${verb.prefix}"`);
+  return `${verb.infinitive}: ${notes.join('; ')}`;
 }
 
 function baseFields(target: FormTarget, type: ExerciseType, rng: Rng, showTranslations: boolean) {
@@ -154,6 +164,7 @@ const typedConjugation: Generator = ({ target, rng, showTranslations }) => {
     question: questionText(target),
     accepted: target.accepted,
     answer: target.answer,
+    hint: hintFor(target),
   };
 };
 
@@ -170,9 +181,9 @@ const sentenceCompletion: Generator = ({ target, rng, showTranslations }) => {
 
   const person = slot as Person;
 
-  // Prefer the curated example when it actually contains this exact form —
-  // real German beats a synthetic frame.
-  const located = locateInExample(verb, target.answer);
+  // Prefer the curated example when it contains this exact form with an
+  // agreeing subject — real German beats a synthetic frame.
+  const located = locateInExample(verb, target.answer, person);
   const useExample = located !== null;
 
   const { before, after } = useExample ? located : frameParts(person);
@@ -200,28 +211,37 @@ const matching: Generator = ({ target, rng, showTranslations }) => {
     return null;
   }
 
+  const person = target.slot as Person;
+  const slots = slotsFor(verb, category) as Person[];
+  if (!slots.includes(person)) return null;
+
   const pairs: MatchingPair[] = [];
-  const cardIds: string[] = [];
   const seenRight = new Set<string>();
 
-  for (const person of PERSONS) {
-    const resolved = resolveTarget(verb, category, person);
+  // Syncretic slots (wir/sie/Sie share a form) would make matching ambiguous,
+  // so a repeated form is dropped. The scheduled person goes first, so it is
+  // always the neighbour that gets dropped, never the card under review.
+  for (const candidate of [person, ...slots.filter((p) => p !== person)]) {
+    if (pairs.length === 4) break;
+    const resolved = resolveTarget(verb, category, candidate);
     if (!resolved) continue;
-    // Syncretic slots (wir/sie/Sie share a form) would make matching
-    // ambiguous, so only the first occurrence of a form is offered.
     if (seenRight.has(resolved.answer.toLowerCase())) continue;
     seenRight.add(resolved.answer.toLowerCase());
-    pairs.push({ left: PERSON_LABELS[person], right: resolved.answer });
-    cardIds.push(makeCardId(verb.id, category, person));
+    pairs.push({
+      left: PERSON_LABELS[candidate],
+      right: resolved.answer,
+      cardId: makeCardId(verb.id, category, candidate),
+    });
   }
 
   if (pairs.length < 3) return null;
 
-  const chosen = pairs.slice(0, 4);
+  const order = (pair: MatchingPair) => PERSONS.findIndex((p) => PERSON_LABELS[p] === pair.left);
+  const chosen = pairs.sort((a, b) => order(a) - order(b));
 
   return {
     ...baseFields(target, 'matching', rng, showTranslations),
-    cardIds: cardIds.slice(0, chosen.length),
+    cardIds: chosen.map((pair) => pair.cardId),
     type: 'matching',
     prompt: `Match each pronoun to the correct ${FORM_CATEGORY_META[category].short} form of "${verb.infinitive}"`,
     pairs: chosen,
@@ -240,18 +260,31 @@ const errorCorrection: Generator = ({ target, rng, pool, showTranslations }) => 
   if (!['present', 'simplePast', 'presentPerfect', 'futureI'].includes(category)) return null;
 
   const person = slot as Person;
+
+  // The "wrong" token must be wrong for every person the displayed subject
+  // could denote, or a grammatical sentence gets struck out ("Sie darf.").
+  // Example sentences only locate unambiguous subjects, so the frame pronoun's
+  // readings cover both cases.
+  const rightForSubject = personsReadAs(SUBJECT_PRONOUN[person]).flatMap(
+    (p) => resolveTarget(verb, category, p)?.accepted ?? [],
+  );
   const wrong = buildWrongForm({
     verb,
     category,
     slot,
     answer: target.answer,
-    accepted: target.accepted,
+    accepted: [...target.accepted, ...rightForSubject],
     pool,
     rng,
   });
   if (!wrong) return null;
 
-  const sentence = simpleFrame(person, wrong);
+  const located = locateInExample(verb, target.answer, person);
+  const useExample =
+    located !== null && tokenize(wrong).length === tokenize(target.answer).length;
+  const sentence = useExample
+    ? capitalizeFirst(`${located.before}${wrong}${located.after}`)
+    : simpleFrame(person, wrong);
 
   return {
     ...baseFields(target, 'errorCorrection', rng, showTranslations),
@@ -261,6 +294,7 @@ const errorCorrection: Generator = ({ target, rng, pool, showTranslations }) => 
     wrongToken: wrong,
     accepted: target.accepted,
     answer: target.answer,
+    translation: showTranslations && useExample ? verb.example.english : undefined,
     hint: `${FORM_CATEGORY_META[category].short}, ${PERSON_LABELS[person]}`,
     explanation: `"${wrong}" is wrong here — ${PERSON_LABELS[person]} takes "${target.answer}".`,
   };
@@ -303,10 +337,27 @@ const tenseTransformation: Generator = ({
   const sourceTarget = resolveTarget(verb, source, person);
   if (!sourceTarget) return null;
 
-  const sourceSentence = simpleFrame(person, sourceTarget.answer);
+  // Rewrite the curated example when it holds the source form with an agreeing
+  // subject. Swapping in a multi-word form is only safe when nothing follows
+  // the verb; otherwise the German verb bracket would break.
+  const located = locateInExample(verb, sourceTarget.answer, person);
+  const inExample = (form: string): string | null =>
+    located && (!form.includes(' ') || !/[^\s.!?]/.test(located.after))
+      ? capitalizeFirst(`${located.before}${form}${located.after}`)
+      : null;
+  const useExample = inExample(target.answer) !== null;
 
-  // Accept either the bare form or the whole rewritten sentence.
-  const accepted = target.accepted.flatMap((form) => [form, simpleFrame(person, form)]);
+  const sourceSentence = useExample
+    ? verb.example.german.trim()
+    : simpleFrame(person, sourceTarget.answer);
+  const answer = inExample(target.answer) ?? simpleFrame(person, target.answer);
+
+  // Accept the bare form or the whole rewritten sentence (a frame with either ending).
+  const accepted = target.accepted.flatMap((form) => {
+    if (useExample) return [form, ...[inExample(form)].filter((v): v is string => v !== null)];
+    const frame = simpleFrame(person, form);
+    return [form, frame, frame.replace(/ …$/, '.')];
+  });
 
   return {
     ...baseFields(target, 'tenseTransformation', rng, showTranslations),
@@ -316,8 +367,8 @@ const tenseTransformation: Generator = ({
     fromLabel: FORM_CATEGORY_META[source].short,
     toLabel: FORM_CATEGORY_META[category].short,
     accepted,
-    answer: simpleFrame(person, target.answer),
-    explanation: `${FORM_CATEGORY_META[source].short}: ${sourceSentence} → ${FORM_CATEGORY_META[category].short}: ${simpleFrame(person, target.answer)}`,
+    answer,
+    explanation: `${FORM_CATEGORY_META[source].short}: ${sourceSentence} → ${FORM_CATEGORY_META[category].short}: ${answer}`,
   };
 };
 
@@ -328,9 +379,15 @@ const tenseTransformation: Generator = ({
 const sentenceReconstruction: Generator = ({ target, rng, showTranslations }) => {
   const { verb, category, slot } = target;
 
+  // The puzzle must exercise the scheduled card: its form has to appear in the
+  // example with an agreeing subject, or solving it reviews an unrelated card.
+  if (!PERSONS.includes(slot as Person)) return null;
+  if (!locateInExample(verb, target.answer, slot as Person)) return null;
+
   // Word order is only worth drilling on a genuine, single-clause sentence.
   const sentence = verb.example.german.trim();
   if (!isSingleClause(sentence)) return null;
+  const terminal = /[.!?]$/.test(sentence) ? sentence.slice(-1) : '.';
 
   const raw = sentence.split(/\s+/);
   if (raw.length < 4 || raw.length > 9) return null;
@@ -358,6 +415,7 @@ const sentenceReconstruction: Generator = ({ target, rng, showTranslations }) =>
     prompt: `Build a correct German sentence with "${verb.infinitive}"`,
     tokens: scrambled,
     correctOrder: tokens,
+    terminal,
     translation: showTranslations ? verb.example.english : undefined,
     explanation: `${sentence} — ${verb.example.english}`,
   };
@@ -403,8 +461,8 @@ export function supportedTypes(
 }
 
 /** Full display text of a reconstruction answer, for feedback. */
-export function renderSentence(tokens: readonly string[]): string {
-  return `${capitalizeFirst(tokens.join(' '))}.`;
+export function renderSentence(tokens: readonly string[], terminal = '.'): string {
+  return `${capitalizeFirst(tokens.join(' '))}${terminal}`;
 }
 
 /** Number of scrambled tokens, used by the UI to size the drop area. */

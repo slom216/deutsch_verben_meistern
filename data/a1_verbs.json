@@ -133,7 +133,7 @@
           }
         },
         "participles": {
-          "present": "seind",
+          "present": "seiend",
           "past": "gewesen"
         },
         "infinitiveWithZu": "zu sein",
@@ -152,10 +152,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -183,9 +180,10 @@
       "topic": "Personal information",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "auxiliary"
+        "auxiliary",
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -274,10 +272,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -398,10 +393,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -430,9 +422,10 @@
       "topic": "Work",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "modal"
+        "modal",
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -521,10 +514,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -553,9 +543,10 @@
       "topic": "City",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "modal"
+        "modal",
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -644,10 +635,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -766,10 +754,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -889,10 +874,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -921,9 +903,10 @@
       "topic": "Health",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "modal"
+        "modal",
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -1001,8 +984,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Darf ich hier parken?",
-        "english": "May I park here?"
+        "german": "Wir dürfen hier parken.",
+        "english": "We are allowed to park here."
       },
       "practiceForms": [
         "present",
@@ -1012,10 +995,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -1043,9 +1023,10 @@
       "topic": "Food and drink",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "modal"
+        "modal",
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -1148,10 +1129,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -1252,8 +1230,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Wie heißt du?",
-        "english": "What is your name?"
+        "german": "Ich heiße Anna Schmidt.",
+        "english": "My name is Anna Schmidt."
       },
       "practiceForms": [
         "present",
@@ -1263,10 +1241,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -1367,8 +1342,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute machen.",
-        "english": "I would like to do today."
+        "german": "Wir machen heute Hausaufgaben.",
+        "english": "We are doing homework today."
       },
       "practiceForms": [
         "present",
@@ -1378,10 +1353,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -1493,10 +1465,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -1608,10 +1577,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -1713,8 +1679,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute sagen.",
-        "english": "I would like to say today."
+        "german": "Er sagt leider kein Wort.",
+        "english": "Unfortunately he doesn't say a word."
       },
       "practiceForms": [
         "present",
@@ -1724,10 +1690,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -1843,8 +1806,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -1960,8 +1921,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -2078,8 +2037,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -2108,9 +2065,9 @@
       "topic": "Relationships",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "regular"
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -2181,8 +2138,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute wissen.",
-        "english": "I would like to know today."
+        "german": "Ich weiß die Antwort nicht.",
+        "english": "I don't know the answer."
       },
       "practiceForms": [
         "present",
@@ -2192,10 +2149,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -2319,8 +2273,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -2422,8 +2374,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute finden.",
-        "english": "I would like to find today."
+        "german": "Du findest den Schlüssel im Auto.",
+        "english": "You find the key in the car."
       },
       "practiceForms": [
         "present",
@@ -2433,10 +2385,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -2537,8 +2486,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute bleiben.",
-        "english": "I would like to stay today."
+        "german": "Wir bleiben heute zu Hause.",
+        "english": "We are staying at home today."
       },
       "practiceForms": [
         "present",
@@ -2548,10 +2497,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -2652,8 +2598,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute arbeiten.",
-        "english": "I would like to work today."
+        "german": "Er arbeitet in einem Büro.",
+        "english": "He works in an office."
       },
       "practiceForms": [
         "present",
@@ -2663,10 +2609,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -2767,8 +2710,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute wohnen.",
-        "english": "I would like to live today."
+        "german": "Ich wohne in Berlin.",
+        "english": "I live in Berlin."
       },
       "practiceForms": [
         "present",
@@ -2778,10 +2721,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -2882,8 +2822,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute leben.",
-        "english": "I would like to live today."
+        "german": "Ihr lebt schon lange in Deutschland.",
+        "english": "You have lived in Germany for a long time."
       },
       "practiceForms": [
         "present",
@@ -2893,10 +2833,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -2997,8 +2934,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute lernen.",
-        "english": "I would like to learn today."
+        "german": "Wir lernen jeden Tag Deutsch.",
+        "english": "We learn German every day."
       },
       "practiceForms": [
         "present",
@@ -3008,10 +2945,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -3112,10 +3046,12 @@
         "infinitiveWithZu": "zu brauchen",
         "thirdPersonPresent": "braucht"
       },
-      "specialA1Forms": {},
+      "specialA1Forms": {
+        "alternativeKonjunktivII": "bräuchte"
+      },
       "example": {
-        "german": "Ich möchte heute brauchen.",
-        "english": "I would like to need today."
+        "german": "Ich brauche ein neues Handy.",
+        "english": "I need a new mobile phone."
       },
       "practiceForms": [
         "present",
@@ -3126,8 +3062,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -3156,9 +3090,9 @@
       "topic": "Daily routine",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "regular"
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -3235,8 +3169,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute denken.",
-        "english": "I would like to think today."
+        "german": "Er denkt oft an seine Familie.",
+        "english": "He often thinks about his family."
       },
       "practiceForms": [
         "present",
@@ -3247,8 +3181,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -3351,8 +3283,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute glauben.",
-        "english": "I would like to believe today."
+        "german": "Ich glaube dir das nicht.",
+        "english": "I don't believe you about that."
       },
       "practiceForms": [
         "present",
@@ -3362,10 +3294,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -3394,9 +3323,9 @@
       "topic": "Hobbies",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "regular"
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -3469,8 +3398,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute kennen.",
-        "english": "I would like to know today."
+        "german": "Du kennst meinen Bruder schon.",
+        "english": "You already know my brother."
       },
       "practiceForms": [
         "present",
@@ -3481,8 +3410,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -3584,8 +3511,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute verstehen.",
-        "english": "I would like to understand today."
+        "german": "Ich verstehe die Frage nicht.",
+        "english": "I don't understand the question."
       },
       "practiceForms": [
         "present",
@@ -3595,10 +3522,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -3707,8 +3631,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute fragen.",
-        "english": "I would like to ask today."
+        "german": "Er fragt den Lehrer nach dem Weg.",
+        "english": "He asks the teacher for directions."
       },
       "practiceForms": [
         "present",
@@ -3719,8 +3643,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -3830,8 +3752,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute antworten.",
-        "english": "I would like to answer today."
+        "german": "Ich antworte sofort auf deine Nachricht.",
+        "english": "I answer your message right away."
       },
       "practiceForms": [
         "present",
@@ -3842,8 +3764,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -3948,8 +3868,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute hören.",
-        "english": "I would like to hear today."
+        "german": "Wir hören abends gern Musik.",
+        "english": "We like listening to music in the evening."
       },
       "practiceForms": [
         "present",
@@ -3960,8 +3880,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -4063,8 +3981,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Sie liest jeden Abend ein Buch.",
-        "english": "She reads a book every evening."
+        "german": "Er liest jeden Abend ein Buch.",
+        "english": "He reads a book every evening."
       },
       "practiceForms": [
         "present",
@@ -4074,10 +3992,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4178,8 +4093,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute schreiben.",
-        "english": "I would like to write today."
+        "german": "Du schreibst deiner Mutter eine E-Mail.",
+        "english": "You write your mother an email."
       },
       "practiceForms": [
         "present",
@@ -4189,10 +4104,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4293,7 +4205,9 @@
         "infinitiveWithZu": "zu fahren",
         "thirdPersonPresent": "fährt"
       },
-      "specialA1Forms": {},
+      "specialA1Forms": {
+        "alternativeAuxiliary": "haben"
+      },
       "example": {
         "german": "Wir fahren mit dem Zug nach München.",
         "english": "We are travelling to Munich by train."
@@ -4306,10 +4220,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4421,10 +4332,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4536,10 +4444,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4651,10 +4556,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4755,8 +4657,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute kaufen.",
-        "english": "I would like to buy today."
+        "german": "Ich kaufe Brot im Supermarkt.",
+        "english": "I buy bread at the supermarket."
       },
       "practiceForms": [
         "present",
@@ -4766,10 +4668,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4870,8 +4769,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute bezahlen.",
-        "english": "I would like to pay today."
+        "german": "Wir bezahlen die Rechnung zusammen.",
+        "english": "We pay the bill together."
       },
       "practiceForms": [
         "present",
@@ -4881,10 +4780,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -4985,8 +4881,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute zahlen.",
-        "english": "I would like to pay today."
+        "german": "Ich zahle mit Karte.",
+        "english": "I pay by card."
       },
       "practiceForms": [
         "present",
@@ -4996,10 +4892,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5111,10 +5004,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5215,8 +5105,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute bestellen.",
-        "english": "I would like to order today."
+        "german": "Heute bestellt sie eine Pizza.",
+        "english": "Today she orders a pizza."
       },
       "practiceForms": [
         "present",
@@ -5226,10 +5116,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5257,9 +5144,9 @@
       "topic": "City",
       "frequencyBand": "A1 Core 1",
       "verbClasses": [
-        "regular"
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": false,
       "prefix": null,
       "reflexive": {
@@ -5333,8 +5220,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute bringen.",
-        "english": "I would like to bring today."
+        "german": "Ich bringe dir einen Kaffee.",
+        "english": "I'll bring you a coffee."
       },
       "practiceForms": [
         "present",
@@ -5345,8 +5232,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -5448,8 +5333,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute holen.",
-        "english": "I would like to fetch today."
+        "german": "Er holt Brötchen vom Bäcker.",
+        "english": "He gets bread rolls from the bakery."
       },
       "practiceForms": [
         "present",
@@ -5459,10 +5344,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5564,8 +5446,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute bekommen.",
-        "english": "I would like to get today."
+        "german": "Ich bekomme heute ein Paket.",
+        "english": "I am getting a parcel today."
       },
       "practiceForms": [
         "present",
@@ -5575,10 +5457,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5679,8 +5558,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute suchen.",
-        "english": "I would like to search today."
+        "german": "Wir suchen eine neue Wohnung.",
+        "english": "We are looking for a new flat."
       },
       "practiceForms": [
         "present",
@@ -5690,10 +5569,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -5796,8 +5672,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Kannst du mir bitte helfen?",
-        "english": "Can you please help me?"
+        "german": "Ich helfe dir gern.",
+        "english": "I am happy to help you."
       },
       "practiceForms": [
         "present",
@@ -5808,8 +5684,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -5913,8 +5787,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute treffen.",
-        "english": "I would like to meet today."
+        "german": "Ich treffe meine Freunde im Park.",
+        "english": "I meet my friends in the park."
       },
       "practiceForms": [
         "present",
@@ -5925,8 +5799,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -6028,8 +5900,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute spielen.",
-        "english": "I would like to play today."
+        "german": "Ihr spielt am Nachmittag Fußball.",
+        "english": "You play football in the afternoon."
       },
       "practiceForms": [
         "present",
@@ -6039,10 +5911,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6141,7 +6010,9 @@
         "infinitiveWithZu": "zu stehen",
         "thirdPersonPresent": "steht"
       },
-      "specialA1Forms": {},
+      "specialA1Forms": {
+        "alternativeAuxiliary": "sein"
+      },
       "example": {
         "german": "Die Tasche steht neben der Tür.",
         "english": "The bag is next to the door."
@@ -6154,10 +6025,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6256,7 +6124,9 @@
         "infinitiveWithZu": "zu sitzen",
         "thirdPersonPresent": "sitzt"
       },
-      "specialA1Forms": {},
+      "specialA1Forms": {
+        "alternativeAuxiliary": "sein"
+      },
       "example": {
         "german": "Wir sitzen im Garten.",
         "english": "We are sitting in the garden."
@@ -6269,10 +6139,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6372,7 +6239,9 @@
         "infinitiveWithZu": "zu liegen",
         "thirdPersonPresent": "liegt"
       },
-      "specialA1Forms": {},
+      "specialA1Forms": {
+        "alternativeAuxiliary": "sein"
+      },
       "example": {
         "german": "Das Hotel liegt im Zentrum.",
         "english": "The hotel is located in the centre."
@@ -6385,10 +6254,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6490,8 +6356,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute laufen.",
-        "english": "I would like to run today."
+        "german": "Er läuft jeden Morgen im Park.",
+        "english": "He runs in the park every morning."
       },
       "practiceForms": [
         "present",
@@ -6501,10 +6367,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6606,8 +6469,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute tragen.",
-        "english": "I would like to carry today."
+        "german": "Du trägst die schwere Tasche.",
+        "english": "You carry the heavy bag."
       },
       "practiceForms": [
         "present",
@@ -6617,10 +6480,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6722,8 +6582,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute lassen.",
-        "english": "I would like to let today."
+        "german": "Wir lassen den Hund zu Hause.",
+        "english": "We leave the dog at home."
       },
       "practiceForms": [
         "present",
@@ -6733,10 +6593,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6837,8 +6694,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute buchstabieren.",
-        "english": "I would like to spell today."
+        "german": "Ich buchstabiere meinen Namen.",
+        "english": "I spell my name."
       },
       "practiceForms": [
         "present",
@@ -6848,10 +6705,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -6952,8 +6806,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute kontrollieren.",
-        "english": "I would like to check today."
+        "german": "Er kontrolliert die Fahrkarten im Zug.",
+        "english": "He checks the tickets on the train."
       },
       "practiceForms": [
         "present",
@@ -6963,10 +6817,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7041,11 +6892,11 @@
           "sieSie": "werden lauten"
         },
         "imperative": {
-          "available": true,
-          "du": "laute",
-          "ihr": "lautet",
-          "Sie": "lauten Sie",
-          "reason": null
+          "available": false,
+          "du": null,
+          "ihr": null,
+          "Sie": null,
+          "reason": "No common or useful imperative at A1 level."
         },
         "konjunktivII": {
           "preferred": "würdeForm",
@@ -7068,8 +6919,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute lauten.",
-        "english": "I would like to read today."
+        "german": "Die Antwort lautet ganz einfach nein.",
+        "english": "The answer is simply no."
       },
       "practiceForms": [
         "present",
@@ -7079,10 +6930,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7183,8 +7031,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute studieren.",
-        "english": "I would like to study today."
+        "german": "Ich studiere Medizin in Wien.",
+        "english": "I study medicine in Vienna."
       },
       "practiceForms": [
         "present",
@@ -7194,10 +7042,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7298,8 +7143,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute zusammenwohnen.",
-        "english": "I would like to live together today."
+        "german": "Wir wohnen seit Mai zusammen.",
+        "english": "We have lived together since May."
       },
       "practiceForms": [
         "present",
@@ -7310,9 +7155,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -7420,8 +7263,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Guten Tag, ich möchte mich vorstellen.",
-        "english": "Hello, I would like to introduce myself."
+        "german": "Ich stelle mich kurz vor.",
+        "english": "I briefly introduce myself."
       },
       "practiceForms": [
         "present",
@@ -7536,8 +7379,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Entschuldigen Sie bitte die Verspätung.",
-        "english": "Please excuse the delay."
+        "german": "Ich entschuldige meinen Sohn beim Lehrer.",
+        "english": "I excuse my son with the teacher."
       },
       "practiceForms": [
         "present",
@@ -7547,10 +7390,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7651,8 +7491,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute wiederholen.",
-        "english": "I would like to repeat today."
+        "german": "Ihr wiederholt die neuen Wörter.",
+        "english": "You repeat the new words."
       },
       "practiceForms": [
         "present",
@@ -7662,10 +7502,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7766,8 +7603,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute schwimmen.",
-        "english": "I would like to swim today."
+        "german": "Ich schwimme im Sommer oft.",
+        "english": "I often swim in summer."
       },
       "practiceForms": [
         "present",
@@ -7777,10 +7614,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7881,8 +7715,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute joggen.",
-        "english": "I would like to jog today."
+        "german": "Er joggt jeden Morgen.",
+        "english": "He jogs every morning."
       },
       "practiceForms": [
         "present",
@@ -7892,10 +7726,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -7996,8 +7827,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute wandern.",
-        "english": "I would like to hike today."
+        "german": "Wir wandern gern in den Bergen.",
+        "english": "We like hiking in the mountains."
       },
       "practiceForms": [
         "present",
@@ -8007,10 +7838,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -8111,8 +7939,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute kochen.",
-        "english": "I would like to cook today."
+        "german": "Du kochst heute das Abendessen.",
+        "english": "You are cooking dinner today."
       },
       "practiceForms": [
         "present",
@@ -8122,10 +7950,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -8226,8 +8051,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute fotografieren.",
-        "english": "I would like to photograph today."
+        "german": "Ich fotografiere gern Blumen.",
+        "english": "I like photographing flowers."
       },
       "practiceForms": [
         "present",
@@ -8237,10 +8062,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -8348,8 +8170,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute beginnen.",
-        "english": "I would like to begin today."
+        "german": "Wir beginnen um neun Uhr.",
+        "english": "We begin at nine o'clock."
       },
       "practiceForms": [
         "present",
@@ -8360,8 +8182,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -8463,8 +8283,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute feiern.",
-        "english": "I would like to celebrate today."
+        "german": "Wir feiern morgen meinen Geburtstag.",
+        "english": "We are celebrating my birthday tomorrow."
       },
       "practiceForms": [
         "present",
@@ -8474,10 +8294,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -8554,7 +8371,7 @@
         },
         "imperative": {
           "available": true,
-          "du": "seh aus",
+          "du": "sieh aus",
           "ihr": "seht aus",
           "Sie": "sehen Sie aus",
           "reason": null
@@ -8580,8 +8397,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute aussehen.",
-        "english": "I would like to look today."
+        "german": "Du siehst heute sehr müde aus.",
+        "english": "You look very tired today."
       },
       "practiceForms": [
         "present",
@@ -8592,9 +8409,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -8696,8 +8511,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Die Antwort stimmt.",
-        "english": "The answer is correct."
+        "german": "Es stimmt leider nicht.",
+        "english": "Unfortunately that is not right."
       },
       "practiceForms": [
         "present",
@@ -8707,10 +8522,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -8826,8 +8638,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -8929,8 +8739,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute wünschen.",
-        "english": "I would like to wish today."
+        "german": "Ich wünsche dir alles Gute.",
+        "english": "I wish you all the best."
       },
       "practiceForms": [
         "present",
@@ -8940,10 +8750,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9044,8 +8851,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute frühstücken.",
-        "english": "I would like to have breakfast today."
+        "german": "Wir frühstücken um sieben Uhr.",
+        "english": "We have breakfast at seven o'clock."
       },
       "practiceForms": [
         "present",
@@ -9055,10 +8862,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9160,8 +8964,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute präsentieren.",
-        "english": "I would like to present today."
+        "german": "Er präsentiert morgen sein Projekt.",
+        "english": "He presents his project tomorrow."
       },
       "practiceForms": [
         "present",
@@ -9171,10 +8975,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9211,7 +9012,7 @@
         "isReflexive": false,
         "case": null
       },
-      "auxiliary": "haben",
+      "auxiliary": "sein",
       "requiredCases": [],
       "fixedPrepositions": [],
       "forms": {
@@ -9232,12 +9033,12 @@
           "sieSie": "kletterten"
         },
         "presentPerfect": {
-          "ich": "habe geklettert",
-          "du": "hast geklettert",
-          "erSieEs": "hat geklettert",
-          "wir": "haben geklettert",
-          "ihr": "habt geklettert",
-          "sieSie": "haben geklettert"
+          "ich": "bin geklettert",
+          "du": "bist geklettert",
+          "erSieEs": "ist geklettert",
+          "wir": "sind geklettert",
+          "ihr": "seid geklettert",
+          "sieSie": "sind geklettert"
         },
         "futureI": {
           "ich": "werde klettern",
@@ -9275,8 +9076,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute klettern.",
-        "english": "I would like to climb today."
+        "german": "Ihr klettert gern auf Bäume.",
+        "english": "You like climbing trees."
       },
       "practiceForms": [
         "present",
@@ -9286,10 +9087,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9390,8 +9188,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute schließen.",
-        "english": "I would like to close today."
+        "german": "Ich schließe das Fenster.",
+        "english": "I close the window."
       },
       "practiceForms": [
         "present",
@@ -9401,10 +9199,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9516,10 +9311,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9631,10 +9423,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9735,8 +9524,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute öffnen.",
-        "english": "I would like to open today."
+        "german": "Du öffnest die Tür.",
+        "english": "You open the door."
       },
       "practiceForms": [
         "present",
@@ -9746,10 +9535,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -9851,8 +9637,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute hingehen.",
-        "english": "I would like to go there today."
+        "german": "Ich gehe morgen auch hin.",
+        "english": "I am going there tomorrow too."
       },
       "practiceForms": [
         "present",
@@ -9863,9 +9649,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -9966,8 +9750,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute einkaufen.",
-        "english": "I would like to shop today."
+        "german": "Wir kaufen am Samstag ein.",
+        "english": "We go shopping on Saturday."
       },
       "practiceForms": [
         "present",
@@ -9978,9 +9762,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -10081,8 +9863,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute schneiden.",
-        "english": "I would like to cut today."
+        "german": "Er schneidet das Brot.",
+        "english": "He cuts the bread."
       },
       "practiceForms": [
         "present",
@@ -10092,10 +9874,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10198,8 +9977,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute setzen.",
-        "english": "I would like to set today."
+        "german": "Ich setze das Kind auf den Stuhl.",
+        "english": "I put the child on the chair."
       },
       "practiceForms": [
         "present",
@@ -10209,10 +9988,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10313,8 +10089,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute waschen.",
-        "english": "I would like to wash today."
+        "german": "Er wäscht heute sein Auto.",
+        "english": "He is washing his car today."
       },
       "practiceForms": [
         "present",
@@ -10324,10 +10100,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10429,8 +10202,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute aufstehen.",
-        "english": "I would like to get up today."
+        "german": "Ich stehe morgen früh auf.",
+        "english": "I am getting up early tomorrow."
       },
       "practiceForms": [
         "present",
@@ -10441,9 +10214,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -10519,7 +10290,7 @@
         },
         "imperative": {
           "available": true,
-          "du": "seh fern",
+          "du": "sieh fern",
           "ihr": "seht fern",
           "Sie": "sehen Sie fern",
           "reason": null
@@ -10545,8 +10316,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute fernsehen.",
-        "english": "I would like to watch television today."
+        "german": "Wir sehen am Abend fern.",
+        "english": "We watch TV in the evening."
       },
       "practiceForms": [
         "present",
@@ -10557,9 +10328,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -10660,8 +10429,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute lieben.",
-        "english": "I would like to love today."
+        "german": "Ich liebe meine Familie.",
+        "english": "I love my family."
       },
       "practiceForms": [
         "present",
@@ -10671,10 +10440,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10777,8 +10543,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute mitnehmen.",
-        "english": "I would like to take (along) today."
+        "german": "Du nimmst einen Regenschirm mit.",
+        "english": "You take an umbrella along."
       },
       "practiceForms": [
         "present",
@@ -10789,9 +10555,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -10892,8 +10656,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute üben.",
-        "english": "I would like to practise today."
+        "german": "Wir üben jeden Tag Grammatik.",
+        "english": "We practise grammar every day."
       },
       "practiceForms": [
         "present",
@@ -10903,10 +10667,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -10999,7 +10760,7 @@
           }
         },
         "participles": {
-          "present": "tund",
+          "present": "tuend",
           "past": "getan"
         },
         "infinitiveWithZu": "zu tun",
@@ -11007,8 +10768,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute tun.",
-        "english": "I would like to do today."
+        "german": "Er tut heute nichts.",
+        "english": "He isn't doing anything today."
       },
       "practiceForms": [
         "present",
@@ -11018,10 +10779,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -11123,8 +10881,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute reinkommen.",
-        "english": "I would like to come in today."
+        "german": "Er kommt gleich rein.",
+        "english": "He is coming in soon."
       },
       "practiceForms": [
         "present",
@@ -11135,9 +10893,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -11253,8 +11009,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -11294,7 +11048,8 @@
       },
       "auxiliary": "haben",
       "requiredCases": [
-        "dative+accusative"
+        "dative",
+        "accusative"
       ],
       "fixedPrepositions": [],
       "forms": {
@@ -11358,8 +11113,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute zeigen.",
-        "english": "I would like to show today."
+        "german": "Ich zeige dir die Stadt.",
+        "english": "I show you the city."
       },
       "practiceForms": [
         "present",
@@ -11370,8 +11125,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -11480,8 +11233,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute erzählen.",
-        "english": "I would like to tell today."
+        "german": "Abends erzählt sie eine Geschichte.",
+        "english": "In the evening she tells a story."
       },
       "practiceForms": [
         "present",
@@ -11492,8 +11245,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -11595,8 +11346,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute surfen.",
-        "english": "I would like to surf today."
+        "german": "Du surfst oft im Internet.",
+        "english": "You often surf the internet."
       },
       "practiceForms": [
         "present",
@@ -11606,10 +11357,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -11710,8 +11458,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute nutzen.",
-        "english": "I would like to use today."
+        "german": "Wir nutzen das Internet jeden Tag.",
+        "english": "We use the internet every day."
       },
       "practiceForms": [
         "present",
@@ -11721,10 +11469,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -11825,8 +11570,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute chatten.",
-        "english": "I would like to chat today."
+        "german": "Ich chatte abends mit Freunden.",
+        "english": "I chat with friends in the evening."
       },
       "practiceForms": [
         "present",
@@ -11836,10 +11581,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -11946,8 +11688,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute telefonieren.",
-        "english": "I would like to telephone today."
+        "german": "Er telefoniert mit seiner Mutter.",
+        "english": "He is on the phone with his mother."
       },
       "practiceForms": [
         "present",
@@ -11958,8 +11700,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -12061,8 +11801,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute vergessen.",
-        "english": "I would like to forget today."
+        "german": "Ich vergesse oft meinen Schlüssel.",
+        "english": "I often forget my key."
       },
       "practiceForms": [
         "present",
@@ -12072,10 +11812,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -12185,8 +11922,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute bitten.",
-        "english": "I would like to ask today."
+        "german": "Ich bitte dich um Hilfe.",
+        "english": "I ask you for help."
       },
       "practiceForms": [
         "present",
@@ -12197,8 +11934,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -12306,8 +12041,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute reagieren.",
-        "english": "I would like to react today."
+        "german": "Er reagiert nicht auf meine Nachricht.",
+        "english": "He doesn't react to my message."
       },
       "practiceForms": [
         "present",
@@ -12318,8 +12053,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -12424,8 +12157,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute schenken.",
-        "english": "I would like to give as a present today."
+        "german": "Wir schenken ihr Blumen.",
+        "english": "We give her flowers."
       },
       "practiceForms": [
         "present",
@@ -12436,8 +12169,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -12541,8 +12272,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute danken.",
-        "english": "I would like to thank today."
+        "german": "Ich danke dir für das Geschenk.",
+        "english": "I thank you for the present."
       },
       "practiceForms": [
         "present",
@@ -12553,8 +12284,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -12656,8 +12385,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute begrüßen.",
-        "english": "I would like to welcome today."
+        "german": "Wir begrüßen die Gäste.",
+        "english": "We welcome the guests."
       },
       "practiceForms": [
         "present",
@@ -12667,10 +12396,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -12779,8 +12505,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute informieren.",
-        "english": "I would like to inform today."
+        "german": "Ich informiere dich morgen.",
+        "english": "I will inform you tomorrow."
       },
       "practiceForms": [
         "present",
@@ -12791,8 +12517,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -12895,8 +12619,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute leiten.",
-        "english": "I would like to lead today."
+        "german": "Er leitet eine kleine Firma.",
+        "english": "He runs a small company."
       },
       "practiceForms": [
         "present",
@@ -12906,10 +12630,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -13010,8 +12731,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute verdienen.",
-        "english": "I would like to earn today."
+        "german": "Du verdienst genug Geld.",
+        "english": "You earn enough money."
       },
       "practiceForms": [
         "present",
@@ -13021,10 +12742,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -13126,8 +12844,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute zurückrufen.",
-        "english": "I would like to call back today."
+        "german": "Ich rufe dich später zurück.",
+        "english": "I'll call you back later."
       },
       "practiceForms": [
         "present",
@@ -13138,9 +12856,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -13241,8 +12957,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute trainieren.",
-        "english": "I would like to train today."
+        "german": "Wir trainieren zweimal pro Woche.",
+        "english": "We train twice a week."
       },
       "practiceForms": [
         "present",
@@ -13252,10 +12968,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -13357,8 +13070,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute beachten.",
-        "english": "I would like to pay attention to today."
+        "german": "Ihr beachtet die Regeln.",
+        "english": "You pay attention to the rules."
       },
       "practiceForms": [
         "present",
@@ -13368,10 +13081,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -13472,8 +13182,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute erwarten.",
-        "english": "I would like to expect today."
+        "german": "Ich erwarte einen wichtigen Anruf.",
+        "english": "I am expecting an important call."
       },
       "practiceForms": [
         "present",
@@ -13483,10 +13193,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -13588,8 +13295,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute stürzen.",
-        "english": "I would like to fall today."
+        "german": "Er stürzt mit dem Fahrrad.",
+        "english": "He falls off his bike."
       },
       "practiceForms": [
         "present",
@@ -13599,10 +13306,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -13703,8 +13407,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute entspannen.",
-        "english": "I would like to relax today."
+        "german": "Ich entspanne im Garten.",
+        "english": "I relax in the garden."
       },
       "practiceForms": [
         "present",
@@ -13714,10 +13418,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -13818,8 +13519,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute verlieren.",
-        "english": "I would like to lose today."
+        "german": "Du verlierst oft deine Handschuhe.",
+        "english": "You often lose your gloves."
       },
       "practiceForms": [
         "present",
@@ -13829,10 +13530,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -13933,8 +13631,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute shoppen.",
-        "english": "I would like to shop today."
+        "german": "Wir shoppen gern in der Stadt.",
+        "english": "We like shopping in town."
       },
       "practiceForms": [
         "present",
@@ -13944,10 +13642,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -14048,8 +13743,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute übersetzen.",
-        "english": "I would like to translate today."
+        "german": "Ich übersetze den Text ins Englische.",
+        "english": "I translate the text into English."
       },
       "practiceForms": [
         "present",
@@ -14059,10 +13754,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -14164,8 +13856,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute abholen.",
-        "english": "I would like to pick up today."
+        "german": "Ich hole dich am Bahnhof ab.",
+        "english": "I'll pick you up at the station."
       },
       "practiceForms": [
         "present",
@@ -14176,9 +13868,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -14280,8 +13970,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute absagen.",
-        "english": "I would like to cancel today."
+        "german": "Er sagt den Termin ab.",
+        "english": "He cancels the appointment."
       },
       "practiceForms": [
         "present",
@@ -14292,9 +13982,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -14396,8 +14084,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute ablehnen.",
-        "english": "I would like to decline today."
+        "german": "Wir lehnen das Angebot ab.",
+        "english": "We decline the offer."
       },
       "practiceForms": [
         "present",
@@ -14408,9 +14096,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -14512,8 +14198,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute anbieten.",
-        "english": "I would like to offer today."
+        "german": "Ich biete dir einen Tee an.",
+        "english": "I offer you a tea."
       },
       "practiceForms": [
         "present",
@@ -14524,9 +14210,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -14629,8 +14313,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute anfangen.",
-        "english": "I would like to begin today."
+        "german": "Wir fangen morgen früh an.",
+        "english": "We start early tomorrow."
       },
       "practiceForms": [
         "present",
@@ -14641,9 +14325,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -14745,8 +14427,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute ankommen.",
-        "english": "I would like to arrive today."
+        "german": "Er kommt um acht Uhr an.",
+        "english": "He arrives at eight o'clock."
       },
       "practiceForms": [
         "present",
@@ -14757,9 +14439,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -14862,8 +14542,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute annehmen.",
-        "english": "I would like to accept today."
+        "german": "Ich nehme das Geschenk gern an.",
+        "english": "I gladly accept the present."
       },
       "practiceForms": [
         "present",
@@ -14874,9 +14554,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -14977,8 +14655,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute anprobieren.",
-        "english": "I would like to try on today."
+        "german": "Du probierst die Jacke an.",
+        "english": "You try on the jacket."
       },
       "practiceForms": [
         "present",
@@ -14989,9 +14667,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -15096,8 +14772,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute anrufen.",
-        "english": "I would like to call today."
+        "german": "Ich rufe meine Oma an.",
+        "english": "I call my grandma."
       },
       "practiceForms": [
         "present",
@@ -15109,7 +14785,6 @@
         "pastParticiple",
         "auxiliary",
         "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -15212,8 +14887,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute anschauen.",
-        "english": "I would like to look at today."
+        "german": "Wir schauen die Fotos an.",
+        "english": "We look at the photos."
       },
       "practiceForms": [
         "present",
@@ -15224,9 +14899,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -15329,8 +15002,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute ansehen.",
-        "english": "I would like to look at today."
+        "german": "Er sieht das Bild lange an.",
+        "english": "He looks at the picture for a long time."
       },
       "practiceForms": [
         "present",
@@ -15341,9 +15014,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -15457,8 +15128,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte mich für den Kurs anmelden.",
-        "english": "I would like to register for the course."
+        "german": "Ich melde mich für den Kurs an.",
+        "english": "I register for the course."
       },
       "practiceForms": [
         "present",
@@ -15588,8 +15259,7 @@
         "pastParticiple",
         "auxiliary",
         "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "reflexivePattern"
       ],
       "strictness": {
         "capitalization": true,
@@ -15691,8 +15361,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute aufhören.",
-        "english": "I would like to stop today."
+        "german": "Ich höre jetzt mit der Arbeit auf.",
+        "english": "I am stopping work now."
       },
       "practiceForms": [
         "present",
@@ -15703,9 +15373,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -15807,8 +15475,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute aufpassen.",
-        "english": "I would like to pay attention today."
+        "german": "Ihr passt im Unterricht gut auf.",
+        "english": "You pay close attention in class."
       },
       "practiceForms": [
         "present",
@@ -15819,9 +15487,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -15922,8 +15588,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute aufräumen.",
-        "english": "I would like to tidy up today."
+        "german": "Ich räume mein Zimmer auf.",
+        "english": "I tidy up my room."
       },
       "practiceForms": [
         "present",
@@ -15934,9 +15600,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -16038,8 +15702,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute aufschreiben.",
-        "english": "I would like to write down today."
+        "german": "Er schreibt die Telefonnummer auf.",
+        "english": "He writes down the phone number."
       },
       "practiceForms": [
         "present",
@@ -16050,9 +15714,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -16153,8 +15815,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute ausdrucken.",
-        "english": "I would like to print out today."
+        "german": "Ich drucke das Ticket aus.",
+        "english": "I print out the ticket."
       },
       "practiceForms": [
         "present",
@@ -16165,9 +15827,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -16269,8 +15929,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute ausfüllen.",
-        "english": "I would like to fill in today."
+        "german": "Du füllst das Formular aus.",
+        "english": "You fill in the form."
       },
       "practiceForms": [
         "present",
@@ -16281,9 +15941,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -16398,8 +16056,7 @@
         "pastParticiple",
         "auxiliary",
         "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "reflexivePattern"
       ],
       "strictness": {
         "capitalization": true,
@@ -16502,8 +16159,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute aussprechen.",
-        "english": "I would like to pronounce today."
+        "german": "Er spricht das Wort richtig aus.",
+        "english": "He pronounces the word correctly."
       },
       "practiceForms": [
         "present",
@@ -16514,9 +16171,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -16619,8 +16274,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute aussteigen.",
-        "english": "I would like to get out today."
+        "german": "Wir steigen am Hauptbahnhof aus.",
+        "english": "We get off at the main station."
       },
       "practiceForms": [
         "present",
@@ -16631,9 +16286,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -16734,8 +16387,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute backen.",
-        "english": "I would like to bake today."
+        "german": "Ich backe einen Kuchen.",
+        "english": "I am baking a cake."
       },
       "practiceForms": [
         "present",
@@ -16745,10 +16398,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -16850,8 +16500,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute baden.",
-        "english": "I would like to bathe today."
+        "german": "Wir baden im See.",
+        "english": "We bathe in the lake."
       },
       "practiceForms": [
         "present",
@@ -16861,10 +16511,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -16965,8 +16612,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute bauen.",
-        "english": "I would like to build today."
+        "german": "Er baut ein Haus.",
+        "english": "He is building a house."
       },
       "practiceForms": [
         "present",
@@ -16976,10 +16623,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -17081,8 +16725,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute beantworten.",
-        "english": "I would like to answer today."
+        "german": "Ich beantworte alle Fragen.",
+        "english": "I answer all the questions."
       },
       "practiceForms": [
         "present",
@@ -17092,10 +16736,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -17196,8 +16837,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Was bedeutet dieses Wort?",
-        "english": "What does this word mean?"
+        "german": "Es bedeutet mir sehr viel.",
+        "english": "It means a lot to me."
       },
       "practiceForms": [
         "present",
@@ -17207,10 +16848,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -17311,8 +16949,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute benutzen.",
-        "english": "I would like to use today."
+        "german": "Du benutzt mein Handy.",
+        "english": "You are using my phone."
       },
       "practiceForms": [
         "present",
@@ -17322,10 +16960,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -17427,8 +17062,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute besichtigen.",
-        "english": "I would like to visit today."
+        "german": "Wir besichtigen heute das Museum.",
+        "english": "We are visiting the museum today."
       },
       "practiceForms": [
         "present",
@@ -17438,10 +17073,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -17544,8 +17176,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute besuchen.",
-        "english": "I would like to visit today."
+        "german": "Ich besuche am Sonntag meine Eltern.",
+        "english": "I visit my parents on Sunday."
       },
       "practiceForms": [
         "present",
@@ -17556,8 +17188,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -17659,8 +17289,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute buchen.",
-        "english": "I would like to book today."
+        "german": "Er bucht ein Hotelzimmer.",
+        "english": "He books a hotel room."
       },
       "practiceForms": [
         "present",
@@ -17670,10 +17300,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -17774,8 +17401,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute drucken.",
-        "english": "I would like to print today."
+        "german": "Ich drucke die Fotos.",
+        "english": "I print the photos."
       },
       "practiceForms": [
         "present",
@@ -17785,10 +17412,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -17890,8 +17514,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute drücken.",
-        "english": "I would like to press today."
+        "german": "Du drückst den grünen Knopf.",
+        "english": "You press the green button."
       },
       "practiceForms": [
         "present",
@@ -17901,10 +17525,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -18006,8 +17627,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute einladen.",
-        "english": "I would like to invite today."
+        "german": "Ich lade dich zum Essen ein.",
+        "english": "I invite you for a meal."
       },
       "practiceForms": [
         "present",
@@ -18018,9 +17639,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -18121,8 +17740,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute empfehlen.",
-        "english": "I would like to recommend today."
+        "german": "Er empfiehlt ein gutes Restaurant.",
+        "english": "He recommends a good restaurant."
       },
       "practiceForms": [
         "present",
@@ -18132,10 +17751,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -18237,8 +17853,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute ergänzen.",
-        "english": "I would like to complete today."
+        "german": "Ihr ergänzt die Sätze.",
+        "english": "You complete the sentences."
       },
       "practiceForms": [
         "present",
@@ -18248,10 +17864,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -18352,8 +17965,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute erklären.",
-        "english": "I would like to explain today."
+        "german": "Ich erkläre dir die Aufgabe.",
+        "english": "I explain the task to you."
       },
       "practiceForms": [
         "present",
@@ -18363,10 +17976,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -18410,10 +18020,10 @@
       "forms": {
         "present": {
           "ich": "eröffne",
-          "du": "eröffnst",
+          "du": "eröffnest",
           "erSieEs": "eröffnet",
           "wir": "eröffnen",
-          "ihr": "eröffnt",
+          "ihr": "eröffnet",
           "sieSie": "eröffnen"
         },
         "simplePast": {
@@ -18442,8 +18052,8 @@
         },
         "imperative": {
           "available": true,
-          "du": "eröffn",
-          "ihr": "eröffnt",
+          "du": "eröffne",
+          "ihr": "eröffnet",
           "Sie": "eröffnen Sie",
           "reason": null
         },
@@ -18468,8 +18078,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute eröffnen.",
-        "english": "I would like to open today."
+        "german": "Er eröffnet ein Café.",
+        "english": "He is opening a café."
       },
       "practiceForms": [
         "present",
@@ -18479,10 +18089,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -18584,8 +18191,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute fertigmachen.",
-        "english": "I would like to finish today."
+        "german": "Ich mache die Hausaufgaben fertig.",
+        "english": "I finish my homework."
       },
       "practiceForms": [
         "present",
@@ -18596,9 +18203,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -18699,8 +18304,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute fliegen.",
-        "english": "I would like to fly today."
+        "german": "Wir fliegen im Sommer nach Spanien.",
+        "english": "We fly to Spain in summer."
       },
       "practiceForms": [
         "present",
@@ -18710,10 +18315,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -18826,10 +18428,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -18930,8 +18529,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute gewinnen.",
-        "english": "I would like to win today."
+        "german": "Er gewinnt das Spiel.",
+        "english": "He wins the game."
       },
       "practiceForms": [
         "present",
@@ -18941,10 +18540,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -19053,8 +18649,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute gratulieren.",
-        "english": "I would like to congratulate today."
+        "german": "Ich gratuliere dir zum Geburtstag.",
+        "english": "I wish you a happy birthday."
       },
       "practiceForms": [
         "present",
@@ -19065,8 +18661,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -19169,8 +18763,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute grillen.",
-        "english": "I would like to barbecue today."
+        "german": "Wir grillen am Wochenende im Garten.",
+        "english": "We have a barbecue in the garden at the weekend."
       },
       "practiceForms": [
         "present",
@@ -19180,10 +18774,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -19285,8 +18876,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute grüßen.",
-        "english": "I would like to greet today."
+        "german": "Er grüßt die Nachbarn freundlich.",
+        "english": "He greets the neighbours in a friendly way."
       },
       "practiceForms": [
         "present",
@@ -19296,10 +18887,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -19401,8 +18989,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute heiraten.",
-        "english": "I would like to marry today."
+        "german": "Wir heiraten im Mai.",
+        "english": "We are getting married in May."
       },
       "practiceForms": [
         "present",
@@ -19412,10 +19000,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -19516,8 +19101,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute hoffen.",
-        "english": "I would like to hope today."
+        "german": "Ich hoffe auf gutes Wetter.",
+        "english": "I hope for good weather."
       },
       "practiceForms": [
         "present",
@@ -19527,10 +19112,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -19631,8 +19213,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute klicken.",
-        "english": "I would like to click today."
+        "german": "Du klickst auf den Link.",
+        "english": "You click on the link."
       },
       "practiceForms": [
         "present",
@@ -19642,10 +19224,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -19757,10 +19336,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -19861,8 +19437,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute kopieren.",
-        "english": "I would like to copy today."
+        "german": "Ich kopiere die Datei.",
+        "english": "I copy the file."
       },
       "practiceForms": [
         "present",
@@ -19872,10 +19448,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -19976,8 +19549,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute lachen.",
-        "english": "I would like to laugh today."
+        "german": "Er lacht über den Witz.",
+        "english": "He laughs at the joke."
       },
       "practiceForms": [
         "present",
@@ -19987,10 +19560,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -20093,8 +19663,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute losfahren.",
-        "english": "I would like to set off today."
+        "german": "Wir fahren um sieben Uhr los.",
+        "english": "We set off at seven o'clock."
       },
       "practiceForms": [
         "present",
@@ -20105,9 +19675,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -20210,8 +19778,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute losgehen.",
-        "english": "I would like to start today."
+        "german": "Ich gehe jetzt los.",
+        "english": "I am leaving now."
       },
       "practiceForms": [
         "present",
@@ -20222,9 +19790,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -20326,8 +19892,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute melden.",
-        "english": "I would like to report today."
+        "german": "Er meldet den Unfall der Polizei.",
+        "english": "He reports the accident to the police."
       },
       "practiceForms": [
         "present",
@@ -20337,10 +19903,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -20442,8 +20005,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute mieten.",
-        "english": "I would like to rent today."
+        "german": "Wir mieten ein Auto.",
+        "english": "We rent a car."
       },
       "practiceForms": [
         "present",
@@ -20453,10 +20016,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -20557,8 +20117,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute organisieren.",
-        "english": "I would like to organize today."
+        "german": "Ich organisiere eine Party.",
+        "english": "I am organizing a party."
       },
       "practiceForms": [
         "present",
@@ -20568,10 +20128,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -20672,8 +20229,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute parken.",
-        "english": "I would like to park today."
+        "german": "Er parkt vor dem Haus.",
+        "english": "He parks in front of the house."
       },
       "practiceForms": [
         "present",
@@ -20683,10 +20240,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -20802,8 +20356,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -20906,8 +20458,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute probieren.",
-        "english": "I would like to try today."
+        "german": "Du probierst die Suppe.",
+        "english": "You try the soup."
       },
       "practiceForms": [
         "present",
@@ -20917,10 +20469,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -21021,8 +20570,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute putzen.",
-        "english": "I would like to clean today."
+        "german": "Ich putze am Samstag die Küche.",
+        "english": "I clean the kitchen on Saturday."
       },
       "practiceForms": [
         "present",
@@ -21032,10 +20581,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -21136,8 +20682,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute rauchen.",
-        "english": "I would like to smoke today."
+        "german": "Er raucht nicht mehr.",
+        "english": "He doesn't smoke any more."
       },
       "practiceForms": [
         "present",
@@ -21147,10 +20693,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -21251,8 +20794,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute reisen.",
-        "english": "I would like to travel today."
+        "german": "Wir reisen gern nach Italien.",
+        "english": "We like travelling to Italy."
       },
       "practiceForms": [
         "present",
@@ -21262,10 +20805,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -21367,8 +20907,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute reservieren.",
-        "english": "I would like to reserve today."
+        "german": "Ich reserviere einen Tisch.",
+        "english": "I reserve a table."
       },
       "practiceForms": [
         "present",
@@ -21378,10 +20918,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -21493,10 +21030,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -21597,8 +21131,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute scannen.",
-        "english": "I would like to scan today."
+        "german": "Ich scanne den Ausweis.",
+        "english": "I scan the ID card."
       },
       "practiceForms": [
         "present",
@@ -21608,10 +21142,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -21724,10 +21255,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -21831,8 +21359,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute schicken.",
-        "english": "I would like to send today."
+        "german": "Du schickst mir eine Nachricht.",
+        "english": "You send me a message."
       },
       "practiceForms": [
         "present",
@@ -21843,8 +21371,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -21957,10 +21483,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -22062,8 +21585,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute spülen.",
-        "english": "I would like to wash up today."
+        "german": "Er spült nach dem Essen.",
+        "english": "He washes up after the meal."
       },
       "practiceForms": [
         "present",
@@ -22073,10 +21596,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -22177,8 +21697,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute starten.",
-        "english": "I would like to start today."
+        "german": "Ich starte den Computer.",
+        "english": "I start the computer."
       },
       "practiceForms": [
         "present",
@@ -22188,10 +21708,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -22305,9 +21822,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -22409,8 +21924,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute stecken.",
-        "english": "I would like to put today."
+        "german": "Ich stecke den Schlüssel in die Tasche.",
+        "english": "I put the key in my bag."
       },
       "practiceForms": [
         "present",
@@ -22420,10 +21935,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -22524,8 +22036,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute stören.",
-        "english": "I would like to disturb today."
+        "german": "Ich störe dich nicht lange.",
+        "english": "I won't disturb you for long."
       },
       "practiceForms": [
         "present",
@@ -22535,10 +22047,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -22647,8 +22156,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute teilnehmen.",
-        "english": "I would like to participate today."
+        "german": "Wir nehmen am Deutschkurs teil.",
+        "english": "We take part in the German course."
       },
       "practiceForms": [
         "present",
@@ -22660,7 +22169,6 @@
         "pastParticiple",
         "auxiliary",
         "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -22762,8 +22270,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute unterrichten.",
-        "english": "I would like to teach today."
+        "german": "Er unterrichtet Deutsch an einer Schule.",
+        "english": "He teaches German at a school."
       },
       "practiceForms": [
         "present",
@@ -22773,10 +22281,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -22877,8 +22382,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute vermissen.",
-        "english": "I would like to miss today."
+        "german": "Ich vermisse meine Familie.",
+        "english": "I miss my family."
       },
       "practiceForms": [
         "present",
@@ -22888,10 +22393,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -22966,7 +22468,7 @@
         },
         "imperative": {
           "available": true,
-          "du": "versprech",
+          "du": "versprich",
           "ihr": "versprecht",
           "Sie": "versprechen Sie",
           "reason": null
@@ -22992,8 +22494,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute versprechen.",
-        "english": "I would like to promise today."
+        "german": "Ich verspreche dir das.",
+        "english": "I promise you that."
       },
       "practiceForms": [
         "present",
@@ -23003,10 +22505,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -23108,8 +22607,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute verschicken.",
-        "english": "I would like to send today."
+        "german": "Wir verschicken die Einladungen.",
+        "english": "We send out the invitations."
       },
       "practiceForms": [
         "present",
@@ -23119,10 +22618,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -23223,8 +22719,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute verschreiben.",
-        "english": "I would like to prescribe today."
+        "german": "Er verschreibt mir ein Medikament.",
+        "english": "He prescribes me a medicine."
       },
       "practiceForms": [
         "present",
@@ -23234,10 +22730,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -23339,8 +22832,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute vorstellen.",
-        "english": "I would like to introduce today."
+        "german": "Ich stelle dir meine Freundin vor.",
+        "english": "I introduce my friend to you."
       },
       "practiceForms": [
         "present",
@@ -23351,9 +22844,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -23454,8 +22945,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute vorbereiten.",
-        "english": "I would like to prepare today."
+        "german": "Wir bereiten das Essen vor.",
+        "english": "We prepare the food."
       },
       "practiceForms": [
         "present",
@@ -23466,9 +22957,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -23571,8 +23060,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute vorbeikommen.",
-        "english": "I would like to come by today."
+        "german": "Ich komme morgen vorbei.",
+        "english": "I'll come by tomorrow."
       },
       "practiceForms": [
         "present",
@@ -23583,9 +23072,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -23704,8 +23191,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -23809,8 +23294,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute weiterfahren.",
-        "english": "I would like to continue travelling today."
+        "german": "Wir fahren nach der Pause weiter.",
+        "english": "We continue our journey after the break."
       },
       "practiceForms": [
         "present",
@@ -23821,9 +23306,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -23926,8 +23409,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute wiederkommen.",
-        "english": "I would like to come back today."
+        "german": "Er kommt nächste Woche wieder.",
+        "english": "He is coming back next week."
       },
       "practiceForms": [
         "present",
@@ -23938,9 +23421,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -24052,10 +23533,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -24154,7 +23632,10 @@
         "infinitiveWithZu": "zu hängen",
         "thirdPersonPresent": "hängt"
       },
-      "specialA1Forms": {},
+      "specialA1Forms": {
+        "alternativeSimplePast": "hängte",
+        "alternativePastParticiple": "gehängt"
+      },
       "example": {
         "german": "Die Jacke hängt an der Wand.",
         "english": "The jacket is hanging on the wall."
@@ -24167,10 +23648,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -24272,8 +23750,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute legen.",
-        "english": "I would like to lay today."
+        "german": "Ich lege das Buch auf den Tisch.",
+        "english": "I put the book on the table."
       },
       "practiceForms": [
         "present",
@@ -24283,10 +23761,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -24399,9 +23874,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "reflexivePattern"
       ],
       "strictness": {
         "capitalization": true,
@@ -24520,7 +23993,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -24646,7 +24118,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -24751,8 +24222,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute abfahren.",
-        "english": "I would like to depart today."
+        "german": "Wir fahren um zehn Uhr ab.",
+        "english": "We depart at ten o'clock."
       },
       "practiceForms": [
         "present",
@@ -24763,9 +24234,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -24868,8 +24337,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute abgeben.",
-        "english": "I would like to hand in today."
+        "german": "Ihr gebt die Tests heute ab.",
+        "english": "You hand in the tests today."
       },
       "practiceForms": [
         "present",
@@ -24880,9 +24349,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -24983,8 +24450,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute anklicken.",
-        "english": "I would like to click on today."
+        "german": "Du klickst das Bild an.",
+        "english": "You click on the picture."
       },
       "practiceForms": [
         "present",
@@ -24995,9 +24462,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -25099,8 +24564,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute ankreuzen.",
-        "english": "I would like to tick today."
+        "german": "Ich kreuze die richtige Antwort an.",
+        "english": "I tick the correct answer."
       },
       "practiceForms": [
         "present",
@@ -25111,9 +24576,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -25215,8 +24678,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute anmachen.",
-        "english": "I would like to switch on today."
+        "german": "Er macht das Licht an.",
+        "english": "He switches on the light."
       },
       "practiceForms": [
         "present",
@@ -25227,9 +24690,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -25331,8 +24792,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute ausmachen.",
-        "english": "I would like to switch off today."
+        "german": "Ich mache den Fernseher aus.",
+        "english": "I switch off the TV."
       },
       "practiceForms": [
         "present",
@@ -25343,9 +24804,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -25462,8 +24921,7 @@
         "pastParticiple",
         "auxiliary",
         "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "reflexivePattern"
       ],
       "strictness": {
         "capitalization": true,
@@ -25566,8 +25024,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute einsteigen.",
-        "english": "I would like to get in today."
+        "german": "Wir steigen in den Bus ein.",
+        "english": "We get on the bus."
       },
       "practiceForms": [
         "present",
@@ -25578,9 +25036,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -25685,8 +25141,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute erlauben.",
-        "english": "I would like to allow today."
+        "german": "Ich erlaube dir das nicht.",
+        "english": "I don't allow you to do that."
       },
       "practiceForms": [
         "present",
@@ -25697,8 +25153,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -25815,8 +25269,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -25920,8 +25372,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute abfliegen.",
-        "english": "I would like to depart by air today."
+        "german": "Wir fliegen morgen früh ab.",
+        "english": "We fly out early tomorrow."
       },
       "practiceForms": [
         "present",
@@ -25932,9 +25384,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -26059,7 +25509,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -26176,8 +25625,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -26280,8 +25727,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute halten.",
-        "english": "I would like to hold today."
+        "german": "Er hält das Baby im Arm.",
+        "english": "He holds the baby in his arms."
       },
       "practiceForms": [
         "present",
@@ -26291,10 +25738,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -26396,8 +25840,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute kennenlernen.",
-        "english": "I would like to get to know today."
+        "german": "Ich lerne heute neue Leute kennen.",
+        "english": "I am meeting new people today."
       },
       "practiceForms": [
         "present",
@@ -26408,9 +25852,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -26512,8 +25954,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute kriegen.",
-        "english": "I would like to get today."
+        "german": "Du kriegst morgen dein Geld.",
+        "english": "You'll get your money tomorrow."
       },
       "practiceForms": [
         "present",
@@ -26523,10 +25965,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -26645,7 +26084,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -26675,9 +26113,10 @@
       "topic": "Social life",
       "frequencyBand": "A1 Core 4",
       "verbClasses": [
-        "separable"
+        "separable",
+        "mixed"
       ],
-      "regularity": "regular",
+      "regularity": "mixed",
       "separable": true,
       "prefix": "mit",
       "reflexive": {
@@ -26748,8 +26187,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute mitbringen.",
-        "english": "I would like to bring along today."
+        "german": "Ich bringe einen Kuchen mit.",
+        "english": "I am bringing a cake along."
       },
       "practiceForms": [
         "present",
@@ -26760,9 +26199,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -26864,8 +26301,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute mitkommen.",
-        "english": "I would like to come along today."
+        "german": "Er kommt heute Abend mit.",
+        "english": "He is coming along this evening."
       },
       "practiceForms": [
         "present",
@@ -26876,9 +26313,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -26980,8 +26415,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute mitmachen.",
-        "english": "I would like to join in today."
+        "german": "Wir machen beim Spiel mit.",
+        "english": "We join in the game."
       },
       "practiceForms": [
         "present",
@@ -26992,9 +26427,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -27095,8 +26528,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute reparieren.",
-        "english": "I would like to repair today."
+        "german": "Er repariert das Fahrrad.",
+        "english": "He repairs the bike."
       },
       "practiceForms": [
         "present",
@@ -27106,10 +26539,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -27211,8 +26641,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute stellen.",
-        "english": "I would like to put today."
+        "german": "Ich stelle die Flasche auf den Tisch.",
+        "english": "I put the bottle on the table."
       },
       "practiceForms": [
         "present",
@@ -27222,10 +26652,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -27326,8 +26753,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute tanzen.",
-        "english": "I would like to dance today."
+        "german": "Ihr tanzt sehr gut.",
+        "english": "You dance very well."
       },
       "practiceForms": [
         "present",
@@ -27337,10 +26764,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -27460,7 +26884,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
         "reflexivePattern",
         "caseAndPreposition"
       ],
@@ -27563,8 +26986,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute übernachten.",
-        "english": "I would like to stay overnight today."
+        "german": "Wir übernachten im Hotel.",
+        "english": "We stay overnight at the hotel."
       },
       "practiceForms": [
         "present",
@@ -27574,10 +26997,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -27681,8 +27101,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute überweisen.",
-        "english": "I would like to transfer money today."
+        "german": "Ich überweise die Miete.",
+        "english": "I transfer the rent."
       },
       "practiceForms": [
         "present",
@@ -27693,8 +27113,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -27797,8 +27215,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute umziehen.",
-        "english": "I would like to move house today."
+        "german": "Wir ziehen nächsten Monat um.",
+        "english": "We are moving house next month."
       },
       "practiceForms": [
         "present",
@@ -27809,9 +27227,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "separability"
       ],
       "strictness": {
         "capitalization": true,
@@ -27912,8 +27328,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute unterschreiben.",
-        "english": "I would like to sign today."
+        "german": "Du unterschreibst den Vertrag hier.",
+        "english": "You sign the contract here."
       },
       "practiceForms": [
         "present",
@@ -27923,10 +27339,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -28027,8 +27440,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute verkaufen.",
-        "english": "I would like to sell today."
+        "german": "Er verkauft sein altes Auto.",
+        "english": "He is selling his old car."
       },
       "practiceForms": [
         "present",
@@ -28038,10 +27451,7 @@
         "imperative",
         "konjunktivII",
         "pastParticiple",
-        "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "auxiliary"
       ],
       "strictness": {
         "capitalization": true,
@@ -28145,8 +27555,8 @@
       },
       "specialA1Forms": {},
       "example": {
-        "german": "Ich möchte heute vermieten.",
-        "english": "I would like to rent out today."
+        "german": "Wir vermieten eine kleine Wohnung.",
+        "english": "We rent out a small flat."
       },
       "practiceForms": [
         "present",
@@ -28157,8 +27567,6 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {
@@ -28273,9 +27681,7 @@
         "konjunktivII",
         "pastParticiple",
         "auxiliary",
-        "separability",
-        "reflexivePattern",
-        "caseAndPreposition"
+        "reflexivePattern"
       ],
       "strictness": {
         "capitalization": true,
@@ -28371,7 +27777,7 @@
           }
         },
         "participles": {
-          "present": "wehtund",
+          "present": "wehtuend",
           "past": "wehgetan"
         },
         "infinitiveWithZu": "wehzutun",
@@ -28392,7 +27798,6 @@
         "pastParticiple",
         "auxiliary",
         "separability",
-        "reflexivePattern",
         "caseAndPreposition"
       ],
       "strictness": {

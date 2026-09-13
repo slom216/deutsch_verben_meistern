@@ -54,8 +54,8 @@
   --color-red-700: #9d2f2f;
 
   /* --- typography ------------------------------------------------------ */
-  --font-heading: 'Heading Font', 'Inter var', 'Segoe UI', system-ui, sans-serif;
-  --font-sans: 'Body Font', 'Inter var', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-heading: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   /* Existing markup says `font-serif` for headings; keep it pointing at the
      heading family rather than editing ten call sites. */
   --font-serif: var(--font-heading);
@@ -106,12 +106,16 @@
   --radius-2xl: 16px;
   --radius-3xl: 28px;
 
-  /* --- spacing rhythm (named, alongside Tailwind's numeric scale) ------- */
-  --spacing-xs: 6px;
-  --spacing-sm: 14px;
-  --spacing-md: 28px;
-  --spacing-lg: 40px;
-  --spacing-xl: 88px;
+}
+
+/* Spacing rhythm from design.md. Deliberately not `--spacing-*`: in Tailwind v4
+   those names also resolve `max-w-sm/md/…`, shrinking them to pixels. */
+:root {
+  --rhythm-xs: 6px;
+  --rhythm-sm: 14px;
+  --rhythm-md: 28px;
+  --rhythm-lg: 40px;
+  --rhythm-xl: 88px;
 }
 
 @layer base {
@@ -123,7 +127,9 @@
     --surface-sunken: var(--color-primary-10);
     --border-subtle: var(--color-ink-200);
     --text-strong: var(--color-on-surface);
-    --text-muted: var(--color-primary-60);
+    /* Darker than design.md's primary-60 (#5f8f9f, 3.4:1) to reach WCAG AA:
+       5.0:1 on surface, 4.6:1 on surface-sunken. */
+    --text-muted: #447383;
   }
 
   /* design.md is a light-only spec; dark deepens the primary teal and flips
@@ -198,6 +204,11 @@
   }
 }
 
+/* Fade the right edge of a horizontal scroller so overflow is visible. */
+@utility fade-x-end {
+  mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent);
+}
+
 @layer utilities {
   .animate-pop {
     animation: pop 220ms cubic-bezier(0.2, 0.9, 0.3, 1.4);
@@ -265,6 +276,25 @@
   to {
     transform: translateY(-42px);
     opacity: 0;
+  }
+}
+
+@media print {
+  :root,
+  [data-theme='dark'] {
+    color-scheme: light;
+    --surface: #fff;
+    --surface-raised: #fff;
+    --surface-sunken: #fff;
+    --border-subtle: #ccc;
+    --text-strong: #000;
+    --text-muted: #333;
+  }
+
+  header,
+  footer,
+  [data-print-hidden] {
+    display: none !important;
   }
 }
 

@@ -16,12 +16,21 @@ npm run dev        # http://localhost:5173
 | `npm run dev` | Dev server with hot reload |
 | `npm run build` | Typecheck and produce a static `dist/` |
 | `npm run preview` | Serve the production build |
-| `npm test` | Full test suite (71 tests) |
+| `npm test` | Full test suite (186 tests) |
 | `npm run typecheck` | Types only |
 | `npm run validate:data` | Validate all three verb datasets |
 
 The build is static and hash-routed, so `dist/` can be dropped on any host
 without server rewrite rules.
+
+`public/_headers` sets a Content-Security-Policy (plus `nosniff` and
+`no-referrer`) for Netlify and Cloudflare Pages. Its `script-src` allows the
+inline theme script in `index.html` by hash, so **if that script changes, update
+the hash** or the theme script will be blocked:
+
+```bash
+node -e "const s=require('fs').readFileSync('index.html','utf8');console.log('sha256-'+require('crypto').createHash('sha256').update(s.match(/<script>([\s\S]*?)<\/script>/)[1]).digest('base64'))"
+```
 
 ## How it is put together
 
@@ -93,7 +102,7 @@ than raw volume.
 
 ## Testing
 
-`npm test` runs 71 tests. The substantial one drives the real generators over
+`npm test` runs 186 tests. The substantial one drives the real generators over
 all 676 real verbs and every form category — roughly 10,000 generated exercises
 — asserting that none is malformed, that every generator grades its own correct
 answer as correct, and that no distractor is secretly also a right answer.

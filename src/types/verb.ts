@@ -144,7 +144,12 @@ export interface Verb {
   specialA1Forms?: Record<string, SpecialForm>;
   specialA2Forms?: Record<string, SpecialForm>;
   specialB1Forms?: Record<string, SpecialForm>;
-  usageRestrictions?: { mostlyImpersonal?: boolean; notes?: string[] };
+  usageRestrictions?: {
+    mostlyImpersonal?: boolean;
+    /** Only the er/sie/es and sie/Sie slots exist (es lohnt sich). */
+    thirdPersonOnly?: boolean;
+    notes?: string[];
+  };
   sourceMetadata?: Record<string, unknown>;
   example: VerbExample;
   practiceForms: string[];
