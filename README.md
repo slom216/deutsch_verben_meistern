@@ -112,3 +112,8 @@ intentional content, not defects:
 
 The datasets recommend a native-speaker editorial pass before production use,
 particularly for example sentences and valency.
+
+## Disclaimer
+
+This app and its content were built with the help of AI. It may contain errors.
+Every error we identify will be fixed. If you spot one, write to hallo@deulern.com.

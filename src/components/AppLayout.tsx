@@ -179,7 +179,8 @@ export function AppLayout() {
 				<footer className="border-t border-[var(--border-subtle)] py-4">
 					<p className="mx-auto max-w-5xl px-4 text-xs text-muted">
 						676 verbs across A1–A2–B1. Everything is stored in this browser
-						only.
+						only. Built with the help of AI, so there may be errors; every
+						one we find gets fixed.
 					</p>
 				</footer>
 
