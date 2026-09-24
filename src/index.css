@@ -1,61 +1,107 @@
 @import 'tailwindcss';
 
 /*
- * Design system: design.md ("Junior Achievement SoCal"), applied literally.
- * Deep teal is the voice, yellow-lime is the single call-to-action accent,
- * containers are flat with a 1px border, actions are pills.
+ * Design system: the DeuLern poster collage, shared with deulern.com and the other
+ * DeuLern apps. Cream paper with a faint grain, black ink, signal red for actions,
+ * blue for focus and links, mustard in the art and the progress fills. Corners are
+ * trimmed paper (2–3px), not pills, and there are no shadows.
  *
- * The existing `ink-*` / `gold-*` scales are re-pointed at that palette rather
- * than renamed, so the whole app inherits the brand without touching pages.
+ * The existing `ink-*` / `gold-*` / `red-*` / `sky-*` scales and the design.md colour
+ * names are re-pointed at that palette rather than renamed, so the whole app follows
+ * without touching pages.
  */
+
+/* Body and UI text. */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('./assets/fonts/manrope-var-latin.woff2') format('woff2');
+}
+
+/* Heavy geometric sans — the big poster headlines. */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('./assets/fonts/outfit-800-latin.woff2') format('woff2');
+}
+
+/* Condensed sans — echoes the lettering printed in the art. */
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/oswald-600-latin.woff2') format('woff2');
+}
 
 /* Theme is an explicit attribute, not a media query — index.html resolves the
    system preference pre-paint and the header toggle overrides it. */
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 @theme {
-  /* --- design.md colors, verbatim ------------------------------------- */
-  --color-primary: #285f74;
-  --color-secondary: #00a0af;
-  --color-tertiary: #e6e33c;
-  --color-neutral: #ffffff;
-  --color-surface: #f6fbfc;
-  --color-on-surface: #285f74;
-  --color-error: #d64545;
-  --color-primary-60: #5f8f9f;
-  --color-primary-10: #eaf2f4;
-  --color-accent-lime: #dceb4a;
-  --color-accent-cyan: #a7e8ea;
+  /* --- the design.md names, re-pointed at the poster palette ----------- */
+  --color-primary: #141414; /* ink: text on mustard and cream fills */
+  --color-secondary: #2f5f8f; /* blue */
+  --color-tertiary: #f2a82c; /* mustard */
+  --color-neutral: #fbf5ea; /* cream: text on red, the pressed segment */
+  --color-surface: #e6ddcc; /* paper */
+  --color-on-surface: #141414;
+  --color-error: #c63f1e;
+  --color-primary-60: #7a7163;
+  --color-primary-10: #ddd3c0; /* hover tint */
 
-  /* --- ink = the primary teal ramp (50 = surface … 900 = primary) ------ */
-  --color-ink-50: #f6fbfc;
-  --color-ink-100: #eaf2f4;
-  --color-ink-200: #d3e4e9;
-  --color-ink-300: #a9c6cf;
-  --color-ink-400: #7fa7b4;
-  --color-ink-500: #5f8f9f;
-  --color-ink-600: #4a7a8b;
-  --color-ink-700: #3a6c7e;
-  --color-ink-800: #2f6577;
-  --color-ink-900: #285f74;
-  --color-ink-950: #1c4453;
+  /* Poster constants. */
+  --color-poster-red: #c63f1e; /* action red: cream text 4.7:1 */
+  --color-poster-blue: #2f5f8f;
+  --color-poster-sky: #3b7dd8; /* the art's blue, decoration only */
 
-  /* --- gold = the tertiary yellow-lime accent -------------------------- */
-  --color-gold-300: #f0f29b;
-  --color-gold-400: #dceb4a;
-  --color-gold-500: #e6e33c;
-  --color-gold-600: #cbc82a;
-  --color-gold-700: #7f7d13;
+  /* --- ink = warm paper-to-ink ramp (50 = light paper … 950 = night paper) */
+  --color-ink-50: #efe8db;
+  --color-ink-100: #ddd3c0;
+  --color-ink-200: #d3c9b6;
+  --color-ink-300: #bfb49f;
+  --color-ink-400: #9c9281;
+  --color-ink-500: #7a7163;
+  --color-ink-600: #5c554b;
+  --color-ink-700: #3a352e;
+  --color-ink-800: #2e2a25;
+  --color-ink-900: #25221e;
+  --color-ink-950: #1c1a17;
 
-  /* Validation red is design.md's restrained error, not Tailwind's. */
-  --color-red-400: #e88b8b;
-  --color-red-500: #d64545;
-  --color-red-600: #c33a3a;
-  --color-red-700: #9d2f2f;
+  /* --- gold = mustard; 600/700 are burnt ochre, dark enough for text -- */
+  --color-gold-300: #f7cf85;
+  --color-gold-400: #f5b94f;
+  --color-gold-500: #f2a82c;
+  --color-gold-600: #8a5800;
+  --color-gold-700: #6b4400;
+
+  /* Red is the poster's action red, also used for wrong answers. */
+  --color-red-300: #f2a58f;
+  --color-red-400: #e8603f;
+  --color-red-500: #c63f1e;
+  --color-red-600: #a8341a;
+  --color-red-700: #8a2a14;
+
+  /* Violet has no place on the poster; its chips take the red family instead. */
+  --color-violet-300: #f2a58f;
+  --color-violet-500: #c63f1e;
+  --color-violet-700: #8a2a14;
+
+  /* Sky is the art's blue. */
+  --color-sky-300: #8fb3dc;
+  --color-sky-500: #3b7dd8;
+  --color-sky-700: #2f5f8f;
 
   /* --- typography ------------------------------------------------------ */
-  --font-heading: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: 'Outfit', 'Futura', 'Century Gothic', system-ui, sans-serif;
+  --font-cond: 'Oswald', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+  --font-sans:
+    'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
   /* Existing markup says `font-serif` for headings; keep it pointing at the
      heading family rather than editing ten call sites. */
   --font-serif: var(--font-heading);
@@ -93,19 +139,18 @@
   --text-label-sm--letter-spacing: 0.04em;
   --text-nav-link: 14px;
   --text-nav-link--line-height: 16px;
-  --text-nav-link--font-weight: 700;
+  --text-nav-link--font-weight: 500;
   --text-button: 17px;
   --text-button--line-height: 20px;
   --text-button--font-weight: 700;
 
-  /* --- shape: design.md's rounded scale -------------------------------- */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-xl: 28px;
-  --radius-2xl: 16px;
-  --radius-3xl: 28px;
-
+  /* --- shape: trimmed paper. `rounded-full` stays for bars, dots, pills. */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 3px;
+  --radius-xl: 4px;
+  --radius-2xl: 3px;
+  --radius-3xl: 4px;
 }
 
 /* Spacing rhythm from design.md. Deliberately not `--spacing-*`: in Tailwind v4
@@ -116,54 +161,64 @@
   --rhythm-md: 28px;
   --rhythm-lg: 40px;
   --rhythm-xl: 88px;
+
+  /* The page is one poster sheet. The art is cut at native size from a 1536px
+     mockup whose content runs ~1340px wide; past 1440px it sits on a darker table. */
+  --sheet: 1440px;
+
+  /* Paper grain, as on deulern.com. The dark one is lifted to pale fibres. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .94 0 0 0 0 .88 0 0 0 0 .78 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @layer base {
+  /* One set of semantic tokens; `light-dark()` follows the color-scheme that the
+     data-theme attribute pins. */
   :root {
     color-scheme: light;
 
-    --surface: var(--color-surface);
-    --surface-raised: var(--color-neutral);
-    --surface-sunken: var(--color-primary-10);
-    --border-subtle: var(--color-ink-200);
-    --text-strong: var(--color-on-surface);
-    /* Darker than design.md's primary-60 (#5f8f9f, 3.4:1) to reach WCAG AA:
-       5.0:1 on surface, 4.6:1 on surface-sunken. */
-    --text-muted: #447383;
+    --table: light-dark(#cfc4ae, #100f0d);
+    --surface: light-dark(#e6ddcc, #1c1a17);
+    --surface-raised: light-dark(#efe8db, #25221e);
+    --surface-sunken: light-dark(#ddd3c0, #2e2a25);
+    --border-subtle: light-dark(#14141466, #efe6d666);
+    --rule: light-dark(#14141480, #efe6d680);
+    --track: light-dark(#d3c9b6, #3a352e);
+    --text-strong: light-dark(#141414, #efe6d6);
+    --text-muted: light-dark(#3f3a33, #b8ad9a);
+    --link: light-dark(#2f5f8f, #8fb3dc);
+    /* The red phrase in a poster headline. Large text only in dark. */
+    --headline-accent: light-dark(#c63f1e, #e8603f);
+    --paper-grain: var(--grain);
   }
 
-  /* design.md is a light-only spec; dark deepens the primary teal and flips
-     surface and on-surface, keeping the same hue family. */
   [data-theme='dark'] {
     color-scheme: dark;
-
-    --surface: #143844;
-    --surface-raised: #1c4453;
-    --surface-sunken: #0f2c36;
-    --border-subtle: #2f6577;
-    --text-strong: var(--color-surface);
-    --text-muted: #a9c6cf;
+    --paper-grain: var(--grain-dark);
   }
 
   html {
     -webkit-text-size-adjust: 100%;
+    /* The table the poster sheet lies on; only shows past --sheet. */
+    background: var(--table);
   }
 
   body {
-    margin: 0;
-    background: var(--surface);
+    margin: 0 auto;
+    max-width: var(--sheet);
+    overflow-x: clip; /* edge art bleeds to the sheet edge, never past it */
+    background: var(--surface) var(--paper-grain);
     color: var(--text-strong);
     font-family: var(--font-sans);
-    font-feature-settings: 'cv02', 'cv03', 'cv04';
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
 
-  /* Anything focusable gets a visible ring — this app is heavily keyboard
-     driven. Clarity through the secondary aqua, not a glow. */
+  /* Anything focusable gets a visible ring — this app is heavily keyboard driven. */
   :focus-visible {
-    outline: 2px solid var(--color-secondary);
-    outline-offset: 2px;
+    outline: 3px solid var(--link);
+    outline-offset: 3px;
     border-radius: var(--radius-sm);
   }
 
@@ -190,6 +245,19 @@
     color: var(--text-muted);
   }
 
+  /* A link styled as a button that takes the learner somewhere carries the poster's
+     arrow. Drawn as a mask rather than the → glyph, which sits low in Manrope. */
+  .btn-arrow::after {
+    content: '';
+    flex: none;
+    width: 20px;
+    height: 15px;
+    margin-left: 4px;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath d='M0 7h15M10 1.5 15.5 7 10 12.5' fill='none' stroke='black' stroke-width='2.2'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
   /* The answer field: large, centred, for careful spelling. Understated, with
      focus emphasised through border colour. */
   .answer-input {
@@ -199,7 +267,7 @@
   }
 
   .answer-input:focus {
-    border-color: var(--color-secondary);
+    border-color: var(--link);
     outline: none;
   }
 }
@@ -284,6 +352,7 @@
   [data-theme='dark'] {
     color-scheme: light;
     --surface: #fff;
+    --paper-grain: none;
     --surface-raised: #fff;
     --surface-sunken: #fff;
     --border-subtle: #ccc;

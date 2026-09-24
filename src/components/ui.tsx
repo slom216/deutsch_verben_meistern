@@ -9,22 +9,23 @@ export function cx(...parts: Array<string | false | null | undefined>): string {
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
-/* design.md: flat fills, teal text, no shadows; emphasis comes from colour. */
+/* Poster buttons: flat, square-cut, no shadows. Red is the one action colour;
+   secondary is an ink outline on the lighter cream. */
 const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
   primary:
-    'bg-tertiary text-primary hover:bg-gold-600 active:bg-gold-600 disabled:bg-ink-200 dark:disabled:bg-ink-700 disabled:text-ink-500',
+    'bg-poster-red text-neutral font-bold hover:bg-red-600 active:bg-red-600 disabled:bg-ink-200 dark:disabled:bg-ink-700 disabled:text-ink-500',
   secondary:
-    'surface-card hover:bg-primary-10 dark:hover:bg-ink-800 disabled:opacity-50',
+    'bg-[var(--surface-raised)] border-2 border-[var(--text-strong)] font-bold hover:bg-[var(--text-strong)] hover:text-[var(--surface)] disabled:opacity-50',
   ghost: 'hover:bg-primary-10 dark:hover:bg-ink-800 disabled:opacity-50',
   danger: 'bg-error text-neutral hover:bg-red-700 active:bg-red-700 disabled:opacity-50',
 };
 
-/* Pill actions. `lg` is design.md's button-primary (56px), `md` its
-   button-secondary (48px), `sm` a compact variant of the same shape. */
+/* Trimmed-paper corners. `lg` is the page's main action (56px), `md` 48px, `sm` a
+   compact variant of the same shape. */
 const BUTTON_SIZES: Record<ButtonSize, string> = {
-  sm: 'px-4 py-1.5 text-label-md rounded-full',
-  md: 'h-12 px-6 py-3 text-button rounded-full',
-  lg: 'h-14 px-7 py-3.5 text-button rounded-full',
+  sm: 'px-4 py-1.5 text-label-md rounded-md',
+  md: 'h-12 px-6 py-3 text-button rounded-md',
+  lg: 'h-14 px-7 py-3.5 text-body-lg font-bold rounded-md',
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -133,7 +134,7 @@ export function ProgressBar({
   };
   return (
     <div
-      className={cx('h-2 w-full overflow-hidden rounded-full bg-ink-200 dark:bg-ink-800', className)}
+      className={cx('h-2 w-full overflow-hidden rounded-full bg-[var(--track)]', className)}
       role="progressbar"
       aria-valuenow={Math.round(percent)}
       aria-valuemin={0}
@@ -207,7 +208,7 @@ export function Segmented<T extends string>({
   size?: 'sm' | 'md';
 }) {
   return (
-    <div className="inline-flex rounded-full bg-primary-10 dark:bg-ink-800 p-0.5">
+    <div className="inline-flex rounded-md bg-primary-10 dark:bg-ink-800 p-0.5">
       {options.map((option) => (
         <button
           key={option.value}
@@ -215,7 +216,7 @@ export function Segmented<T extends string>({
           onClick={() => onChange(option.value)}
           aria-pressed={value === option.value}
           className={cx(
-            'rounded-full font-medium transition-colors',
+            'rounded-sm font-medium transition-colors',
             size === 'sm' ? 'px-3 py-1 text-xs' : 'px-4 py-1.5 text-sm',
             value === option.value
               ? 'bg-neutral text-primary dark:bg-ink-950 dark:text-ink-50'
@@ -248,7 +249,12 @@ export function Stat({
   return (
     <div>
       <div className="text-xs uppercase tracking-wide text-muted">{label}</div>
-      <div className={cx('text-2xl font-semibold tabular-nums mt-0.5', tone && tones[tone])}>
+      <div
+        className={cx(
+          'font-heading text-3xl font-extrabold tabular-nums mt-0.5',
+          tone && tones[tone],
+        )}
+      >
         {value}
       </div>
       {hint && <div className="text-xs text-muted mt-0.5">{hint}</div>}
