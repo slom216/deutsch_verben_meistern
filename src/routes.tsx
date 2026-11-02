@@ -5,7 +5,7 @@ import { DashboardPage } from './pages/DashboardPage';
 
 /**
  * Route table, kept separate from the router itself so the application can be
- * mounted under a hash router in the browser and a memory router in tests.
+ * mounted under a browser router in the browser and a memory router in tests.
  * There are no loaders or actions, so the plain routing API is all we need.
  */
 

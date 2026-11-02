@@ -19,7 +19,7 @@ beforeEach(() => {
   useProgress.getState().resetProgress();
   useGamification.getState().resetGamification();
   useSettings.getState().resetToDefaults();
-  window.location.hash = '#/';
+  window.history.replaceState(null, '', '/');
 });
 
 afterEach(cleanup);
@@ -300,5 +300,13 @@ describe('settings drive practice', () => {
 
     fireEvent.click(screen.getByRole('link', { name: /Practice/ }));
     expect(await screen.findByText('No verbs match your filters')).toBeTruthy();
+  });
+});
+
+describe('shared verb links', () => {
+  it('opens a verb whose level the visitor has not enabled', async () => {
+    window.history.replaceState(null, '', '/library/b1v-348-ueberzeugen');
+    render(<App />);
+    expect(await screen.findByRole('heading', { name: '(sich) überzeugen' }, LAZY)).toBeTruthy();
   });
 });

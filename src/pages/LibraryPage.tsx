@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useVerbs } from '@/hooks/useVerbs';
 import { searchVerbs } from '@/lib/filters';
-import { PERSONS, PERSON_LABELS, specialForms, type Verb } from '@/types/verb';
-import { availableCategories } from '@/data/verbRepository';
+import { CEFR_LEVELS, PERSONS, PERSON_LABELS, specialForms, type CefrLevel, type Verb } from '@/types/verb';
+import { availableCategories, loadLevel } from '@/data/verbRepository';
 import { FORM_CATEGORY_META } from '@/types/formCategory';
 import { makeCardId, formatInterval, type CardRecord } from '@/lib/srs';
 import { slotsFor } from '@/exercises/formAccess';
@@ -23,9 +23,26 @@ export function LibraryPage() {
   const [query, setQuery] = useState('');
 
   const results = useMemo(() => searchVerbs(filtered, query), [filtered, query]);
-  const selected = verbId ? byId.get(verbId) : undefined;
 
-  if (loading) return <Spinner label="Loading verbs…" />;
+  // A shared link can name a verb outside the visitor's enabled levels: fetch its
+  // level from the id prefix ("b1v-…") so the link still opens the verb.
+  const [outside, setOutside] = useState<{ id: string; verb?: Verb }>();
+  const inPool = verbId ? byId.get(verbId) : undefined;
+  useEffect(() => {
+    if (!verbId || loading || inPool) return;
+    const level = verbId.slice(0, 2).toUpperCase() as CefrLevel;
+    if (!CEFR_LEVELS.includes(level)) return setOutside({ id: verbId });
+    let cancelled = false;
+    loadLevel(level)
+      .then((verbs) => !cancelled && setOutside({ id: verbId, verb: verbs.find((v) => v.id === verbId) }))
+      .catch(() => !cancelled && setOutside({ id: verbId }));
+    return () => {
+      cancelled = true;
+    };
+  }, [verbId, loading, inPool]);
+  const selected = inPool ?? (outside?.id === verbId ? outside?.verb : undefined);
+
+  if (loading || (verbId && !inPool && outside?.id !== verbId)) return <Spinner label="Loading verbs…" />;
 
   if (selected) {
     return <VerbDetail verb={selected} onBack={() => navigate('/library')} />;
@@ -42,7 +59,7 @@ export function LibraryPage() {
 
       {verbId && (
         <p role="alert" className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-300">
-          Verb not found: there is no “{verbId}” in your current pool. Pick one from the list below.
+          Verb not found: there is no verb “{verbId}”. Pick one from the list below.
         </p>
       )}
 
@@ -148,6 +165,15 @@ function VerbDetail({ verb, onBack }: { verb: Verb; onBack: () => void }) {
   const mastery = useVerbMastery(verb);
   const categories = availableCategories(verb);
   const extras = specialForms(verb);
+
+  // Mounts after the route's generic "Verbs" title, so this one wins; restored on leave.
+  useEffect(() => {
+    const previous = document.title;
+    document.title = `${verb.dictionaryForm} conjugation · Deutsch Verben Meister`;
+    return () => {
+      document.title = previous;
+    };
+  }, [verb.dictionaryForm]);
 
   return (
     <div className="space-y-4">

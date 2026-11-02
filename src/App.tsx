@@ -1,21 +1,21 @@
 import { Suspense } from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './routes';
 import { Spinner } from './components/ui';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 /**
- * Hash routing keeps the app deployable as static files from any path without
- * server rewrite rules.
+ * Path routing, so every verb has its own crawlable URL. The host must serve
+ * index.html for unknown paths (Cloudflare Pages does when there is no 404.html).
  */
 export function App() {
   return (
     <ErrorBoundary>
-      <HashRouter>
+      <BrowserRouter>
         <Suspense fallback={<Spinner />}>
           <AppRoutes />
         </Suspense>
-      </HashRouter>
+      </BrowserRouter>
     </ErrorBoundary>
   );
 }
