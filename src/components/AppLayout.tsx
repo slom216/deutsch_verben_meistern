@@ -20,6 +20,13 @@ const NAV_ITEMS = [
   { to: '/settings', label: 'Settings', icon: '⚙️' },
 ];
 
+/** The other apps in the suite. External, so they stay plain anchors. */
+const DEULERN_APPS = [
+  { href: 'https://grammatik.deulern.com', label: 'Grammatik mit System' },
+  { href: 'https://wortschatz.deulern.com', label: 'Deutsch Wortschatz' },
+  { href: 'https://lese.deulern.com', label: 'Lese Reise' },
+];
+
 function RankPill() {
   const xp = useGamification((state) => state.xp);
   const rank = rankForXp(xp);
@@ -191,6 +198,13 @@ export function AppLayout() {
                 Cookies
               </a>
             </p>
+            <nav aria-label="Other DeuLern apps" className="flex flex-wrap gap-x-4 gap-y-1 text-xs" data-print-hidden>
+              {DEULERN_APPS.map((app) => (
+                <a key={app.href} href={app.href} className="text-muted hover:text-[var(--headline-accent)]">
+                  {app.label}
+                </a>
+              ))}
+            </nav>
           </div>
         </div>
         {/* Decoration, rising out of the sheet's bottom-right corner behind the page. */}

@@ -39,6 +39,13 @@ Verb content is kept completely separate from interface code. The datasets in
 app only ever reads them through `verbRepository`, which loads each CEFR level
 as its own lazy chunk — studying A1 never downloads the 348-entry B1 file.
 
+`src/data/wortschatzLinks.json` maps verb ids to their entry on
+wortschatz.deulern.com. It is generated, not hand-edited: run
+`node scripts/linkVerben.mjs` in `deutsch_wort_shatz` after adding verbs here.
+
+The build includes a service worker (vite-plugin-pwa), so the app works offline
+after the first visit, all three levels included.
+
 ```
 src/
   types/          Verb schema types, form-category definitions
