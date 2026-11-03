@@ -186,7 +186,10 @@ export function AppLayout() {
             </a>
             <p className="text-xs text-muted">
               German verbs from A1 to B1. Everything is stored in this browser only. Built with
-              the help of AI, so there may be errors; every one we find gets fixed.
+              the help of AI, so there may be errors; every one we find gets fixed.{' '}
+              <a href="#cookies" data-consent-open className="underline">
+                Cookies
+              </a>
             </p>
           </div>
         </div>
